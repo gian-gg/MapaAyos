@@ -53,7 +53,7 @@ function handleSignIn($email, $password)
 
     if ($user && password_verify($password, $user['password'])) {
         $_SESSION['userID'] = $user['id'];
-        header("Location: ../views/dashboard/dashboard.php"); // Redirect dashboard
+        header("Location: ../views/dashboard/Dashboard.php"); // Redirect dashboard
         exit();
     } else {
         echo "Invalid email or password.";
@@ -78,6 +78,14 @@ function requireSignIn()
 {
     if (!isAuthenticated()) {
         header("Location: ../../index.php");
+        exit();
+    }
+}
+
+function redirectIfAuthenticated()
+{
+    if (isAuthenticated()) {
+        header("Location: /MapaAyos/views/dashboard/Dashboard.php");
         exit();
     }
 }

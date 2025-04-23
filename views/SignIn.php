@@ -2,11 +2,7 @@
 session_start();
 
 require_once __DIR__ . '/../controllers/AuthController.php';
-
-if (isAuthenticated()) {
-    header("Location: ../views/dashboard/dashboard.php");
-    exit();
-}
+redirectIfAuthenticated(); // redirect to dashboard if authenticated
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = filter_var(trim($_POST['email']), FILTER_SANITIZE_EMAIL);

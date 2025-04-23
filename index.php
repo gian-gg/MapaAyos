@@ -27,7 +27,7 @@ require_once __DIR__ . '/controllers/AuthController.php';
                 echo '<a class="btn" href="./views/SignUp.php">Sign Up</a>';
                 echo '<a class="btn" href="./views/SignIn.php">Sign In</a>';
             } else {
-                echo '<a class="btn" href="./views/dashboard/dashboard.php">Dashboard</a>';
+                echo '<a class="btn" href="./views/dashboard/Dashboard.php">Dashboard</a>';
             }
             ?>
         </div>
