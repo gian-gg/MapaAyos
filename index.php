@@ -1,5 +1,8 @@
 <?php
+session_start();
+
 require_once __DIR__ . '/config/db.php';
+require_once __DIR__ . '/controllers/AuthController.php';
 
 ?>
 
@@ -19,8 +22,14 @@ require_once __DIR__ . '/config/db.php';
     <main>
         <h1>MapaAyos</h1>
         <div class="btn-group">
-            <a class="btn" href="./views/SignUp.php">Sign Up</a>
-            <a class="btn" href="./views/SignIn.php">Sign In</a>
+            <?php
+            if (!isAuthenticated()) {
+                echo '<a class="btn" href="./views/SignUp.php">Sign Up</a>';
+                echo '<a class="btn" href="./views/SignIn.php">Sign In</a>';
+            } else {
+                echo '<a class="btn" href="./views/dashboard/dashboard.php">Dashboard</a>';
+            }
+            ?>
         </div>
     </main>
 

@@ -1,3 +1,19 @@
+<?php
+session_start();
+require_once __DIR__ . '/../../models/UserModel.php';
+require_once __DIR__ . '/../../controllers/AuthController.php';
+
+requireSignIn();
+
+$userID = $_SESSION['userID'];
+$user = findUserByID($userID);
+
+if (isset($_POST['logout'])) {
+    handleSignOut();
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -29,13 +45,23 @@
                     </svg>
                     Settings
                 </a>
+                <form method="POST">
+                    <button type="submit" name="logout">Log Out</button>
+                </form>
+
             </nav>
         </aside>
         <main class="main-content">
             <div class="header">
                 <h1>Dashboard</h1>
                 <div class="user-info">
-                    Welcome, User!
+                    <?php
+                    if ($user) {
+                        echo "<p>Welcome, " . htmlspecialchars($user['firstName']) . " " . htmlspecialchars($user['lastName']) . "</p>";
+                    } else {
+                        echo "<p>User not found.</p>";
+                    }
+                    ?>
                 </div>
             </div>
             <div class="cards-grid">
