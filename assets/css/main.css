@@ -8,9 +8,10 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
+  width: 100vw;
 }
 
-main {
+.card {
   background-color: var(--bg-secondary);
   border: 1px solid var(--outline);
   border-radius: 8px;

@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <a class="btn" href="./SignIn.php">Sign In</a>
     </div>
 
-    <main>
+    <div class="card">
         <form method="POST">
             <h1>Sign Up</h1>
             <label for="firstNameInput">First Name:</label>
@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <br>
             <button class="btn" type="submit">Sign Up</button>
         </form>
-    </main>
+    </div>
 </body>
 
 </html>

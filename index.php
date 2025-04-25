@@ -19,7 +19,7 @@ require_once __DIR__ . '/controllers/AuthController.php';
 </head>
 
 <body>
-    <main>
+    <div class="card">
         <h1>MapaAyos</h1>
         <div class="btn-group">
             <?php
@@ -31,7 +31,7 @@ require_once __DIR__ . '/controllers/AuthController.php';
             }
             ?>
         </div>
-    </main>
+    </div>
 
 </body>
 

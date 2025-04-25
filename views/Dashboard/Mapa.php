@@ -20,13 +20,43 @@ if (isset($_POST['logout'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MapaAyos Dashboard</title>
+    <title>MapaAyos Dashboard - Mapa</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" />
+
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" /> <!-- Leaflet CSS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script> <!-- Leaflet JS -->
 
     <link rel="stylesheet" href="../../assets/css/root.css">
     <link rel="stylesheet" href="../../assets/css/dashboard.css">
+    <link rel="stylesheet" href="../../assets/css/mapa.css">
+
 </head>
 
 <body>
+    <div class="modal" id="reportModal" tabindex="-1" aria-labelledby="reportModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="reportModalLabel">Enter Report</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    add form or something
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="dashboard">
         <aside class="sidebar">
             <div class="logo">MapaAyos</div>
@@ -53,7 +83,7 @@ if (isset($_POST['logout'])) {
         </aside>
         <main class="main-content">
             <div class="header">
-                <h1>Dashboard</h1>
+                <h1>Mapa</h1>
                 <div class="user-info">
                     <?php
                     if ($user) {
@@ -64,22 +94,11 @@ if (isset($_POST['logout'])) {
                     ?>
                 </div>
             </div>
-            <div class="cards-grid">
-                <div class="card">
-                    <div class="card-title">Total Users</div>
-                    <div class="card-value">1,234</div>
-                </div>
-                <div class="card">
-                    <div class="card-title">Active Reports</div>
-                    <div class="card-value">56</div>
-                </div>
-                <div class="card">
-                    <div class="card-title">Resolved Issues</div>
-                    <div class="card-value">89%</div>
-                </div>
-            </div>
+            <div id="map" style="height: 90%;"></div>
         </main>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+    <script src="../../assets/js/mapa.js"></script>
 </body>
 
 </html>
