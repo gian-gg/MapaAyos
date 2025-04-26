@@ -4,9 +4,9 @@ require_once __DIR__ . '/../models/UserModel.php';
 function handleSignUp($firstName, $lastName, $email, $password)
 {
     // Sanitize Inputs
-    $email = filter_var($email, FILTER_SANITIZE_EMAIL);
-    $firstName = trim($firstName);
-    $lastName = trim($lastName);
+    $firstName = htmlspecialchars(trim($firstName));
+    $lastName = htmlspecialchars(trim($lastName));
+    $email = filter_var(trim($email), FILTER_SANITIZE_EMAIL);
 
     // Validation of Data
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {

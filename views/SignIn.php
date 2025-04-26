@@ -5,11 +5,9 @@ require_once __DIR__ . '/../controllers/AuthController.php';
 redirectIfAuthenticated(); // redirect to dashboard if authenticated
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $email = filter_var(trim($_POST['email']), FILTER_SANITIZE_EMAIL);
-    $password = htmlspecialchars(trim($_POST['password']));
-
-    handleSignIn($email, $password);
+    handleSignIn($_POST['email'], $_POST['password']);
 }
+
 ?>
 
 <!DOCTYPE html>
