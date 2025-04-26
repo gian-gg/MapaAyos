@@ -1,15 +1,3 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: var(--poppins);
-}
-
-body {
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
-}
-
 .dashboard {
   display: grid;
   grid-template-columns: 240px 1fr;
@@ -27,6 +15,13 @@ body {
   font-weight: 600;
   margin-bottom: 2rem;
   color: var(--primary);
+}
+
+nav {
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .nav-item {

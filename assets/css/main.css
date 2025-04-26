@@ -1,12 +1,5 @@
 body {
-  font-family: var(--poppins);
   background-color: var(--bg-primary);
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   height: 100vh;
   width: 100vw;
 }
@@ -28,30 +21,6 @@ h1 {
   text-align: center;
 }
 
-.btn {
-  color: var(--bg-primary);
-  text-align: center;
-  width: 100%;
-  padding: 8px 12px;
-  font-size: 0.875rem;
-  font-weight: 600;
-  background-color: var(--primary);
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background-color 0.2s;
-  text-decoration: none;
-}
-
-.btn:hover {
-  opacity: 0.8;
-}
-
-.btn:disabled {
-  background-color: var(--error);
-  cursor: not-allowed;
-}
-
 p {
   font-size: 0.875rem;
   color: var(--text-secondary);
@@ -59,9 +28,63 @@ p {
   margin-top: 16px;
 }
 
+label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 2px;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 8px 12px;
+  font-size: 0.875rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  margin-bottom: 16px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+input:focus {
+  border-color: var(--gray);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+}
+
+.ma-btn {
+  text-align: center;
+  text-decoration: none;
+  background-color: var(--primary);
+  color: var(--bg-primary);
+  border: none;
+  width: 100%;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.ma-btn:hover {
+  opacity: 0.8;
+}
+
 .btn-group {
   min-width: 200px;
   display: flex;
   gap: 0.5rem;
   margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spin {
+  animation: spin 1s linear infinite;
 }

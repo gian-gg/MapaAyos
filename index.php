@@ -16,6 +16,7 @@ require_once __DIR__ . '/controllers/AuthController.php';
 
     <link rel="stylesheet" href="./assets/css/root.css">
     <link rel="stylesheet" href="./assets/css/main.css">
+    <link rel="stylesheet" href="./assets/css/landing.css">
 </head>
 
 <body>
@@ -24,10 +25,10 @@ require_once __DIR__ . '/controllers/AuthController.php';
         <div class="btn-group">
             <?php
             if (!isAuthenticated()) {
-                echo '<a class="btn" href="./views/SignUp.php">Sign Up</a>';
-                echo '<a class="btn" href="./views/SignIn.php">Sign In</a>';
+                echo '<a class="ma-btn" href="./views/SignUp.php">Sign Up</a>';
+                echo '<a class="ma-btn" href="./views/SignIn.php">Sign In</a>';
             } else {
-                echo '<a class="btn" href="./views/dashboard/Dashboard.php">Dashboard</a>';
+                echo '<a class="ma-btn" href="./views/dashboard/Dashboard.php">Dashboard</a>';
             }
             ?>
         </div>

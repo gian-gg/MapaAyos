@@ -22,13 +22,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <link rel="stylesheet" href="../assets/css/root.css">
     <link rel="stylesheet" href="../assets/css/main.css">
-    <link rel="stylesheet" href="../assets/css/form.css">
+    <link rel="stylesheet" href="../assets/css/landing.css">
 </head>
 
 <body>
     <div class="btn-group">
-        <a class="btn" href="../index.php">Home</a>
-        <a class="btn" href="./SignUp.php">Sign Up</a>
+        <a class="ma-btn" href="../index.php">Home</a>
+        <a class="ma-btn" href="./SignUp.php">Sign Up</a>
     </div>
 
     <div class="card">
@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" required>
             <br>
-            <button class="btn" type="submit">Sign In</button>
+            <button class="ma-btn" type="submit">Sign In</button>
         </form>
     </div>
 </body>

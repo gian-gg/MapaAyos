@@ -1,25 +1,3 @@
-// temporary markers for demo purposes, AI generated data
-const locations = [
-  {
-    lat: 10.3157,
-    lng: 123.8854,
-    label: "Cebu City",
-    description: "Barangay report: Infrastructure improvements ongoing.",
-  },
-  {
-    lat: 14.5995,
-    lng: 120.9842,
-    label: "Manila",
-    description: "Barangay report: Community cleanup drive scheduled.",
-  },
-  {
-    lat: 8.228,
-    lng: 124.2452,
-    label: "Iligan City",
-    description: "Barangay report: Flood control measures implemented.",
-  },
-];
-
 // // Function to get address from coordinates using Nominatim API, there might be a better approach than this pero this will do for now :3
 function getAddressFromCoords(lat, lng) {
   const url = `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lng}`;
@@ -58,6 +36,9 @@ function getAddressFromCoords(lat, lng) {
 
 // Function to display a popup with address information
 function displayPopUp(lat, lng) {
+  document.getElementById("latInput").value = lat;
+  document.getElementById("lngInput").value = lng;
+
   // loading animation as address info is loading
   const loadingPopup = L.popup()
     .setLatLng([lat, lng])
@@ -86,9 +67,8 @@ function displayPopUp(lat, lng) {
           }
         </h4>
         <p class="popup-subtitle">${coordsInfo.display_name || ""}</p>
-        
-        <button type="button" class="popup-btn" data-bs-toggle="modal" data-bs-target="#reportModal">
-        Report
+        <button type="button" class="ma-btn popup-btn" data-bs-toggle="modal" data-bs-target="#reportModal">
+          Report
         </button>
       </div>
     `);
@@ -106,36 +86,42 @@ L.tileLayer(
   }
 ).addTo(map);
 
-// Add report markers to the map
-locations.forEach((loc) => {
-  L.marker([loc.lat, loc.lng]).addTo(map).bindPopup(`
-        <h4 class="popup-title">${loc.label}</h4>
-        <p class="popup-subtitle">${loc.description}</p>`);
-});
-
 // Event listener for map click
-map.on("click", function (e) {
+map.on("click", (e) => {
   const { lat, lng } = e.latlng;
   console.log(`Clicked at Latitude: ${lat}, Longitude: ${lng}`);
 
   displayPopUp(lat, lng);
 });
 
-// Add a marker for the user's current location
-map.locate({
-  setView: true,
-  maxZoom: 16,
-});
-
 // Event listener for location found
-map.on("locationfound", function (e) {
+map.on("locationfound", (e) => {
   const { lat, lng } = e.latlng;
-
   L.marker([lat, lng]).addTo(map).bindPopup("You are here!").openPopup();
 
   console.log(`Your location: Latitude: ${lat}, Longitude: ${lng}`);
 });
 
-map.on("locationerror", function (e) {
+map.on("locationerror", () => {
   alert("Location access denied or not available.");
+});
+
+// Add a button to locate the user's current location
+document.getElementById("my-location-btn").addEventListener("click", () => {
+  map.locate({
+    setView: true,
+    maxZoom: 16,
+  });
+});
+
+// Display all reports on the map
+reports.forEach((loc) => {
+  L.marker([loc.lat, loc.lng]).addTo(map).bindPopup(`
+      <div class="map-popup">
+        <h4 class="popup-title">
+          ${loc.title}
+        </h4>
+        <p class="popup-subtitle">${loc.description}</p>
+      </div>
+    `);
 });
