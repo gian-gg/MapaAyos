@@ -2,6 +2,18 @@
 session_start();
 require_once __DIR__ . '/../../models/UserModel.php';
 require_once __DIR__ . '/../../controllers/AuthController.php';
+require_once __DIR__ . '/../../config/db.php';
+
+$stmt = $pdo->query("SELECT COUNT(*) AS total FROM users");
+$totalUsers = $stmt->fetch()['total'];
+
+$stmt = $pdo->query("SELECT COUNT(*) AS active FROM reports WHERE status = 'pending'");
+$activeReports = $stmt->fetch()['active'];
+
+$stmt = $pdo->query("SELECT COUNT(*) AS total FROM reports");
+$totalReports = $stmt->fetch()['total'];
+
+$resolvedReports = $totalReports > 0 ? round((($totalReports - $activeReports) / $totalReports) * 100) : 0;
 
 requireSignIn();
 
@@ -67,19 +79,19 @@ if (isset($_POST['logout'])) {
                     }
                     ?>
                 </div>
-            </div>
+            </div>a
             <div class="cards-grid">
                 <div class="card">
                     <div class="card-title">Total Users</div>
-                    <div class="card-value">1,234</div>
+                    <div class="card-value"><?php echo $totalUsers; ?></div>
                 </div>
                 <div class="card">
                     <div class="card-title">Active Reports</div>
-                    <div class="card-value">56</div>
+                    <div class="card-value"><?php echo $activeReports; ?></div>
                 </div>
                 <div class="card">
                     <div class="card-title">Resolved Issues</div>
-                    <div class="card-value">89%</div>
+                    <div class="card-value"><?php echo $resolvedReports; ?>%</div>
                 </div>
             </div>
         </main>
