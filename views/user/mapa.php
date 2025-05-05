@@ -81,14 +81,14 @@ if (isset($_POST['logout'])) {
             <div class="logo">MapaAyos</div>
             <nav>
                 <div>
-                    <a href="/MapaAyos/dashboard" class="nav-item">
+                    <a href="/MapaAyos/user/dashboard" class="nav-item">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
                             <polyline points="9 22 9 12 15 12 15 22"></polyline>
                         </svg>
                         Dashboard
                     </a>
-                    <a href="/MapaAyos/mapa" class="nav-item">
+                    <a href="/MapaAyos/user/mapa" class="nav-item">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"></path>
                             <circle cx="12" cy="9" r="2.5"></circle>
