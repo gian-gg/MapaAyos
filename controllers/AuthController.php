@@ -34,7 +34,7 @@ function handleSignUp($firstName, $lastName, $email, $password)
 
     if (signUp($firstName, $lastName, $email, $hashedPassword)) {
         echo "User registered successfully.";
-        header("Location: ../views/SignIn.php"); // Redirect to sign-in page
+        header("Location: /MapaAyos/signin"); // Redirect to sign-in page
         exit();
     } else {
         echo "Error signing up. Please try again.";
@@ -63,7 +63,7 @@ function handleSignIn($email, $password)
         session_regenerate_id(true);
         $_SESSION['userID'] = $user['id'];
 
-        header("Location: ../views/" . $user["role"] . "/dashboard.php"); // Redirect Dashboard
+        header("Location: /MapaAyos/" . $user["role"] . "/dashboard"); // Redirect Dashboard
 
         exit();
     } else {
@@ -76,7 +76,7 @@ function handleSignOut()
     session_unset(); // Unset all session variables
     session_destroy(); // Destroy the session
 
-    header("Location: ../../index.php");
+    header("Location: /MapaAyos/");
     exit();
 }
 
@@ -88,7 +88,7 @@ function isAuthenticated()
 function requireSignIn()
 {
     if (!isAuthenticated()) {
-        header("Location: ../../index.php");
+        header("Location: /MapaAyos/");
         exit();
     }
 }
@@ -97,10 +97,10 @@ function redirectIfNotAllowed($userRole, $pageRole)
 {
     if (isAuthenticated()) {
         if ($userRole == "all" && ($pageRole == "signup" || $pageRole == "signin")) {
-            header("Location: /MapaAyos/index.php");
+            header("Location: /MapaAyos/");
             exit();
         } else if ($userRole != $pageRole) {
-            header("Location: /MapaAyos/views/" . $userRole . "/dashboard.php");
+            header("Location: /MapaAyos/" . $userRole . "/dashboard");
             exit();
         }
     }

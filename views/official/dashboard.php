@@ -25,9 +25,9 @@ if (isset($_POST['logout'])) {
     <title>MapaAyos Officials Dashboard</title>
 
     <!-- Project CSS -->
-    <link rel="stylesheet" href="../../assets/css/root.css">
-    <link rel="stylesheet" href="../../assets/css/main.css">
-    <link rel="stylesheet" href="../../assets/css/dashboard.css">
+    <link rel="stylesheet" href="/MapaAyos/assets/css/root.css">
+    <link rel="stylesheet" href="/MapaAyos/assets/css/main.css">
+    <link rel="stylesheet" href="/MapaAyos/assets/css/dashboard.css">
 </head>
 
 <body>
@@ -36,7 +36,7 @@ if (isset($_POST['logout'])) {
             <div class="logo">MapaAyos</div>
             <nav>
                 <div>
-                    <a href="./Dashboard.php" class="nav-item">
+                    <a href="/MapaAyos/official/dashboard" class="nav-item">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
                             <polyline points="9 22 9 12 15 12 15 22"></polyline>

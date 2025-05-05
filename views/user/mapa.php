@@ -38,10 +38,10 @@ if (isset($_POST['logout'])) {
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
     <!-- Project CSS -->
-    <link rel="stylesheet" href="../../assets/css/root.css">
-    <link rel="stylesheet" href="../../assets/css/main.css">
-    <link rel="stylesheet" href="../../assets/css/dashboard.css">
-    <link rel="stylesheet" href="../../assets/css/mapa.css">
+    <link rel="stylesheet" href="/MapaAyos/assets/css/root.css">
+    <link rel="stylesheet" href="/MapaAyos/assets/css/main.css">
+    <link rel="stylesheet" href="/MapaAyos/assets/css/dashboard.css">
+    <link rel="stylesheet" href="/MapaAyos/assets/css/mapa.css">
 
 </head>
 
@@ -81,14 +81,14 @@ if (isset($_POST['logout'])) {
             <div class="logo">MapaAyos</div>
             <nav>
                 <div>
-                    <a href="./Dashboard.php" class="nav-item">
+                    <a href="/MapaAyos/dashboard" class="nav-item">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
                             <polyline points="9 22 9 12 15 12 15 22"></polyline>
                         </svg>
                         Dashboard
                     </a>
-                    <a href="./Mapa.php" class="nav-item">
+                    <a href="/MapaAyos/mapa" class="nav-item">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"></path>
                             <circle cx="12" cy="9" r="2.5"></circle>
@@ -130,7 +130,7 @@ if (isset($_POST['logout'])) {
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
     <!-- Page JS -->
-    <script src="../../assets/js/mapa.js"></script>
+    <script src="/MapaAyos/assets/js/mapa.js"></script>
 
 </body>
 

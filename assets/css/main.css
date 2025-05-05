@@ -14,6 +14,14 @@ body {
   color: var(--text-primary);
 }
 
+.card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+}
+
 h1 {
   font-size: 1.5rem;
   font-weight: 600;
@@ -74,6 +82,12 @@ input:focus {
   display: flex;
   gap: 0.5rem;
   margin-bottom: 1rem;
+}
+
+.error {
+  color: var(--error);
+  font-size: 0.875rem;
+  margin-top: 8px;
 }
 
 @keyframes spin {

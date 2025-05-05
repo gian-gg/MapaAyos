@@ -14,9 +14,9 @@ require_once __DIR__ . '/controllers/AuthController.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MapaAyos</title>
 
-    <link rel="stylesheet" href="./assets/css/root.css">
-    <link rel="stylesheet" href="./assets/css/main.css">
-    <link rel="stylesheet" href="./assets/css/landing.css">
+    <link rel="stylesheet" href="/MapaAyos/assets/css/root.css">
+    <link rel="stylesheet" href="/MapaAyos/assets/css/main.css">
+    <link rel="stylesheet" href="/MapaAyos/assets/css/landing.css">
 </head>
 
 <body>
@@ -25,10 +25,10 @@ require_once __DIR__ . '/controllers/AuthController.php';
         <div class="btn-group">
             <?php
             if (!isAuthenticated()) {
-                echo '<a class="ma-btn" href="./views/signup.php">Sign Up</a>';
-                echo '<a class="ma-btn" href="./views/signin.php">Sign In</a>';
+                echo '<a class="ma-btn" href="/MapaAyos/signup">Sign Up</a>';
+                echo '<a class="ma-btn" href="/MapaAyos/signin">Sign In</a>';
             } else {
-                echo '<a class="ma-btn" href="./views/user/dashboard.php">Dashboard</a>';
+                echo '<a class="ma-btn" href="/MapaAyos/user/dashboard">Dashboard</a>';
             }
             ?>
         </div>

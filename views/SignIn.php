@@ -18,15 +18,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MapaAyos - Sign In</title>
 
-    <link rel="stylesheet" href="../assets/css/root.css">
-    <link rel="stylesheet" href="../assets/css/main.css">
-    <link rel="stylesheet" href="../assets/css/landing.css">
+    <link rel="stylesheet" href="/MapaAyos/assets/css/root.css">
+    <link rel="stylesheet" href="/MapaAyos/assets/css/main.css">
+    <link rel="stylesheet" href="/MapaAyos/assets/css/landing.css">
 </head>
 
 <body>
     <div class="btn-group">
-        <a class="ma-btn" href="../index.php">Home</a>
-        <a class="ma-btn" href="./signup.php">Sign Up</a>
+        <a class="ma-btn" href="/MapaAyos/">Home</a>
+        <a class="ma-btn" href="/MapaAyos/signup">Sign Up</a>
     </div>
 
     <div class="card">
