@@ -62,7 +62,9 @@ function handleSignIn($email, $password)
     if ($user && password_verify($password, $user['password'])) {
         session_regenerate_id(true);
         $_SESSION['userID'] = $user['id'];
-        header("Location: ../views/dashboard/Dashboard.php"); // Redirect dashboard
+
+        header("Location: ../views/" . $user["role"] . "/dashboard.php"); // Redirect Dashboard
+
         exit();
     } else {
         echo "Invalid email or password.";
@@ -91,10 +93,15 @@ function requireSignIn()
     }
 }
 
-function redirectIfAuthenticated()
+function redirectIfNotAllowed($userRole, $pageRole)
 {
     if (isAuthenticated()) {
-        header("Location: /MapaAyos/views/dashboard/Dashboard.php");
-        exit();
+        if ($userRole == "all" && ($pageRole == "signup" || $pageRole == "signin")) {
+            header("Location: /MapaAyos/index.php");
+            exit();
+        } else if ($userRole != $pageRole) {
+            header("Location: /MapaAyos/views/" . $userRole . "/dashboard.php");
+            exit();
+        }
     }
 }

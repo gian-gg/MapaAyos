@@ -25,10 +25,10 @@ require_once __DIR__ . '/controllers/AuthController.php';
         <div class="btn-group">
             <?php
             if (!isAuthenticated()) {
-                echo '<a class="ma-btn" href="./views/SignUp.php">Sign Up</a>';
-                echo '<a class="ma-btn" href="./views/SignIn.php">Sign In</a>';
+                echo '<a class="ma-btn" href="./views/signup.php">Sign Up</a>';
+                echo '<a class="ma-btn" href="./views/signin.php">Sign In</a>';
             } else {
-                echo '<a class="ma-btn" href="./views/dashboard/Dashboard.php">Dashboard</a>';
+                echo '<a class="ma-btn" href="./views/user/dashboard.php">Dashboard</a>';
             }
             ?>
         </div>

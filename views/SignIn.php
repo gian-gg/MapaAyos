@@ -2,7 +2,7 @@
 session_start();
 
 require_once __DIR__ . '/../controllers/AuthController.php';
-redirectIfAuthenticated(); // redirect to dashboard if authenticated
+redirectIfNotAllowed("all", "signup");
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     handleSignIn($_POST['email'], $_POST['password']);
@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
     <div class="btn-group">
         <a class="ma-btn" href="../index.php">Home</a>
-        <a class="ma-btn" href="./SignUp.php">Sign Up</a>
+        <a class="ma-btn" href="./signup.php">Sign Up</a>
     </div>
 
     <div class="card">
