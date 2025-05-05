@@ -9,17 +9,12 @@ requireSignIn();
 $userID = $_SESSION['userID'];
 $user = findUserByID($userID);
 
-if (isset($_POST['logout'])) {
-    handleSignOut();
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    handleRegisterReport($_POST['latInput'], $_POST['lngInput'], $_POST['titleInput'], $_POST['descriptionInput'], $userID);
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $latInput = htmlspecialchars(trim($_POST['latInput']));
-    $lngInput = htmlspecialchars(trim($_POST['lngInput']));
-    $titleInput = htmlspecialchars(trim($_POST['titleInput']));
-    $descriptionInput = htmlspecialchars(trim($_POST['descriptionInput']));
-
-    handleRegisterReport($latInput, $lngInput, $titleInput, $descriptionInput, $userID);
+if (isset($_POST['logout'])) {
+    handleSignOut();
 }
 
 ?>
