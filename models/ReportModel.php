@@ -28,3 +28,13 @@ function getReportsById($userID)
 
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
+
+function getAllReports()
+{
+    global $pdo;
+    $sql = "SELECT * FROM reports";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
+
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}

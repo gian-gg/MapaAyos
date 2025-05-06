@@ -24,10 +24,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 
 <body>
-    <div class="btn-group">
-        <a class="ma-btn" href="/MapaAyos/">Home</a>
-        <a class="ma-btn" href="/MapaAyos/signup">Sign Up</a>
-    </div>
+    <nav>
+        <div class="btn-group">
+            <a class="ma-btn" href="/MapaAyos/">Home</a>
+            <a class="ma-btn" href="/MapaAyos/signup">Sign Up</a>
+        </div>
+    </nav>
 
     <div class="card">
         <form method="POST">

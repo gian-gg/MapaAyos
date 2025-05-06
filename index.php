@@ -22,15 +22,18 @@ require_once __DIR__ . '/controllers/AuthController.php';
 <body>
     <div class="card">
         <h1>MapaAyos</h1>
-        <div class="btn-group">
-            <?php
-            if (!isAuthenticated()) {
-                echo '<a class="ma-btn" href="/MapaAyos/signup">Sign Up</a>';
-                echo '<a class="ma-btn" href="/MapaAyos/signin">Sign In</a>';
-            } else {
-                echo '<a class="ma-btn" href="/MapaAyos/user/dashboard">Dashboard</a>';
-            }
-            ?>
+        <div class="card-body">
+            <div class="btn-group">
+                <?php
+                if (!isAuthenticated()) {
+                    echo '<a class="ma-btn" href="/MapaAyos/signup">Sign Up</a>';
+                    echo '<a class="ma-btn" href="/MapaAyos/signin">Sign In</a>';
+                } else {
+                    echo '<a class="ma-btn" href="/MapaAyos/user/dashboard">Dashboard</a>';
+                }
+                ?>
+            </div>
+            <a class="ma-btn" href="/MapaAyos/mapa">Mapa</a>
         </div>
     </div>
 

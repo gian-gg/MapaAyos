@@ -4,3 +4,7 @@ body {
   justify-content: center;
   align-items: center;
 }
+
+nav {
+  margin-bottom: 1rem;
+}

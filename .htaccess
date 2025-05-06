@@ -13,7 +13,7 @@ RewriteRule ^.*$ /MapaAyos/views/404.php [L]
 # 2. Rewrite root-level views like /signin → /views/signin.php
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(signin|signup)$ views/$1.php [NC,L]
+RewriteRule ^(signin|signup|mapa)$ views/$1.php [NC,L]
 
 # 3. Rewrite nested views like /user/dashboard → /views/user/dashboard.php
 RewriteCond %{REQUEST_FILENAME} !-f

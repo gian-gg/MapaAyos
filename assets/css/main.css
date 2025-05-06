@@ -78,10 +78,10 @@ input:focus {
 }
 
 .btn-group {
+  width: 100%;
   min-width: 200px;
   display: flex;
   gap: 0.5rem;
-  margin-bottom: 1rem;
 }
 
 .error {
