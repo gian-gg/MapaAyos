@@ -28,6 +28,8 @@ require_once __DIR__ . '/../controllers/ReportController.php';
         </div>
     </nav>
 
+    <p>hi osbev, do ur magic here</p>
+
     <button id="my-location-btn">My Location</button>
     <div id="map"></div> <!-- Map -->
 
