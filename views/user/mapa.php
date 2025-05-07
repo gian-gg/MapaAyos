@@ -9,6 +9,8 @@ requireSignIn();
 $userID = $_SESSION['userID'];
 $user = findUserByID($userID);
 
+redirectIfNotAllowed($user["role"], "user");
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     handleRegisterReport($_POST['latInput'], $_POST['lngInput'], $_POST['titleInput'], $_POST['descriptionInput'], $userID);
 }
@@ -120,9 +122,8 @@ if (isset($_POST['logout'])) {
         </main>
     </div>
 
-    <!-- For JS to access mysql data -->
     <script>
-        const reports = <?php echo json_encode(getReportsById($userID)); ?>;
+        const currentUser = "<?php echo $userID ?>";
     </script>
 
     <!-- Leaflet JS -->
@@ -131,7 +132,7 @@ if (isset($_POST['logout'])) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
     <!-- Page JS -->
     <script src="/MapaAyos/assets/js/mapa-init.js"></script>
-    <script src="/MapaAyos/assets/js/mapa.js"></script>
+    <script src="/MapaAyos/assets/js/user-mapa.js"></script>
 
 </body>
 

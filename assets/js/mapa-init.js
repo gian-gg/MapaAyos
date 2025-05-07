@@ -1,3 +1,24 @@
+async function getAllReports(API_URL) {
+  try {
+    const response = await fetch(API_URL, {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer mapaayos123", // Replace with your actual token
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+
+    const data = await response.json();
+    return data.reports;
+  } catch (error) {
+    console.error("Error fetching reports:", error);
+    return [];
+  }
+}
+
 // // Function to get address from coordinates using Nominatim API, there might be a better approach than this pero this will do for now :3
 function getAddressFromCoords(lat, lng) {
   const url = `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lng}`;
@@ -65,14 +86,15 @@ map.on("locationerror", () => {
   alert("Location access denied or not available.");
 });
 
-// Display all reports on the map
-reports.forEach((loc) => {
-  L.marker([loc.lat, loc.lng]).addTo(map).bindPopup(`
-          <div class="map-popup">
-            <h4 class="popup-title">
-              ${loc.title}
-            </h4>
-            <p class="popup-subtitle">${loc.description}</p>
-          </div>
-        `);
-});
+function displayReports(reports) {
+  reports.forEach((loc) => {
+    L.marker([loc.lat, loc.lng]).addTo(map).bindPopup(`
+            <div class="map-popup">
+              <h4 class="popup-title">
+                ${loc.title}
+              </h4>
+              <p class="popup-subtitle">${loc.description}</p>
+            </div>
+          `);
+  });
+}

@@ -22,7 +22,7 @@ if (isset($_POST['logout'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MapaAyos Officials - Dashboard</title>
+    <title>MapaAyos Officials - Reports</title>
 
     <!-- Project CSS -->
     <link rel="stylesheet" href="/MapaAyos/assets/css/root.css">
@@ -63,7 +63,7 @@ if (isset($_POST['logout'])) {
         </aside>
         <main class="main-content">
             <div class="header">
-                <h1>Officials Dashboard</h1>
+                <h1>Reports</h1>
                 <div class="user-info">
                     <?php
                     if ($user) {
@@ -75,18 +75,7 @@ if (isset($_POST['logout'])) {
                 </div>
             </div>
             <div class="cards-grid">
-                <div class="card">
-                    <div class="card-title">Assigned Reports</div>
-                    <div class="card-value">45</div>
-                </div>
-                <div class="card">
-                    <div class="card-title">Pending Actions</div>
-                    <div class="card-value">12</div>
-                </div>
-                <div class="card">
-                    <div class="card-title">Resolved by You</div>
-                    <div class="card-value">78%</div>
-                </div>
+
             </div>
         </main>
     </div>

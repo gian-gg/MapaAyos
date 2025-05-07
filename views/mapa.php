@@ -1,7 +1,3 @@
-<?php
-require_once __DIR__ . '/../controllers/ReportController.php';
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -33,15 +29,11 @@ require_once __DIR__ . '/../controllers/ReportController.php';
     <button id="my-location-btn">My Location</button>
     <div id="map"></div> <!-- Map -->
 
-    <!-- For JS to access mysql data -->
-    <script>
-        const reports = <?php echo json_encode(getAllReports()); ?>;
-    </script>
-
     <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
     <script src="/MapaAyos/assets/js/mapa-init.js"></script>
+    <script src="/MapaAyos/assets/js/public-mapa.js"></script>
 </body>
 
 </html>
