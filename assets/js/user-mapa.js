@@ -52,4 +52,4 @@ const allReports = getAllReports(
     currentUser
 );
 
-allReports.then((reports) => displayReports(reports));
+allReports.then((reports) => displayReports(reports, "all"));

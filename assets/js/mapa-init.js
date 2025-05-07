@@ -86,14 +86,17 @@ map.on("locationerror", () => {
   alert("Location access denied or not available.");
 });
 
-function displayReports(reports) {
+function displayReports(reports, statusToFilter) {
   reports.forEach((loc) => {
+    if (loc.status !== statusToFilter && statusToFilter !== "all") return;
+
     L.marker([loc.lat, loc.lng]).addTo(map).bindPopup(`
             <div class="map-popup">
               <h4 class="popup-title">
                 ${loc.title}
               </h4>
               <p class="popup-subtitle">${loc.description}</p>
+              <p class="popup-subtitle">Status: ${loc.status}</p>
             </div>
           `);
   });
