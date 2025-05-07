@@ -20,7 +20,16 @@ function handleRegisterReport($lat, $lng, $title, $description, $createdBy)
         return;
     }
 
-    // verify if report is already registered
+    $reports = getReportsById($createdBy);
+    $currentDate = date('Y-m-d');
+    $reports = array_filter($reports, function ($report) use ($currentDate) {
+        return date('Y-m-d', strtotime($report['createdAt'])) === $currentDate;
+    });
+
+    if (count($reports) >= 3) {
+        echo "<script>alert('You have reached the maximum number of daily reports.');</script>";
+        return;
+    }
 
     if (!(registerReport($lat, $lng, $title, $description, $createdBy))) {
         echo "script>alert('Error signing up. Please try again.');</script>";

@@ -1,7 +1,6 @@
 body {
-  background: 
-      url('../img/dotgrid.png') repeat-y center/contain,
-      var(--bg-primary);
+  background: url("../img/dotgrid.png") repeat-y center/contain,
+    var(--bg-primary);
   color: var(--text-primary);
   gap: 20px;
 }
