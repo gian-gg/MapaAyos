@@ -25,12 +25,12 @@ CREATE TABLE IF NOT EXISTS `reports` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Baranggays table
-CREATE TABLE IF NOT EXISTS `baranggays` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(255) NOT NULL,
-  `city` VARCHAR(255) DEFAULT NULL,
-  `country` VARCHAR(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+CREATE TABLE `baranggays` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `city` varchar(255) DEFAULT NULL,
+  `country` varchar(255) DEFAULT NULL,
+  `geojson` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Officials Info table
