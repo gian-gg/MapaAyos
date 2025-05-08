@@ -116,6 +116,7 @@ require_once __DIR__ . '/../controllers/AuthController.php';
             ?>
         </div>
         <div class="map-container">
+            <i class="bi bi-layout-sidebar"></i>
             <div id="map"></div>
             <div class="map-controls-container">
                 <button id="my-location-btn">My Location</button>
