@@ -17,20 +17,20 @@ All reports show up on a live map so everyone can see what’s happening and tra
 
 ```
 MapaAyos/
-├── .htaccess # Apache config for clean URLs and access rules
-├── index.php # Entry point of the application
-├── config/ # Configuration files
-├── database/ # Database schema and notes
-├── public/ # Publicly accessible assets
-├── src/ # Application source code (logic, views, API)
-│ ├── api/ # API endpoints (e.g., for AJAX requests)
-│ ├── controllers/ # Handles business logic and interaction with models
-│ ├── models/ # Represents database entities and queries
-│ ├── scripts/ # App-specific JavaScript logic for different roles/pages
-│ └── views/ # PHP view templates rendered based on routing
-│ ├── admin/ # Views for admin dashboard and controls
-│ ├── official/ # Views for official user roles (e.g., barangay officials)
-│ └── user/ # Views for regular users
+├── .htaccess              # Apache config for clean URLs and access rules
+├── index.php              # Entry point of the application
+├── config/                # Configuration files
+├── database/              # Database schema and notes
+├── public/                # Publicly accessible assets (CSS, JS, images)
+├── src/                   # Application source code (logic, views, API)
+│   ├── api/               # API endpoints (e.g., for AJAX requests)
+│   ├── controllers/       # Business logic and interaction with models
+│   ├── models/            # Database entities and queries
+│   ├── scripts/           # App-specific JavaScript logic for roles/pages
+│   └── views/             # PHP view templates rendered based on routing
+│       ├── admin/         # Views for admin dashboard and controls
+│       ├── official/      # Views for official user roles (e.g., barangay)
+│       └── user/          # Views for regular users
 ```
 
 ---
