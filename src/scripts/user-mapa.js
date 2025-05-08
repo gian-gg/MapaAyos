@@ -42,8 +42,9 @@ document
     ).then((data) => {
       currentBaranggayCoords = JSON.parse(data.data[0].geojson)["coordinates"];
 
-      createBaranggayBoundary(currentBaranggayPolygon, [
-        currentBaranggayCoords,
-      ]);
+      currentBaranggayPolygon = createBaranggayBoundary(
+        currentBaranggayPolygon,
+        [currentBaranggayCoords]
+      );
     });
   });

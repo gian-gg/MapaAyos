@@ -34,6 +34,8 @@ function createBaranggayBoundary(currentBaranggayPolygon, baranggayCoords) {
   // Fit and restrict map to new polygon
   map.fitBounds(currentBaranggayPolygon.getBounds());
   map.setMaxBounds(currentBaranggayPolygon.getBounds());
+
+  return currentBaranggayPolygon;
 }
 
 function displayReports(reports) {
