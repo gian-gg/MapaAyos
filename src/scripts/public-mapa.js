@@ -1,5 +1,6 @@
-const allReports = getAllReports(
-  "http://localhost/MapaAyos/api/reports?mode=getReports&status=verified"
-);
+import { fetchAPI } from "./utils/api-utils.js";
+import { displayReports } from "./utils/mapa-utils.js";
 
-allReports.then((reports) => displayReports(reports));
+fetchAPI(
+  "http://localhost/MapaAyos/api/reports?mode=getReports&status=verified"
+).then((data) => displayReports(data.reports));

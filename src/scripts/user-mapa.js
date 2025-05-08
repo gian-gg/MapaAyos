@@ -1,55 +1,49 @@
-// Function to display a popup with address information
-function displayPopUp(lat, lng) {
-  document.getElementById("latInput").value = lat;
-  document.getElementById("lngInput").value = lng;
+import {
+  isInBaranggay,
+  displayReports,
+  createBaranggayBoundary,
+  displayPopUp,
+} from "./utils/mapa-utils.js";
 
-  // loading animation as address info is loading
-  const loadingPopup = L.popup()
-    .setLatLng([lat, lng])
-    .setContent(
-      `
-      <div class="map-popup">
-        <h4 class="popup-title">Fetching location...</h4>
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-loader-circle spin">
-          <path d="M21 12a9 9 0 1 1-6.219-8.56"/>
-        </svg>
-      </div>
-    `
-    )
-    .openOn(map);
+import { fetchAPI } from "./utils/api-utils.js";
 
-  // load info as soon as info is available
-  getAddressFromCoords(lat, lng).then((coordsInfo) => {
-    loadingPopup.setContent(`
-      <div class="map-popup">
-        <h4 class="popup-title">
-          ${
-            coordsInfo.road ||
-            coordsInfo.city ||
-            coordsInfo.suburb ||
-            "Unknown location"
-          }
-        </h4>
-        <p class="popup-subtitle">${coordsInfo.display_name || ""}</p>
-        <button type="button" class="ma-btn popup-btn" data-bs-toggle="modal" data-bs-target="#reportModal">
-          Report
-        </button>
-      </div>
-    `);
-  });
-}
+let currentBaranggayCoords = null;
+let currentBaranggayPolygon = null;
 
 // Event listener for map click
 map.on("click", (e) => {
   const { lat, lng } = e.latlng;
-  console.log(`Clicked at Latitude: ${lat}, Longitude: ${lng}`);
 
-  displayPopUp(lat, lng);
+  if (currentBaranggayCoords === null) {
+    alert("Please select a baranggay first.");
+    return;
+  }
+
+  if (isInBaranggay([lat, lng], currentBaranggayCoords)) {
+    console.log(`Clicked at Latitude: ${lat}, Longitude: ${lng}`);
+    displayPopUp(lat, lng);
+  } else {
+    alert("You clicked outside the baranggay boundary.");
+  }
 });
 
-const allReports = getAllReports(
+fetchAPI(
   "http://localhost/MapaAyos/api/reports?mode=getReportsByUserID&userID=" +
     currentUser
-);
+).then((data) => displayReports(data.reports));
 
-allReports.then((reports) => displayReports(reports));
+document
+  .getElementById("selectBaranggayInput")
+  .addEventListener("change", (e) => {
+    const selectedBaranggay = e.target.value;
+
+    fetchAPI(
+      "http://localhost/MapaAyos/api/baranggay?baranggay=" + selectedBaranggay
+    ).then((data) => {
+      currentBaranggayCoords = JSON.parse(data.data[0].geojson)["coordinates"];
+
+      createBaranggayBoundary(currentBaranggayPolygon, [
+        currentBaranggayCoords,
+      ]);
+    });
+  });
