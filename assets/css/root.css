@@ -6,6 +6,7 @@
   --accent: #bdd181;
   --bg-primary: #f6f8f9;
   --bg-secondary: #f0f5f3;
+  --bg-tertiary: #E5EBE8;
   --outline: #c8d7db;
   --text-primary: #252728;
   --text-secondary: #505051;
@@ -19,3 +20,4 @@
   box-sizing: border-box;
   font-family: var(--poppins);
 }
+  
