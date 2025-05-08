@@ -8,7 +8,7 @@ requireSignIn();
 $userID = $_SESSION['userID'];
 $user = findUserByID($userID);
 
-redirectIfNotAllowed($user["role"], "official");
+redirectIfNotAllowed($user["role"], "admin");
 
 if (isset($_POST['logout'])) {
     handleSignOut();
@@ -22,12 +22,12 @@ if (isset($_POST['logout'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MapaAyos Officials - Dashboard</title>
+    <title>MapaAyos Admin Dashboard</title>
 
     <!-- Project CSS -->
-    <link rel="stylesheet" href="/MapaAyos/assets/css/root.css">
-    <link rel="stylesheet" href="/MapaAyos/assets/css/main.css">
-    <link rel="stylesheet" href="/MapaAyos/assets/css/dashboard.css">
+    <link rel="stylesheet" href="/MapaAyos/public/css/root.css">
+    <link rel="stylesheet" href="/MapaAyos/public/css/main.css">
+    <link rel="stylesheet" href="/MapaAyos/public/css/dashboard.css">
 </head>
 
 <body>
@@ -36,23 +36,12 @@ if (isset($_POST['logout'])) {
             <div class="logo">MapaAyos</div>
             <nav>
                 <div>
-                    <a href="/MapaAyos/official/dashboard" class="nav-item">
+                    <a href="/MapaAyos/admin/dashboard" class="nav-item">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
                             <polyline points="9 22 9 12 15 12 15 22"></polyline>
                         </svg>
                         Dashboard
-                    </a>
-                    <a href="/MapaAyos/official/reports" class="nav-item">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <line x1="8" y1="6" x2="21" y2="6"></line>
-                            <line x1="8" y1="12" x2="21" y2="12"></line>
-                            <line x1="8" y1="18" x2="21" y2="18"></line>
-                            <circle cx="4" cy="6" r="1.5"></circle>
-                            <circle cx="4" cy="12" r="1.5"></circle>
-                            <circle cx="4" cy="18" r="1.5"></circle>
-                        </svg>
-                        Reports
                     </a>
                 </div>
                 <form method="POST">
@@ -63,7 +52,7 @@ if (isset($_POST['logout'])) {
         </aside>
         <main class="main-content">
             <div class="header">
-                <h1>Officials Dashboard</h1>
+                <h1>Admin Dashboard</h1>
                 <div class="user-info">
                     <?php
                     if ($user) {
@@ -76,16 +65,16 @@ if (isset($_POST['logout'])) {
             </div>
             <div class="cards-grid">
                 <div class="card">
-                    <div class="card-title">Assigned Reports</div>
-                    <div class="card-value">45</div>
+                    <div class="card-title">Total Users</div>
+                    <div class="card-value">1,234</div>
                 </div>
                 <div class="card">
-                    <div class="card-title">Pending Actions</div>
-                    <div class="card-value">12</div>
+                    <div class="card-title">Active Reports</div>
+                    <div class="card-value">56</div>
                 </div>
                 <div class="card">
-                    <div class="card-title">Resolved by You</div>
-                    <div class="card-value">78%</div>
+                    <div class="card-title">Resolved Issues</div>
+                    <div class="card-value">89%</div>
                 </div>
             </div>
         </main>

@@ -55,7 +55,8 @@ function getAddressFromCoords(lat, lng) {
     });
 }
 
-const map = L.map("map", { zoomControl: false }).setView([10.3157, 123.8854], 6);
+// Initialize the map
+const map = L.map("map").setView([10.3157, 123.8854], 6);
 L.tileLayer(
   "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png",
   {
@@ -73,15 +74,6 @@ document.getElementById("my-location-btn").addEventListener("click", () => {
   });
 });
 
-// Custom zoom buttons event listeners
-document.getElementById("zoom-in-btn").addEventListener("click", () => {
-  map.zoomIn();
-});
-
-document.getElementById("zoom-out-btn").addEventListener("click", () => {
-  map.zoomOut();
-});
-
 // Event listener for location found
 map.on("locationfound", (e) => {
   const { lat, lng } = e.latlng;
@@ -94,41 +86,27 @@ map.on("locationerror", () => {
   alert("Location access denied or not available.");
 });
 
-const rightPanel = document.querySelector('.right-panel');
-const rightPanelContent = document.getElementById('right-panel-content');
-const rightPanelCloseBtn = document.getElementById('right-panel-close-btn');
+function displayReports(reports, statusToFilter) {
+  reports.forEach((loc) => {
+    if (loc.status !== statusToFilter && statusToFilter !== "all") return;
 
-rightPanelCloseBtn.addEventListener('click', () => {
-  rightPanel.style.display = 'none';
-  rightPanelContent.innerHTML = '';
+    L.marker([loc.lat, loc.lng]).addTo(map).bindPopup(`
+            <div class="map-popup">
+              <h4 class="popup-title">
+                ${loc.title}
+              </h4>
+              <p class="popup-subtitle">${loc.description}</p>
+              <p class="popup-subtitle">Status: ${loc.status}</p>
+            </div>
+          `);
+  });
+}
+
+// Custom zoom buttons event listeners
+document.getElementById("zoom-in-btn").addEventListener("click", () => {
+  map.zoomIn();
 });
 
-// Display all reports on the map
-reports.forEach((loc) => {
-  const marker = L.marker([loc.lat, loc.lng]).addTo(map);
-  marker.bindPopup(`
-          <div class="map-popup">
-            <h4 class="popup-title">
-              ${loc.title}
-            </h4>
-            <p class="popup-subtitle">${loc.description}</p>
-          </div>
-        `);
-
-  marker.on('click', () => {
-    // zoom map to marker location
-    map.flyTo([loc.lat, loc.lng], 12, { animate: true, duration: 1.0 });
-
-    // populate right panel with report details
-    rightPanelContent.innerHTML = `
-      <div class="right-panel-content">
-        <div class="report-item">
-          Report Title:<br><small>${loc.title}</small><br>
-          Description:<br><small>${loc.description}</small><br>
-          <small><em>Latitude: ${loc.lat.toFixed(5)}, Longitude: ${loc.lng.toFixed(5)}</em></small>
-        </div>
-      </div>
-    `;
-    rightPanel.style.display = 'block';
-  });
+document.getElementById("zoom-out-btn").addEventListener("click", () => {
+  map.zoomOut();
 });

@@ -25,9 +25,9 @@ if (isset($_POST['logout'])) {
     <title>MapaAyos Officials - Reports</title>
 
     <!-- Project CSS -->
-    <link rel="stylesheet" href="/MapaAyos/assets/css/root.css">
-    <link rel="stylesheet" href="/MapaAyos/assets/css/main.css">
-    <link rel="stylesheet" href="/MapaAyos/assets/css/dashboard.css">
+    <link rel="stylesheet" href="/MapaAyos/public/css/root.css">
+    <link rel="stylesheet" href="/MapaAyos/public/css/main.css">
+    <link rel="stylesheet" href="/MapaAyos/public/css/dashboard.css">
 </head>
 
 <body>

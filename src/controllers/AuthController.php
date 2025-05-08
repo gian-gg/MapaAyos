@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/../models/UserModel.php';
 
+
 function handleSignUp($firstName, $lastName, $email, $password)
 {
     // Sanitize Inputs

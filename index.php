@@ -1,8 +1,8 @@
 <?php
 session_start();
 
-require_once __DIR__ . '/config/db.php';
-require_once __DIR__ . '/controllers/AuthController.php';
+require_once __DIR__ .  '/config/db.php';
+require_once __DIR__ . '/src/controllers/AuthController.php';
 
 ?>
 
@@ -17,14 +17,14 @@ require_once __DIR__ . '/controllers/AuthController.php';
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="/MapaAyos/assets/css/root.css">
-    <link rel="stylesheet" href="/MapaAyos/assets/css/main.css">
-    <link rel="stylesheet" href="/MapaAyos/assets/css/landing.css">
+    <link rel="stylesheet" href="/MapaAyos/public/css/root.css">
+    <link rel="stylesheet" href="/MapaAyos/public/css/main.css">
+    <link rel="stylesheet" href="/MapaAyos/public/css/landing.css">
 
-    <link rel="stylesheet" href="/MapaAyos/assets/css/footer.css">
-    <link rel="stylesheet" href="/MapaAyos/assets/css/navbar.css">
-    <link rel="stylesheet" href="/MapaAyos/assets/css/navbar-mobile.css">
-    <link rel="stylesheet" href="/MapaAyos/assets/css/footer-mobile.css">
+    <link rel="stylesheet" href="/MapaAyos/public/css/footer.css">
+    <link rel="stylesheet" href="/MapaAyos/public/css/navbar.css">
+    <link rel="stylesheet" href="/MapaAyos/public/css/navbar-mobile.css">
+    <link rel="stylesheet" href="/MapaAyos/public/css/footer-mobile.css">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
@@ -34,9 +34,9 @@ require_once __DIR__ . '/controllers/AuthController.php';
 <body>
     <!-- header | navbar -->
     <header>
-        <a href="/MapaAyos/index.php">
-            <div class="branding">
-                <img src="/MapaAyos/assets/img/logo.png" alt="MapaAyos">
+        <a href="/MapaAyos/">
+            <div class=" branding">
+                <img src="/MapaAyos/public/img/logo.png" alt="MapaAyos">
                 <div class="brand-title">
                     <h1>MapaAyos</h1>
                     <p>nisi commodo laborum</p>
@@ -119,13 +119,13 @@ require_once __DIR__ . '/controllers/AuthController.php';
 
         <!--placeholders for partners logo-->
         <section class="partners_logo">
-            <img src="/MapaAyos/assets/img/usc.png" alt="USC Logo">
-            <img src="/MapaAyos/assets/img/deped.png" alt="DepEd Logo">
-            <img src="/MapaAyos/assets/img/dost.png" alt="DOST Logo">
+            <img src="/MapaAyos/public/img/usc.png" alt="USC Logo">
+            <img src="/MapaAyos/public/img/deped.png" alt="DepEd Logo">
+            <img src="/MapaAyos/public/img/dost.png" alt="DOST Logo">
 
-            <img src="/MapaAyos/assets/img/usc.png" alt="USC Logo">
-            <img src="/MapaAyos/assets/img/deped.png" alt="DepEd Logo">
-            <img src="/MapaAyos/assets/img/dost.png" alt="DOST Logo">
+            <img src="/MapaAyos/public/img/usc.png" alt="USC Logo">
+            <img src="/MapaAyos/public/img/deped.png" alt="DepEd Logo">
+            <img src="/MapaAyos/public/img/dost.png" alt="DOST Logo">
         </section>
 
         <!-- how it works section -->

@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MapaAyos - 404 Not Found</title>
 
-    <link rel="stylesheet" href="/MapaAyos/assets/css/root.css">
-    <link rel="stylesheet" href="/MapaAyos/assets/css/main.css">
-    <link rel="stylesheet" href="/MapaAyos/assets/css/landing.css">
+    <link rel="stylesheet" href="/MapaAyos/public/css/root.css">
+    <link rel="stylesheet" href="/MapaAyos/public/css/main.css">
+    <link rel="stylesheet" href="/MapaAyos/public/css/landing.css">
 </head>
 
 <body>

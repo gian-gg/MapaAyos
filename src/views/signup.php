@@ -5,7 +5,7 @@ require_once __DIR__ . '/../controllers/AuthController.php';
 redirectIfNotAllowed("all", "signup");
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    handleSignIn($_POST['email'], $_POST['password']);
+    handleSignUp($_POST['firstName'], $_POST['lastName'], $_POST['email'], $_POST['password']);
 }
 
 ?>
@@ -16,16 +16,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MapaAyos - Sign In</title>
+    <title>MapaAyos - Sign Up</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="/MapaAyos/assets/css/root.css">
-    <link rel="stylesheet" href="/MapaAyos/assets/css/main.css">
-    <link rel="stylesheet" href="/MapaAyos/assets/css/navbar.css">
-    <link rel="stylesheet" href="/MapaAyos/assets/css/signinup.css">
+    <link rel="stylesheet" href="/MapaAyos/public/css/root.css">
+    <link rel="stylesheet" href="/MapaAyos/public/css/main.css">
+    <link rel="stylesheet" href="/MapaAyos/public/css/navbar.css">
+    <link rel="stylesheet" href="/MapaAyos/public/css/signinup.css">
 
-    <link rel="stylesheet" href="/MapaAyos/assets/css/signinup-mobile.css">
+    <link rel="stylesheet" href="/MapaAyos/public/css/signinup-mobile.css">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
 </head>
@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <header>
         <a href="/MapaAyos/index.php">
             <div class="branding">
-                <img src="/MapaAyos/assets/img/logo.png" alt="MapaAyos">
+                <img src="/MapaAyos/public/img/logo.png" alt="MapaAyos">
                 <div class="brand-title">
                     <h1>MapaAyos</h1>
                     <p>nisi commodo laborum</p>
@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
         </a>
 
-        <!-- Toggle button for mobile -->
+        <!-- toggle button for mobile -->
         <button class="btn d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileSidebar" aria-controls="mobileSidebar" aria-label="Toggle navigation" style="background:none; border:none; font-size: 1.5rem; color: var(--text-primary);">
             <i class="bi bi-three-dots-vertical"></i>
         </button>
@@ -84,26 +84,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <?php
                 if (!isAuthenticated()) {
                     echo '<a class="btn btn-outline-primary w-100 mb-2" href="/MapaAyos/signin" data-bs-dismiss="offcanvas">Sign In</a>';
-                    echo '<a class="btn btn-primary w-100" href="/MapaAyos/singup" data-bs-dismiss="offcanvas">Sign Up</a>';
+                    echo '<a class="btn btn-primary w-100" href="/MapaAyos/signup" data-bs-dismiss="offcanvas">Sign Up</a>';
                 } else {
-                    echo '<a class="btn btn-primary w-100" href="/MapaAyos/user/dashboard data-bs-dismiss="offcanvas">Dashboard</a>';
+                    echo '<a class="btn btn-primary w-100" href="/MapaAyos/user/dashboard" data-bs-dismiss="offcanvas">Dashboard</a>';
                 }
                 ?>
             </div>
         </div>
     </div>
 
-
     <main class="signing-main">
         <section class="card">
             <div class="feature-card">
-                <img src="/MapaAyos/assets/img/feature.png" alt="MapaAyos">
+                <img src="/MapaAyos/public/img/feature.png" alt="MapaAyos">
             </div>
+
             <div class="log-card">
-                <h1>Sign In</h1>
+                <h1>Sign Up</h1>
                 <p>Tuloy po kayo! Please enter your details below.</p>
 
                 <form method="POST">
+                    <label for="firstName">First Name:</label>
+                    <input type="text" id="firstName" name="firstName" required>
+                    <br>
+                    <label for="lastName">Last Name:</label>
+                    <input type="text" id="lastName" name="lastName" required>
+                    <br>
                     <label for="email">Email:</label>
                     <input type="email" id="email" name="email" required>
                     <br>
@@ -115,15 +121,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </span>
                     </div>
                     <br>
-                    <button class="btn" type="submit">Sign In</button>
+                    <button class="btn" type="submit">Sign Up</button>
                 </form>
-
-                <p>Wala ka pang account? <a href="/MapaAyos/signup">Sign up here</a></p>
+                <p>May account ka na? <a href="/MapaAyos/signin">Sign in here</a></p>
             </div>
         </section>
     </main>
 
-    <script src="/MapaAyos/assets/js/password.js"></script>
+    <script src="/MapaAyos/public/js/password.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
 </body>
 

@@ -48,8 +48,7 @@ map.on("click", (e) => {
 });
 
 const allReports = getAllReports(
-  "http://localhost/MapaAyos/api/reports.php?mode=getByUserID&userID=" +
-    currentUser
+  "http://localhost/MapaAyos/api/reports?mode=getByUserID&userID=" + currentUser
 );
 
 allReports.then((reports) => displayReports(reports, "all"));

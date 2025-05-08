@@ -1,21 +1,27 @@
 RewriteEngine On
-
-# Set base if your project is in a subfolder like /MapaAyos
 RewriteBase /MapaAyos/
 
-# Custom 404 error page
-ErrorDocument 404 /MapaAyos/views/404.php
+Options -Indexes
 
-# 1. Redirect access to protected directories to 404
-RewriteCond %{REQUEST_URI} ^/MapaAyos/(config|controllers|database|models)/ [NC]
-RewriteRule ^.*$ /MapaAyos/views/404.php [L]
-
-# 2. Rewrite root-level views like /signin → /views/signin.php
+# Serve existing files/folders normally
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(signin|signup|mapa)$ views/$1.php [NC,L]
 
-# 3. Rewrite nested views like /user/dashboard → /views/user/dashboard.php
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(admin|official|user)/(.+)$ views/$1/$2.php [NC,L]
+# Custom 404 page
+ErrorDocument 404 /MapaAyos/src/views/404.php
+ErrorDocument 403 /MapaAyos/src/views/404.php
+
+# Block direct access to backend folders
+RewriteCond %{REQUEST_URI} ^/(config|database|src) [NC]
+RewriteRule ^.*$ /src/views/404.php [L]
+
+# Public-facing routes
+RewriteRule ^signin$ src/views/signin.php [NC,L]
+RewriteRule ^signup$ src/views/signup.php [NC,L]
+RewriteRule ^mapa$ src/views/mapa.php [NC,L]
+
+# Nested Views
+RewriteRule ^(admin|official|user)/(.+)$ src/views/$1/$2.php [NC,L]
+
+# API endpoint
+RewriteRule ^api/(.+)$ src/api/$1.php [NC,L]

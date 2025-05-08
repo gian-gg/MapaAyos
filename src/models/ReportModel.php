@@ -1,5 +1,6 @@
 <?php
-require_once __DIR__ . '/../config/db.php';
+require_once __DIR__ . '/../../config/db.php';
+
 
 function registerReport($lat, $lng, $title, $description, $createdBy) // a function for signing up a user
 {
