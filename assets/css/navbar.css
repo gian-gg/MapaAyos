@@ -29,43 +29,6 @@ header {
   z-index: 1000;
 }
   
-  .branding, .brand-title {
-    display: flex;
-  }
-  
-  .branding {
-    justify-content: center;
-    align-items: flex-end;
-    gap: 8px;
-  }
-  
-  
-  .brand-title {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: -4px;
-  }
-  
-  .brand-title h1,
-  .brand-title p {
-    font-style: normal;
-    line-height: normal;
-  }
-  
-  .brand-title h1 {
-    color: var(--text-primary, #252728);
-    font-size: 15px;
-    font-weight: 700;
-    margin: 0;
-  }
-  
-  .brand-title p {
-    color: var(--text-primary);
-    font-size: 8px;
-    font-weight: 400;
-    margin: 0;
-  }
-  
   .nav-items {
     display: flex;
     align-items: center;
