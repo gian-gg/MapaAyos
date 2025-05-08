@@ -30,12 +30,21 @@ function getReportsById($userID)
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
-function getAllReports()
+function getReports($statusFilter)
 {
     global $pdo;
-    $sql = "SELECT * FROM reports";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute();
+
+    if ($statusFilter == "all") {
+        $sql = "SELECT * FROM reports";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+    } else {
+        $sql = "SELECT * FROM reports WHERE status = :statusFilter";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':statusFilter', $statusFilter);
+        $stmt->execute();
+    }
+
 
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }

@@ -27,8 +27,18 @@ if (!isset($_GET['mode'])) {
 $mode = $_GET['mode'];
 
 switch ($mode) {
-    case 'getAll': // MapaAyos/api/reports.php?mode=getAll
-        $reports = getAllReports();
+    case 'getReports':
+        if (!isset($_GET['status'])) {
+            echo json_encode([
+                'status' => 'error',
+                'message' => 'Status not specified.'
+            ]);
+            exit;
+        }
+
+        $status = $_GET['status'];
+
+        $reports = getReports($status);
         if (empty($reports)) {
             echo json_encode([
                 'status' => 'error',
@@ -43,7 +53,15 @@ switch ($mode) {
         }
         break;
 
-    case 'getByUserID': // MapaAyos/api/reports.php?mode=getByUserID&userID=<ID>
+    case 'getReportsByUserID':
+        if (!isset($_GET['userID'])) {
+            echo json_encode([
+                'status' => 'error',
+                'message' => 'userID not specified.'
+            ]);
+            exit;
+        }
+
         $userID = $_GET['userID'];
         $reports = getReportsById($userID);
         if (empty($reports)) {

@@ -163,8 +163,14 @@ if (isset($_POST['logout'])) {
                     ?>
                 </div>
             </div>
-            <button class="ma-btn" id="my-location-btn">My Location</button>
             <div id="map"></div> <!-- Map -->
+            <div class="map-controls-container">
+                <button id="my-location-btn">My Location</button>
+                <div class="custom-zoom-controls">
+                    <button id="zoom-in-btn" class="zoom-btn">+</button>
+                    <button id="zoom-out-btn" class="zoom-btn">−</button>
+                </div>
+            </div>
         </main>
     </div>
 

@@ -36,8 +36,3 @@ function handleRegisterReport($lat, $lng, $title, $description, $createdBy)
         return;
     }
 }
-
-function getAllReportsController()
-{
-    return getAllReports();
-}

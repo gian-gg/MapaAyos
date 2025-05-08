@@ -96,24 +96,9 @@ require_once __DIR__ . '/../controllers/AuthController.php';
     <div class="map-wrapper">
         <div class="left-panel">
             <p>Reports</p>
+            <!-- Temporarily Disabled, will tackle this laters -->
             <?php
-            $reports = getAllReportsController();
-            if (!empty($reports)) {
-                echo '<ul class="reports-list">';
-                foreach ($reports as $report) {
-                    echo '<li class="report-item">';
-                    echo 'Report Title:<br>' . '<small>' . htmlspecialchars($report["title"]) . '</small>';
-                    echo 'Description:<br>' . '<small>' . htmlspecialchars($report["description"]) . '</small><br>';
-                    echo 'Status:<br>' . '<small>' . htmlspecialchars($report["status"]) . '</small><br>';
-                    $date = new DateTime($report["createdAt"]);
-                    $formattedDate = $date->format('F j, Y, g:i a');
-                    echo '<small><em>' . htmlspecialchars($formattedDate) . '</em></small>';
-                    echo '</li>';
-                }
-                echo '</ul>';
-            } else {
-                echo '<p>No reports found.</p>';
-            }
+            echo '<p>No reports found.</p>';
             ?>
         </div>
         <div class="map-container">

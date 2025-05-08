@@ -12,6 +12,7 @@ async function getAllReports(API_URL) {
     }
 
     const data = await response.json();
+    console.log(data);
     return data.reports;
   } catch (error) {
     console.error("Error fetching reports:", error);
@@ -86,10 +87,8 @@ map.on("locationerror", () => {
   alert("Location access denied or not available.");
 });
 
-function displayReports(reports, statusToFilter) {
+function displayReports(reports) {
   reports.forEach((loc) => {
-    if (loc.status !== statusToFilter && statusToFilter !== "all") return;
-
     L.marker([loc.lat, loc.lng]).addTo(map).bindPopup(`
             <div class="map-popup">
               <h4 class="popup-title">
