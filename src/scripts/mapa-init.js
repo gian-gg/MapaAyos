@@ -26,7 +26,10 @@ map.on("locationfound", (e) => {
 });
 
 map.on("locationerror", () => {
-  alert("Location access denied or not available.");
+  document.getElementById("ma-toast-title").innerText = "Error";
+  document.getElementById("ma-toast-body").innerText =
+    "Location access denied or not available.";
+  new bootstrap.Toast(document.getElementById("ma-toast")).show();
 });
 
 // Custom zoom buttons event listeners

@@ -6,6 +6,7 @@ import {
 } from "./utils/mapa-utils.js";
 
 import { fetchAPI } from "./utils/api-utils.js";
+import { showToast } from "./utils/toast-utils.js";
 
 let currentBaranggayCoords = null;
 let currentBaranggayPolygon = null;
@@ -15,7 +16,7 @@ map.on("click", (e) => {
   const { lat, lng } = e.latlng;
 
   if (currentBaranggayCoords === null) {
-    alert("Please select a baranggay first.");
+    showToast("Error", "Please select a baranggay first before reporting.");
     return;
   }
 
@@ -23,7 +24,7 @@ map.on("click", (e) => {
     console.log(`Clicked at Latitude: ${lat}, Longitude: ${lng}`);
     displayPopUp(lat, lng);
   } else {
-    alert("You clicked outside the baranggay boundary.");
+    showToast("Error", "You clicked outside the baranggay boundary.");
   }
 });
 
