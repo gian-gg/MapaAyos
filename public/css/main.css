@@ -82,8 +82,7 @@ input:focus {
   margin-bottom: 1rem;
 }
 
-.branding,
-.brand-title {
+.branding, .brand-title {
   display: flex;
 }
 

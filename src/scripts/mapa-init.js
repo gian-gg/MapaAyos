@@ -1,3 +1,61 @@
+async function getAllReports(API_URL) {
+  try {
+    const response = await fetch(API_URL, {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer mapaayos123", // Replace with your actual token
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+
+    const data = await response.json();
+    console.log(data);
+    return data.reports;
+  } catch (error) {
+    console.error("Error fetching reports:", error);
+    return [];
+  }
+}
+
+// // Function to get address from coordinates using Nominatim API, there might be a better approach than this pero this will do for now :3
+function getAddressFromCoords(lat, lng) {
+  const url = `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lng}`;
+
+  return fetch(url, {
+    headers: {
+      "User-Agent": "MapaAyos/1.0", // Replace with your app name (required by Nominatim)
+    },
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      if (data && data.address) {
+        return {
+          road: data.address.road || null,
+          suburb: data.address.suburb || null,
+          city:
+            data.address.city ||
+            data.address.town ||
+            data.address.village ||
+            null,
+          display_name: data.display_name || null,
+        };
+      } else {
+        return { error: "No address found" };
+      }
+    })
+    .catch((error) => {
+      return { error: error.message };
+    });
+}
+
 // Initialize the map
 const map = L.map("map").setView([10.3157, 123.8854], 6);
 L.tileLayer(
@@ -26,11 +84,22 @@ map.on("locationfound", (e) => {
 });
 
 map.on("locationerror", () => {
-  document.getElementById("ma-toast-title").innerText = "Error";
-  document.getElementById("ma-toast-body").innerText =
-    "Location access denied or not available.";
-  new bootstrap.Toast(document.getElementById("ma-toast")).show();
+  alert("Location access denied or not available.");
 });
+
+function displayReports(reports) {
+  reports.forEach((loc) => {
+    L.marker([loc.lat, loc.lng]).addTo(map).bindPopup(`
+            <div class="map-popup">
+              <h4 class="popup-title">
+                ${loc.title}
+              </h4>
+              <p class="popup-subtitle">${loc.description}</p>
+              <p class="popup-subtitle">Status: ${loc.status}</p>
+            </div>
+          `);
+  });
+}
 
 // Custom zoom buttons event listeners
 document.getElementById("zoom-in-btn").addEventListener("click", () => {

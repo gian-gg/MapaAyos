@@ -1,7 +1,6 @@
 <?php
 session_start();
 require_once __DIR__ . '/../../models/UserModel.php';
-require_once __DIR__ . '/../../models/BaranggayModel.php';
 require_once __DIR__ . '/../../controllers/AuthController.php';
 require_once __DIR__ . '/../../controllers/ReportController.php';
 
@@ -48,18 +47,6 @@ if (isset($_POST['logout'])) {
 </head>
 
 <body>
-    <div class="toast-container position-fixed bottom-0 end-0 p-3">
-        <div id="ma-toast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-            <div class="toast-header">
-                <strong class="me-auto" id="ma-toast-title">Toast Title</strong>
-                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-            </div>
-            <div class="toast-body" id="ma-toast-body">
-                Toast Message
-            </div>
-        </div>
-    </div>
-
     <!-- Report Modal -->
     <div class="modal" id="reportModal" tabindex="-1" aria-labelledby="reportModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
@@ -176,17 +163,6 @@ if (isset($_POST['logout'])) {
                     ?>
                 </div>
             </div>
-            <select name="selectBaranggayInput" id="selectBaranggayInput">
-                <option value="null" selected>Select Baranggay</option>
-                <?php
-                $baranggays = getBaranggays();
-
-                foreach ($baranggays as $baranggay) {
-                    echo "<option value='" . htmlspecialchars($baranggay['name']) . "'>" . htmlspecialchars($baranggay['name']) . "</option>";
-                }
-                ?>
-            </select>
-
             <div id="map"></div> <!-- Map -->
             <div class="map-controls-container">
                 <button id="my-location-btn">My Location</button>
@@ -208,7 +184,7 @@ if (isset($_POST['logout'])) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
     <!-- Page JS -->
     <script src="/MapaAyos/src/scripts/mapa-init.js"></script>
-    <script type="module" src="/MapaAyos/src/scripts/user-mapa.js"></script>
+    <script src="/MapaAyos/src/scripts/user-mapa.js"></script>
 
     <script src="/MapaAyos/public/js/sidebar.js"></script>
 

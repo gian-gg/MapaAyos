@@ -55,3 +55,18 @@ function findUserByID($userID) // a function to find a user by ID
         return false;
     }
 }
+
+function getUsersByRole($role) {
+    global $pdo;
+
+    $sql = "SELECT * FROM users WHERE role = :role";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([':role' => $role]);
+
+    return $stmt->fetchAll();
+}
+
+function updateUserRole(PDO $pdo, int $userID, string $newRole): bool {
+    $stmt = $pdo->prepare("UPDATE users SET role = ? WHERE id = ?");
+    return $stmt->execute([$newRole, $userID]);
+}
