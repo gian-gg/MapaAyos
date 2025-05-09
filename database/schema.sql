@@ -45,3 +45,10 @@ CREATE TABLE IF NOT EXISTS `officialsInfo` (
   CONSTRAINT `fk_official_user` FOREIGN KEY (`userID`) REFERENCES `users` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_official_baranggay` FOREIGN KEY (`baranggayID`) REFERENCES `baranggays` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- User Preferences table
+CREATE TABLE user_preferences (
+  `user_id` int(11) NOT NULL,
+  `theme` varchar(10) DEFAULT 'system',
+  `profile_image` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

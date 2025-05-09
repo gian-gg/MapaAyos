@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap');
+
+body, .dashboard, .settings-main {
+    font-family: 'Nunito', 'Inter', 'Poppins', Arial, sans-serif;
+    color: #222;
+}
+
+.settings-section {
+    background: #f6faf8;
+    border-radius: 16px;
+    padding: 2rem 2.5rem;
+    margin-bottom: 2rem;
+    border: 1px solid #e0e0e0;
+}
+
+.settings-subtitle {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 1.2rem;
+}
+
+/* Separate the image and forms a bit lol */
+.profile-row form > div:first-child { 
+    margin-bottom: 1rem;
+}
+
+.profile-row .settings-form-row {
+    width: 100%;
+    margin-bottom: 0.8rem;
+}
+
+.profile-row .profile-img {
+    width: 120px;
+    height: 120px;
+}
+
+.settings-label {
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+    font-size: 1rem;
+}
+
+.settings-input {
+    background: #f6faf8;
+    border: 1px solid #d0d0d0;
+    border-radius: 8px;
+    padding: 0.6rem 1rem;
+    width: 100%;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+select.settings-input {
+    appearance: none;
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1em;
+    padding-right: 2.5rem;
+}
+
+.settings-form-row {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1.2rem;
+}
+
+.settings-form-row > div {
+    flex: 1;
+}
+
+.btn-settings {
+    background: #e6f0ea;
+    color: #222;
+    border: 1px solid #b7d6c6;
+    border-radius: 8px;
+    padding: 0.5rem 1.2rem;
+    font-weight: 600;
+    transition: background 0.2s;
+    cursor: pointer;
+}
+.btn-settings:hover {
+    background: #d2e8de;
+}
+
+.section-divider {
+    border: none;
+    border-top: 3px solid #b7d6c6;
+    margin: 0.1rem 0 1.1rem 0;
+}
+
+.account-settings-label {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 1.1rem;
+    margin-top: 0.5rem;
+}
+
+@media (max-width: 900px) {
+    .settings-main { padding: 1rem; }
+    .settings-section { padding: 1rem; }
+    .profile-row { flex-direction: column; gap: 1.2rem; }
+    .settings-form-row { flex-direction: column; gap: 0.7rem; }
+} 
