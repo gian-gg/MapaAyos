@@ -25,11 +25,12 @@ CREATE TABLE IF NOT EXISTS `reports` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Baranggays table
-CREATE TABLE IF NOT EXISTS `baranggays` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(255) NOT NULL,
-  `city` VARCHAR(255) DEFAULT NULL,
-  `country` VARCHAR(255) DEFAULT NULL,
+CREATE TABLE `baranggays` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `city` varchar(255) DEFAULT NULL,
+  `country` varchar(255) DEFAULT NULL,
+  `geojson` text DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -44,4 +45,16 @@ CREATE TABLE IF NOT EXISTS `officialsInfo` (
   PRIMARY KEY (`userID`, `baranggayID`),
   CONSTRAINT `fk_official_user` FOREIGN KEY (`userID`) REFERENCES `users` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_official_baranggay` FOREIGN KEY (`baranggayID`) REFERENCES `baranggays` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Role Requests table
+CREATE TABLE IF NOT EXISTS `role_requests` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `userID` INT(11) NOT NULL,
+  `message` TEXT DEFAULT NULL,
+  `proof_image` VARCHAR(255) DEFAULT NULL,
+  `status` ENUM('pending', 'approved', 'rejected') DEFAULT 'pending',
+  `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `fk_role_request_user` FOREIGN KEY (`userID`) REFERENCES `users` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
