@@ -31,3 +31,20 @@ INSERT INTO `officialsInfo` (`userID`, `baranggayID`, `position`, `isActive`, `t
 (11, 3, 'Barangay Captain', 1, '2023-01-01', '2026-01-01'),
 (12, 3, 'Kagawad', 1, '2023-01-01', '2026-01-01'),
 (13, 3, 'Secretary', 1, '2023-01-01', '2026-01-01');
+
+
+-- User Preferences
+INSERT INTO `user_preferences` (`user_id`, `theme`, `profile_image`) VALUES
+(5, 'system', NULL),
+(6, 'system', NULL),
+(7, 'system', NULL),
+(8, 'system', NULL),
+(9, 'system', NULL),
+(10, 'system', NULL),
+(11, 'system', NULL),
+(12, 'system', NULL),
+(13, 'system', NULL),
+(17, 'system', NULL),
+(18, 'system', NULL),
+(19, 'system', NULL),
+(20, 'system', NULL);

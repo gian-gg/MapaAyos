@@ -9,6 +9,7 @@ requireSignIn();
 
 $userID = $_SESSION['userID'];
 $user = findUserByID($userID);
+$profileImg = !empty($user['profile_image']) ? '/MapaAyos/public/images/profiles/' . $user['profile_image'] : '/MapaAyos/public/img/default-profile.png';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     handleRegisterReport($_POST['latInput'], $_POST['lngInput'], $_POST['titleInput'], $_POST['descriptionInput'], $userID);
@@ -44,6 +45,7 @@ if (isset($_POST['logout'])) {
     <link rel="stylesheet" href="/MapaAyos/public/css/dashboard.css">
     <link rel="stylesheet" href="/MapaAyos/public/css/mapa-init.css">
     <link rel="stylesheet" href="/MapaAyos/public/css/sidebar.css">
+    <link rel="stylesheet" href="/MapaAyos/public/css/header.css">
 
 </head>
 
@@ -158,56 +160,47 @@ if (isset($_POST['logout'])) {
                         <?php endif; ?>
                     </a>
                 </div>
-                <form method="POST">
-                    <button type="submit" name="logout" class="ma-btn">Log Out</button>
-                </form>
+                <div class="nav-bottom">
+                    <a href="/MapaAyos/user/settings" class="nav-item<?php if ($_SERVER['REQUEST_URI'] === '/MapaAyos/user/settings') echo ' active'; ?>" style="font-size: 1.1rem;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"></path>
+                            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                        </svg>
+                        <span class="nav-text">Settings</span>
+                        <?php if ($_SERVER['REQUEST_URI'] === '/MapaAyos/user/settings') : ?>
+                            <i class="bi bi-chevron-right"></i>
+                        <?php endif; ?>
+                    </a>
+                    <div style="margin-top: 1rem;">
+                        <form method="POST">
+                            <button type="submit" name="logout" class="ma-btn">Log Out</button>
+                        </form>
+                    </div>
+                </div>
             </nav>
         </aside>
         <main class="main-content">
-            <div class="header">
-                <i class="bi bi-layout-sidebar"></i>
-                <h1>Mapa</h1>
-                <div class="user-info">
-                    <?php
-                    if ($user) {
-                        echo "<p>Welcome, " . htmlspecialchars($user['firstName']) . " " . htmlspecialchars($user['lastName']) . "</p>";
-                    } else {
-                        echo "<p>User not found.</p>";
-                    }
-                    ?>
-                </div>
-            </div>
-            
-            <div class="map-wrapper">
-                <div id="map"></div> <!-- Map -->
+            <?php 
+            $pageTitle = 'Mapa';
+            require_once __DIR__ . '/../partials/_header.php';
+            ?>
+            <select name="selectBaranggayInput" id="selectBaranggayInput">
+                <option value="null" selected>Select Baranggay</option>
+                <?php
+                $baranggays = getBaranggays();
 
-                <select name="selectBaranggayInput" id="selectBaranggayInput">
-                    <option value="null" selected>Select Baranggay</option>
-                    <?php
-                    $baranggays = getBaranggays();
+                foreach ($baranggays as $baranggay) {
+                    echo "<option value='" . htmlspecialchars($baranggay['name']) . "'>" . htmlspecialchars($baranggay['name']) . "</option>";
+                }
+                ?>
+            </select>
 
-                    foreach ($baranggays as $baranggay) {
-                        echo "<option value='" . htmlspecialchars($baranggay['name']) . "'>" . htmlspecialchars($baranggay['name']) . "</option>";
-                    }
-                    ?>
-                </select>
-
-                <div class="map-controls-container">
-                    <button id="my-location-btn">My Location</button>
-                    <div class="custom-zoom-controls">
-                        <button id="zoom-in-btn" class="zoom-btn">+</button>
-                        <button id="zoom-out-btn" class="zoom-btn">−</button>
-                    </div>
-                </div>
-
-                <div class="right-panel" style="display:none; background: var(--bg-primary); border: 1px solid var(--outline);">
-                    <div class="right-panel-header" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; padding: 10px; border-bottom: 1px solid var(--outline);">
-                        <h5 style="margin:0; text-align:left;">Report Details</h3>
-                        <button id="right-panel-close-btn" aria-label="Close right panel" style="background:none; border:none; font-size:1.5rem; cursor:pointer;">&times;</button>
-                    </div>
-                    <div id="right-panel-content" style="padding: 0 10px 10px 10px;">
-                        <!-- Report details will be populated here -->
-                    </div>
+            <div id="map"></div> <!-- Map -->
+            <div class="map-controls-container">
+                <button id="my-location-btn">My Location</button>
+                <div class="custom-zoom-controls">
+                    <button id="zoom-in-btn" class="zoom-btn">+</button>
+                    <button id="zoom-out-btn" class="zoom-btn">−</button>
                 </div>
             </div>
         </main>
