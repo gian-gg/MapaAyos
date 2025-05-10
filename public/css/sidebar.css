@@ -3,6 +3,10 @@
     padding: 1.5rem;
     border: solid var(--outline) 1px;
     transition: padding 0.3s ease;
+
+    margin: 10px;
+    margin-right: 0;
+    border-radius: 10px;
   }
 
   nav {
@@ -81,7 +85,12 @@
   .sidebar.collapsed {
     padding: 0.5rem;
     overflow: hidden;
-    transition: padding 0.3s ease;
+    transition: padding 0.3s ease, width 0.3s ease;
+  }
+  
+  /* Add transition for expanding sidebar */
+  .sidebar {
+    transition: padding 0.3s ease, width 0.3s ease;
   }
   
   .sidebar.collapsed .nav-text {
