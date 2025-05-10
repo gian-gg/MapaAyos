@@ -1,5 +1,5 @@
 // Initialize the map
-const map = L.map("map").setView([10.3157, 123.8854], 6);
+const map = L.map("map", { zoomControl: false }).setView([10.3157, 123.8854], 9);
 L.tileLayer(
   "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png",
   {
@@ -11,6 +11,7 @@ L.tileLayer(
 
 // Add a button to locate the user's current location
 document.getElementById("my-location-btn").addEventListener("click", () => {
+  document.querySelector(".right-panel").style.display = "none";
   map.locate({
     setView: true,
     maxZoom: 16,
@@ -20,7 +21,8 @@ document.getElementById("my-location-btn").addEventListener("click", () => {
 // Event listener for location found
 map.on("locationfound", (e) => {
   const { lat, lng } = e.latlng;
-  L.marker([lat, lng]).addTo(map).bindPopup("You are here!").openPopup();
+  const locationMarker = L.marker([lat, lng]).addTo(map).bindPopup("You are here!").openPopup();
+  map.flyTo(locationMarker.getLatLng(), 11, { duration: 1 });
 
   console.log(`Your location: Latitude: ${lat}, Longitude: ${lng}`);
 });
