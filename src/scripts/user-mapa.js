@@ -16,6 +16,11 @@ map.on("click", (e) => {
   const { lat, lng } = e.latlng;
 
   if (currentBaranggayCoords === null) {
+    // Hide right panel even if no baranggay is selected
+    const rightPanel = document.querySelector(".right-panel");
+    if (rightPanel) {
+      rightPanel.style.display = "none";
+    }
     showToast("Error", "Please select a baranggay first before reporting.");
     return;
   }
@@ -25,7 +30,12 @@ map.on("click", (e) => {
     displayPopUp(lat, lng);
   } else {
     showToast("Error", "You clicked outside the baranggay boundary.");
+    const rightPanel = document.querySelector(".right-panel");
+    if (rightPanel) {
+      rightPanel.style.display = "none";
+    }
   }
+
 });
 
 fetchAPI(
@@ -49,3 +59,14 @@ document
       );
     });
   });
+
+// Add event listener to close right panel on close button click
+const rightPanelCloseBtn = document.getElementById("right-panel-close-btn");
+if (rightPanelCloseBtn) {
+  rightPanelCloseBtn.addEventListener("click", () => {
+    const rightPanel = document.querySelector(".right-panel");
+    if (rightPanel) {
+      rightPanel.style.display = "none";
+    }
+  });
+}

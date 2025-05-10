@@ -43,7 +43,7 @@ if (isset($_POST['logout'])) {
     <link rel="stylesheet" href="/MapaAyos/public/css/root.css">
     <link rel="stylesheet" href="/MapaAyos/public/css/main.css">
     <link rel="stylesheet" href="/MapaAyos/public/css/dashboard.css">
-    <link rel="stylesheet" href="/MapaAyos/public/css/mapa.css">
+    <link rel="stylesheet" href="/MapaAyos/public/css/mapa-init.css">
     <link rel="stylesheet" href="/MapaAyos/public/css/sidebar.css">
     <link rel="stylesheet" href="/MapaAyos/public/css/header.css">
 
