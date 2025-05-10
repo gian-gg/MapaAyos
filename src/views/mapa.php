@@ -13,6 +13,7 @@ require_once __DIR__ . '/../controllers/AuthController.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MapaAyos - Mapa</title>
+    <link rel="shortcut icon" href="/MapaAyos/public/img/favicon.png" type="image/png">
 
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
@@ -120,7 +121,7 @@ require_once __DIR__ . '/../controllers/AuthController.php';
         <div class="right-panel" style="display:none; background: var(--bg-primary); border: 1px solid var(--outline);">
             <div class="right-panel-header" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; padding: 10px; border-bottom: 1px solid var(--outline);">
                 <h5 style="margin:0; text-align:left;">Report Details</h3>
-                <button id="right-panel-close-btn" aria-label="Close right panel" style="background:none; border:none; font-size:1.5rem; cursor:pointer;">&times;</button>
+                    <button id="right-panel-close-btn" aria-label="Close right panel" style="background:none; border:none; font-size:1.5rem; cursor:pointer;">&times;</button>
             </div>
             <div id="right-panel-content" style="padding: 0 10px 10px 10px;">
                 <!-- Report details will be populated here -->

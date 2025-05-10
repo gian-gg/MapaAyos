@@ -27,8 +27,8 @@ if (isset($_POST['logout'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MapaAyos Dashboard - Mapa</title>
-
+    <title>MapaAyos - User Mapa</title>
+    <link rel="shortcut icon" href="/MapaAyos/public/img/favicon.png" type="image/png">
 
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
@@ -180,27 +180,40 @@ if (isset($_POST['logout'])) {
             </nav>
         </aside>
         <main class="main-content">
-            <?php 
+            <?php
             $pageTitle = 'Mapa';
             require_once __DIR__ . '/../partials/_header.php';
             ?>
-            <select name="selectBaranggayInput" id="selectBaranggayInput">
-                <option value="null" selected>Select Baranggay</option>
-                <?php
-                $baranggays = getBaranggays();
+            <div class="map-wrapper">
+                <div id="map"></div> <!-- Map -->
 
-                foreach ($baranggays as $baranggay) {
-                    echo "<option value='" . htmlspecialchars($baranggay['name']) . "'>" . htmlspecialchars($baranggay['name']) . "</option>";
-                }
-                ?>
-            </select>
+                <select name="selectBaranggayInput" id="selectBaranggayInput">
+                    <option value="null" selected>Select Baranggay</option>
+                    <?php
+                    $baranggays = getBaranggays();
 
-            <div id="map"></div> <!-- Map -->
-            <div class="map-controls-container">
-                <button id="my-location-btn">My Location</button>
-                <div class="custom-zoom-controls">
-                    <button id="zoom-in-btn" class="zoom-btn">+</button>
-                    <button id="zoom-out-btn" class="zoom-btn">−</button>
+                    foreach ($baranggays as $baranggay) {
+                        echo "<option value='" . htmlspecialchars($baranggay['name']) . "'>" . htmlspecialchars($baranggay['name']) . "</option>";
+                    }
+                    ?>
+                </select>
+
+                <div class="map-controls-container">
+                    <button id="my-location-btn">My Location</button>
+                    <div class="custom-zoom-controls">
+                        <button id="zoom-in-btn" class="zoom-btn">+</button>
+                        <button id="zoom-out-btn" class="zoom-btn">−</button>
+                    </div>
+                </div>
+
+                <div class="right-panel" style="display:none; background: var(--bg-primary); border: 1px solid var(--outline);">
+                    <div class="right-panel-header" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; padding: 10px; border-bottom: 1px solid var(--outline);">
+                        <h5 style="margin:0; text-align:left;">Report Details</h3>
+                            <button id="right-panel-close-btn" aria-label="Close right panel" style="background:none; border:none; font-size:1.5rem; cursor:pointer;">&times;</button>
+                    </div>
+                    <div id="right-panel-content" style="padding: 0 10px 10px 10px;">
+                        <!-- Report details will be populated here -->
+                    </div>
                 </div>
             </div>
         </main>

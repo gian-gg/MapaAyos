@@ -17,4 +17,4 @@ $profileImg = !empty($user['profile_image']) ? '/MapaAyos/public/images/profiles
             <p>User not found.</p>
         <?php endif; ?>
     </div>
-</div> 
+</div>

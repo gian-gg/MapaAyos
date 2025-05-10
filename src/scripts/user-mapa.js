@@ -35,7 +35,6 @@ map.on("click", (e) => {
       rightPanel.style.display = "none";
     }
   }
-
 });
 
 fetchAPI(

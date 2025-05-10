@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/../models/ReportModel.php';
+date_default_timezone_set('Asia/Manila');
 
 function handleRegisterReport($lat, $lng, $title, $description, $createdBy)
 { // all returns and echo are for temporary testing

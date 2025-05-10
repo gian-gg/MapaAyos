@@ -39,20 +39,14 @@ function createBaranggayBoundary(currentBaranggayPolygon, baranggayCoords) {
 }
 
 function displayReports(reports) {
-  reports.forEach((loc) => {
-    const marker = L.marker([loc.lat, loc.lng]).addTo(map).bindPopup(`
-            <div class="map-popup">
-              <h4 class="popup-title">
-                ${loc.title}
-              </h4>
-              <p class="popup-subtitle">${loc.description}</p>
-              <p class="popup-subtitle">Status: ${loc.status}</p>
-            </div>
-          `);
+  if (!reports) return;
 
-    marker.on('click', () => {
+  reports.forEach((loc) => {
+    const marker = L.marker([loc.lat, loc.lng]).addTo(map);
+
+    marker.on("click", () => {
       showRightPanelWithReport(loc);
-      map.flyTo(marker.getLatLng(), 12, { duration: 1 });
+      // map.flyTo(marker.getLatLng(), 12, { duration: 1 });
     });
   });
 }
@@ -60,15 +54,18 @@ function displayReports(reports) {
 /* right panel thingy */
 function populateRightPanel(report) {
   if (!report) {
-    document.getElementById("right-panel-content").innerHTML = "<p>No report data available.</p>";
+    document.getElementById("right-panel-content").innerHTML =
+      "<p>No report data available.</p>";
     return;
   }
   let html = '<div class="report-item">';
   html += `Report Title: <small>${report.title}</small><br>`;
   html += `Description: <small>${report.description}</small><br>`;
   html += `Status: <small>${report.status}</small><br>`;
-  html += `<small><em>${new Date(report.createdAt).toLocaleString()}</em></small>`;
-  html += '</div>';
+  html += `<small><em>${new Date(
+    report.createdAt
+  ).toLocaleString()}</em></small>`;
+  html += "</div>";
   document.getElementById("right-panel-content").innerHTML = html;
 }
 
@@ -79,7 +76,6 @@ function showRightPanelWithReport(report) {
     rightPanel.style.display = "block";
   }
 }
-
 
 function displayPopUp(lat, lng) {
   document.getElementById("latInput").value = lat;
@@ -121,4 +117,4 @@ function displayPopUp(lat, lng) {
   });
 }
 
-export { isInBaranggay, createBaranggayBoundary, displayReports, displayPopUp};
+export { isInBaranggay, createBaranggayBoundary, displayReports, displayPopUp };

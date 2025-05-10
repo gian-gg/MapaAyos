@@ -22,7 +22,8 @@ if (isset($_POST['logout'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MapaAyos Officials - Dashboard</title>
+    <title>MapaAyos - Officials Dashboard</title>
+    <link rel="shortcut icon" href="/MapaAyos/public/img/favicon.png" type="image/png">
 
     <!-- Project CSS -->
     <link rel="stylesheet" href="/MapaAyos/public/css/root.css">
@@ -91,7 +92,7 @@ if (isset($_POST['logout'])) {
             </nav>
         </aside>
         <main class="main-content">
-            <?php 
+            <?php
             $pageTitle = 'Official Dashboard';
             require_once __DIR__ . '/../partials/_header.php';
             ?>

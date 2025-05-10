@@ -97,7 +97,7 @@ if (!empty($_POST['cropped_image_data'])) {
         $fileName = 'profile_' . time() . '.png';
         $userFolder = $userID;
         $uploadFileDir = dirname(dirname(dirname(__DIR__))) . '/public/images/profiles/' . $userFolder . '/';
-        
+
         // Create directory if it doesn't exist
         if (!file_exists($uploadFileDir)) {
             // 0777 = default permissions for directories
@@ -132,9 +132,13 @@ $pageTitle = 'MapaAyos - Official Settings';
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MapaAyos - Officials Settings</title>
+    <link rel="shortcut icon" href="/MapaAyos/public/img/favicon.png" type="image/png">
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="/MapaAyos/public/css/root.css">
@@ -146,6 +150,7 @@ $pageTitle = 'MapaAyos - Official Settings';
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css">
     <link rel="stylesheet" href="/MapaAyos/public/css/settings.css">
 </head>
+
 <body>
     <div class="dashboard">
         <aside class="sidebar">
@@ -205,7 +210,7 @@ $pageTitle = 'MapaAyos - Official Settings';
             </nav>
         </aside>
         <main class="main-content">
-            <?php 
+            <?php
             $pageTitle = 'Official Settings';
             require_once __DIR__ . '/../partials/_header.php';
             ?>
@@ -223,23 +228,23 @@ $pageTitle = 'MapaAyos - Official Settings';
                             <input type="file" id="profile_image_input" accept="image/*" style="display:none;">
                             <!-- Cropper Modal -->
                             <div class="modal fade" id="cropperModal" tabindex="-1" aria-labelledby="cropperModalLabel" aria-hidden="true">
-                              <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                  <div class="modal-header">
-                                    <h5 class="modal-title" id="cropperModalLabel">Crop Profile Image</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                  </div>
-                                  <div class="modal-body">
-                                    <div style="max-width:100%;max-height:350px;">
-                                      <img id="cropperImage" style="max-width:100%;max-height:350px;">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="cropperModalLabel">Crop Profile Image</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div style="max-width:100%;max-height:350px;">
+                                                <img id="cropperImage" style="max-width:100%;max-height:350px;">
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                            <button type="button" class="btn btn-primary" id="uploadCroppedImage">Crop</button>
+                                        </div>
                                     </div>
-                                  </div>
-                                  <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                    <button type="button" class="btn btn-primary" id="uploadCroppedImage">Crop</button>
-                                  </div>
                                 </div>
-                              </div>
                             </div>
                             <div class="settings-form-row">
                                 <div>
@@ -299,4 +304,5 @@ $pageTitle = 'MapaAyos - Official Settings';
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
     <script src="/MapaAyos/public/js/settings.js"></script>
 </body>
-</html> 
+
+</html>
