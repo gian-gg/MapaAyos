@@ -4,6 +4,7 @@ require_once __DIR__ . '/../../models/UserModel.php';
 require_once __DIR__ . '/../../models/BaranggayModel.php';
 require_once __DIR__ . '/../../controllers/AuthController.php';
 require_once __DIR__ . '/../../controllers/ReportController.php';
+require_once __DIR__ . '/../../controllers/ProcessFileController.php';
 
 requireSignIn();
 
@@ -12,7 +13,13 @@ $user = findUserByID($userID);
 $profileImg = !empty($user['profile_image']) ? '/MapaAyos/public/images/profiles/' . $user['profile_image'] : '/MapaAyos/public/img/default-profile.png';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    handleRegisterReport($_POST['latInput'], $_POST['lngInput'], $_POST['titleInput'], $_POST['descriptionInput'], $userID);
+
+    if (hasReachedMaxReports($userID)) {
+        echo "<script>alert('You have reached the maximum number of reports for today.');</script>";
+    } else {
+        $fileUpload = uploadImage($_FILES, $userID);
+        handleRegisterReport($_POST['latInput'], $_POST['lngInput'], $_POST['titleInput'], $_POST['descriptionInput'], $fileUpload, $userID);
+    }
 }
 
 if (isset($_POST['logout'])) {
@@ -70,7 +77,7 @@ if (isset($_POST['logout'])) {
                     <h1 class="modal-title fs-5" id="reportModalLabel">Enter Report</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form method="POST">
+                <form method="POST" enctype="multipart/form-data">
                     <div class="modal-body">
                         <label for="titleInput">Title:</label>
                         <input type="text" id="titleInput" name="titleInput" required>
@@ -79,10 +86,10 @@ if (isset($_POST['logout'])) {
                         <textarea name="descriptionInput" id="descriptionInput" required></textarea>
                         <br>
                         <label for="fileInput">Upload Image:</label>
-                        <input type="file" id="fileInput" name="fileInput" accept=".jpg, .jpeg, .png">
+                        <input type="file" id="fileInput" name="fileInput" accept=".jpg, .jpeg, .png" required>
                         <br>
-                        <input type="hidden" name="latInput" id="latInput">
-                        <input type="hidden" name="lngInput" id="lngInput">
+                        <input type="hidden" name="latInput" id="latInput" required>
+                        <input type="hidden" name="lngInput" id="lngInput" required>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="ma-btn">Submit</button>

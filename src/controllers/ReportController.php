@@ -2,7 +2,20 @@
 require_once __DIR__ . '/../models/ReportModel.php';
 date_default_timezone_set('Asia/Manila');
 
-function handleRegisterReport($lat, $lng, $title, $description, $createdBy)
+function hasReachedMaxReports($userID)
+{
+    $maxReports = 3; // Maximum number of reports allowed
+
+    $reports = getReportsById($userID);
+    $currentDate = date('Y-m-d');
+    $reports = array_filter($reports, function ($report) use ($currentDate) {
+        return date('Y-m-d', strtotime($report['createdAt'])) === $currentDate;
+    });
+
+    return count($reports) >= $maxReports;
+}
+
+function handleRegisterReport($lat, $lng, $title, $description, $filePath, $createdBy)
 { // all returns and echo are for temporary testing
     // Sanitize Input
     $lat = htmlspecialchars(trim($lat));
@@ -21,18 +34,7 @@ function handleRegisterReport($lat, $lng, $title, $description, $createdBy)
         return;
     }
 
-    $reports = getReportsById($createdBy);
-    $currentDate = date('Y-m-d');
-    $reports = array_filter($reports, function ($report) use ($currentDate) {
-        return date('Y-m-d', strtotime($report['createdAt'])) === $currentDate;
-    });
-
-    if (count($reports) >= 3) {
-        echo "<script>alert('You have reached the maximum number of daily reports.');</script>";
-        return;
-    }
-
-    if (!(registerReport($lat, $lng, $title, $description, $createdBy))) {
+    if (!(registerReport($lat, $lng, $title, $description, $filePath, $createdBy))) {
         echo "script>alert('Error signing up. Please try again.');</script>";
         return;
     }

@@ -4,7 +4,7 @@ if (!isset($user)) {
     $userID = $_SESSION['userID'];
     $user = findUserByID($userID);
 }
-$profileImg = !empty($user['profile_image']) ? '/MapaAyos/public/images/profiles/' . $user['profile_image'] : '/MapaAyos/public/img/default-profile.png';
+$profileImg = !empty($user['profile_image']) ? '/MapaAyos/public/uploads/profiles/' . $user['profile_image'] : '/MapaAyos/public/img/default-profile.png';
 ?>
 
 <div class="header">

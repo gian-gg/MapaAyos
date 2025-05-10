@@ -59,6 +59,7 @@ function populateRightPanel(report) {
     return;
   }
   let html = '<div class="report-item">';
+  html += `<img src="/MapaAyos/public/uploads/reports/${report.imagePath}" alt="Report Image" width="256px" />`;
   html += `Report Title: <small>${report.title}</small><br>`;
   html += `Description: <small>${report.description}</small><br>`;
   html += `Status: <small>${report.status}</small><br>`;

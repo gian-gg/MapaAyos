@@ -27,7 +27,7 @@ if (isset($_POST['upload_image'])) {
             $userFolder = $userID;
 
             // Create user-specific directory
-            $uploadFileDir = __DIR__ . '/../../public/images/profiles/' . $userFolder;
+            $uploadFileDir = __DIR__ . '/../../public/uploads/profiles/' . $userFolder;
             if (!file_exists($uploadFileDir)) {
                 if (!mkdir($uploadFileDir, 0777, true)) {
                     error_log("Failed to create directory: " . $uploadFileDir);
@@ -107,7 +107,7 @@ if (!empty($_POST['cropped_image_data'])) {
         $data = base64_decode($data);
         $fileName = 'profile_' . time() . '.png';
         $userFolder = $userID;
-        $uploadFileDir = dirname(dirname(dirname(__DIR__))) . '/public/images/profiles/' . $userFolder . '/';
+        $uploadFileDir = dirname(dirname(dirname(__DIR__))) . '/public/uploads/profiles/' . $userFolder . '/';
 
         // Create directory if it doesn't exist
         if (!file_exists($uploadFileDir)) {
@@ -135,7 +135,7 @@ if (isset($_POST['logout'])) {
     handleSignOut();
 }
 
-$profileImg = !empty($user['profile_image']) ? '/MapaAyos/public/images/profiles/' . $user['profile_image'] : '/MapaAyos/public/img/default-profile.png';
+$profileImg = !empty($user['profile_image']) ? '/MapaAyos/public/uploads/profiles/' . $user['profile_image'] : '/MapaAyos/public/img/default-profile.png';
 
 ?>
 <!DOCTYPE html>
