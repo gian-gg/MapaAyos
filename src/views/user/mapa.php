@@ -43,9 +43,9 @@ if (isset($_POST['logout'])) {
     <link rel="stylesheet" href="/MapaAyos/public/css/root.css">
     <link rel="stylesheet" href="/MapaAyos/public/css/main.css">
     <link rel="stylesheet" href="/MapaAyos/public/css/dashboard.css">
-    <link rel="stylesheet" href="/MapaAyos/public/css/mapa-init.css">
     <link rel="stylesheet" href="/MapaAyos/public/css/sidebar.css">
     <link rel="stylesheet" href="/MapaAyos/public/css/header.css">
+    <link rel="stylesheet" href="/MapaAyos/public/css/mapa-init.css">
 
 </head>
 
@@ -184,17 +184,38 @@ if (isset($_POST['logout'])) {
             $pageTitle = 'Mapa';
             require_once __DIR__ . '/../partials/_header.php';
             ?>
-            <select name="selectBaranggayInput" id="selectBaranggayInput">
-                <option value="null" selected>Select Baranggay</option>
-                <?php
-                $baranggays = getBaranggays();
 
-                foreach ($baranggays as $baranggay) {
-                    echo "<option value='" . htmlspecialchars($baranggay['name']) . "'>" . htmlspecialchars($baranggay['name']) . "</option>";
-                }
-                ?>
-            </select>
+            <div class="map-wrapper" style="position: relative;">
+                <div id="map"></div> <!-- Map -->
 
+                <div class="map-controls-container">
+                    <button id="my-location-btn">My Location</button>
+                    <div class="custom-zoom-controls">
+                        <button id="zoom-in-btn" class="zoom-btn">+</button>
+                        <button id="zoom-out-btn" class="zoom-btn">−</button>
+                    </div>
+                </div>
+
+                <select name="selectBaranggayInput" id="selectBaranggayInput">
+                    <option value="null" selected>Select Baranggay</option>
+                    <?php
+                    $baranggays = getBaranggays();
+
+                    foreach ($baranggays as $baranggay) {
+                        echo "<option value='" . htmlspecialchars($baranggay['name']) . "'>" . htmlspecialchars($baranggay['name']) . "</option>";
+                    }
+                    ?>
+                </select>
+
+                <div class="right-panel" style="display:none; background: var(--bg-primary); border: 1px solid var(--outline);">
+                    <div class="right-panel-header" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; padding: 10px; border-bottom: 1px solid var(--outline);">
+                        <h5 style="margin:0; text-align:left;">Report Details</h3>
+                        <button id="right-panel-close-btn" aria-label="Close right panel" style="background:none; border:none; font-size:1.5rem; cursor:pointer;">&times;</button>
+                    </div>
+                    <div id="right-panel-content" style="padding: 0 10px 10px 10px;">
+                        <!-- Report details will be populated here -->
+                    </div>
+                </div>
             <div id="map"></div> <!-- Map -->
             <div class="map-controls-container">
                 <button id="my-location-btn">My Location</button>
@@ -203,6 +224,16 @@ if (isset($_POST['logout'])) {
                     <button id="zoom-out-btn" class="zoom-btn">−</button>
                 </div>
             </div>
+
+            <div class="right-panel" style="display:none; background: var(--bg-primary); border: 1px solid var(--outline);">
+            <div class="right-panel-header" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; padding: 10px; border-bottom: 1px solid var(--outline);">
+                <h5 style="margin:0; text-align:left;">Report Details</h3>
+                <button id="right-panel-close-btn" aria-label="Close right panel" style="background:none; border:none; font-size:1.5rem; cursor:pointer;">&times;</button>
+            </div>
+            <div id="right-panel-content" style="padding: 0 10px 10px 10px;">
+                <!-- Report details will be populated here -->
+            </div>
+        </div>
         </main>
     </div>
 
