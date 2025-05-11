@@ -38,46 +38,6 @@ function createBaranggayBoundary(currentBaranggayPolygon, baranggayCoords) {
   return currentBaranggayPolygon;
 }
 
-function displayReports(reports) {
-  if (!reports) return;
-
-  reports.forEach((loc) => {
-    const marker = L.marker([loc.lat, loc.lng]).addTo(map);
-
-    marker.on("click", () => {
-      showRightPanelWithReport(loc);
-      // map.flyTo(marker.getLatLng(), 12, { duration: 1 });
-    });
-  });
-}
-
-/* right panel thingy */
-function populateRightPanel(report) {
-  if (!report) {
-    document.getElementById("right-panel-content").innerHTML =
-      "<p>No report data available.</p>";
-    return;
-  }
-  let html = '<div class="report-item">';
-  html += `<img src="/MapaAyos/public/uploads/reports/${report.imagePath}" alt="Report Image" width="256px" />`;
-  html += `Report Title: <small>${report.title}</small><br>`;
-  html += `Description: <small>${report.description}</small><br>`;
-  html += `Status: <small>${report.status}</small><br>`;
-  html += `<small><em>${new Date(
-    report.createdAt
-  ).toLocaleString()}</em></small>`;
-  html += "</div>";
-  document.getElementById("right-panel-content").innerHTML = html;
-}
-
-function showRightPanelWithReport(report) {
-  populateRightPanel(report);
-  const rightPanel = document.querySelector(".right-panel");
-  if (rightPanel) {
-    rightPanel.style.display = "block";
-  }
-}
-
 function displayPopUp(lat, lng) {
   document.getElementById("latInput").value = lat;
   document.getElementById("lngInput").value = lng;
@@ -118,4 +78,4 @@ function displayPopUp(lat, lng) {
   });
 }
 
-export { isInBaranggay, createBaranggayBoundary, displayReports, displayPopUp };
+export { isInBaranggay, createBaranggayBoundary, displayPopUp };

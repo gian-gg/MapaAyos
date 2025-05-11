@@ -64,8 +64,11 @@ function handleSignIn($email, $password)
         session_regenerate_id(true);
         $_SESSION['userID'] = $user['id'];
 
-        header("Location: /MapaAyos/" . $user["role"] . "/dashboard"); // Redirect Dashboard
-
+        if ($user["role"] == "user") {
+            header("Location: /MapaAyos/mapa");
+        } else {
+            header("Location: /MapaAyos/" . $user["role"] . "/dashboard");
+        }
         exit();
     } else {
         echo "Invalid email or password.";

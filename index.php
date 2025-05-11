@@ -58,11 +58,11 @@ require_once __DIR__ . '/src/controllers/AuthController.php';
 
         <div class="btn-group d-none d-md-flex">
             <?php
-            if (!isAuthenticated()) {
+            if (isAuthenticated()) {
+                echo '<a class="signup-btn" href="/MapaAyos/mapa">Mapa</a>';
+            } else {
                 echo '<a class="signin-btn" href="/MapaAyos/signin">Sign In</a>';
                 echo '<a class="signup-btn" href="/MapaAyos/signup">Sign Up</a>';
-            } else {
-                echo '<a class="signup-btn" href="/MapaAyos/user/dashboard">Dashboard</a>';
             }
             ?>
         </div>
@@ -83,11 +83,11 @@ require_once __DIR__ . '/src/controllers/AuthController.php';
             </nav>
             <div class="mt-3">
                 <?php
-                if (!isAuthenticated()) {
-                    echo '<a class="btn btn-outline-primary w-100 mb-2" href="/MapaAyos/signin" data-bs-dismiss="offcanvas">Sign In</a>';
-                    echo '<a class="btn btn-primary w-100" href="/MapaAyos/signup" data-bs-dismiss="offcanvas">Sign Up</a>';
+                if (isAuthenticated()) {
+                    echo '<a class="signup-btn" href="/MapaAyos/mapa">Mapa</a>';
                 } else {
-                    echo '<a class="btn btn-primary w-100" href="/MapaAyos/user/dashboard" data-bs-dismiss="offcanvas">Dashboard</a>';
+                    echo '<a class="signin-btn" href="/MapaAyos/signin">Sign In</a>';
+                    echo '<a class="signup-btn" href="/MapaAyos/signup">Sign Up</a>';
                 }
                 ?>
             </div>
@@ -105,12 +105,13 @@ require_once __DIR__ . '/src/controllers/AuthController.php';
 
                 <div class="cta-btn">
                     <?php
-                    if (!isAuthenticated()) {
-                        echo '<a class="btn1" href="/MapaAyos/signup">Mag-Report Na</a>';
+                    if (isAuthenticated()) {
+                        echo '<a class="btn1" href="/MapaAyos/#how_it_works">How it Works</a>';
+                        echo '<a class="btn2" href="/MapaAyos/mapa">Mapa</a>';
                     } else {
-                        echo '<a class="btn1" href="/MapaAyos/user/dashboard">Dashboard</a>';
+                        echo '<a class="btn1" href="/MapaAyos/signup">Mag-Report Na</a>';
+                        echo '<a class="btn2" href="/MapaAyos/mapa">Mapa</a>';
                     }
-                    echo '<a class="btn2" href="/MapaAyos/mapa">Check Mapa</a>';
                     ?>
 
                 </div>

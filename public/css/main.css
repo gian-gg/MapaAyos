@@ -1,6 +1,5 @@
 body {
-  background: url("../img/dotgrid.png") repeat center/contain,
-    var(--bg-primary);
+  background: url("../img/dotgrid.png") repeat center/contain, var(--bg-primary);
   color: var(--text-primary);
   gap: 20px;
 }
@@ -25,7 +24,6 @@ h1 {
 p {
   font-size: 0.875rem;
   color: var(--text-secondary);
-  text-align: center;
   margin-top: 16px;
 }
 
@@ -125,9 +123,10 @@ body::-webkit-scrollbar {
   display: none;
 }
 
-html, body {
+html,
+body {
   scrollbar-width: none;
-  -ms-overflow-style: none;    
+  -ms-overflow-style: none;
 }
 
 @keyframes spin {

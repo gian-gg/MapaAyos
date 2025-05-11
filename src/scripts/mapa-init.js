@@ -14,7 +14,6 @@ L.tileLayer(
 
 // Add a button to locate the user's current location
 document.getElementById("my-location-btn").addEventListener("click", () => {
-  document.querySelector(".right-panel").style.display = "none";
   map.locate({
     setView: true,
     maxZoom: 16,
