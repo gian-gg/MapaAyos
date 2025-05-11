@@ -139,6 +139,10 @@ body {
 }
 
 #selectBaranggayInput {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+
   width: 90%;
   max-width: 300px;
   padding: 8px 8px;
@@ -168,7 +172,7 @@ body {
 
 .info-container {
   position: absolute;
-  top: 1rem;
+  top: 4.5rem;
   left: 1rem;
   z-index: 1000;
 }

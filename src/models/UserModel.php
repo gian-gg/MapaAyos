@@ -57,11 +57,7 @@ function findUserByID($userID) // a function to find a user by ID
 {
     global $pdo;
     try {
-        $sql = "SELECT u.*, up.profile_image 
-                FROM users u 
-                LEFT JOIN user_preferences up ON u.id = up.user_id 
-                WHERE u.id = :id 
-                LIMIT 1";
+        $sql = "SELECT * FROM users WHERE id = :id LIMIT 1";
 
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':id', $userID);

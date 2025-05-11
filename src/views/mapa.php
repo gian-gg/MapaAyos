@@ -8,6 +8,7 @@ require_once __DIR__ . '/../controllers/ReportController.php';
 require_once __DIR__ . '/../controllers/ProcessFileController.php';
 
 require_once __DIR__ . '/components/sidebar.php';
+require_once __DIR__ . '/components/header.php';
 
 $userID = $_SESSION['userID'] ?? null;
 $user = findUserByID($userID);
@@ -102,7 +103,7 @@ if (isset($_POST['logout'])) {
     <div class="dashboard">
         <?php
         renderSideBar(
-            $user ? $user["role"] : "null",
+            $user ? $user["role"] : null,
             "mapa",
             isAuthenticated()
         )
@@ -110,8 +111,14 @@ if (isset($_POST['logout'])) {
 
         <main class="main-content">
             <?php
+            renderHeader(
+                isAuthenticated(),
+                $user ? $user["hasProfilePic"] : false,
+                $userID
+            );
             ?>
-            <div class="header">
+
+            <div class="map-wrapper">
                 <select name="selectBaranggayInput" id="selectBaranggayInput">
                     <option value="null" selected disabled>Select Baranggay To Report</option>
                     <?php
@@ -122,9 +129,6 @@ if (isset($_POST['logout'])) {
                     }
                     ?>
                 </select>
-                <img src="/MapaAyos/public/uploads/pfp/<?= $userID ? $userID : "default" ?>.png" alt="Profile" class="profile-img">
-            </div>
-            <div class="map-wrapper">
                 <div id="map"></div> <!-- Map -->
                 <div class="card info-container hidden" id="info-container"></div>
                 <div class="map-controls-container">

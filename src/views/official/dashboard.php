@@ -4,6 +4,7 @@ require_once __DIR__ . '/../../models/UserModel.php';
 require_once __DIR__ . '/../../controllers/AuthController.php';
 
 require_once __DIR__ . '/../components/sidebar.php';
+require_once __DIR__ . '/../components/header.php';
 
 requireSignIn();
 
@@ -59,18 +60,14 @@ if (isset($_POST['logout'])) {
             $pageTitle = 'Official Dashboard';
             ?>
             <div class="dashboard-container">
-                <div class="header">
-                    <h1>Officials Dashboard</h1>
-                    <div class="user-info">
-                        <?php
-                        if ($user) {
-                            echo "<p>Welcome, " . htmlspecialchars($user['firstName']) . " " . htmlspecialchars($user['lastName']) . "</p>";
-                        } else {
-                            echo "<p>User not found.</p>";
-                        }
-                        ?>
-                    </div>
-                </div>
+                <?php
+                renderHeader(
+                    isAuthenticated(),
+                    $user ? $user["hasProfilePic"] : false,
+                    $userID
+                );
+                ?>
+
                 <div class="cards-grid">
                     <div class="card">
                         <div class="card-title">Assigned Reports</div>

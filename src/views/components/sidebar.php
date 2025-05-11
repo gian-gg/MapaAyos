@@ -31,40 +31,25 @@ function renderSideBar($role, $activePage, $isAuthenticated)
                 <div>
                     <p class='nav-text'>General</p>";
 
-    if ($role == "admin") {
+    if ($role == "admin" || $role == "official") {
         echo "
-            <a href='/MapaAyos/admin/dashboard' class='nav-item" . ($activePage == "user" ? " active" : "") . "'>
+            <a href='/MapaAyos/" . $role . "/dashboard' class='nav-item'>
                 <i class='bi bi-terminal'></i>
                 <span class='nav-text'>Dashboard</span>
-            </a>
-            <a href='/MapaAyos/mapa' class='nav-item'>
-                <i class='bi bi-map'></i>
-                <span class='nav-text'>Mapa</span>
-            </a>
-        ";
-    } else if ($role == "official") {
-        echo "
-            <a href='/MapaAyos/official/dashboard' class='nav-item" . ($activePage == "user" ? " active" : "") . "'>
-                <i class='bi bi-terminal'></i>
-                <span class='nav-text'>Dashboard</span>
-            </a>
-            <a href='/MapaAyos/mapa' class='nav-item'>
-                <i class='bi bi-map'></i>
-                <span class='nav-text'>Mapa</span>
-            </a>
-        ";
-    } else {
-        echo "
-            <a href='/MapaAyos/mapa' class='nav-item'>
-                <i class='bi bi-map'></i>
-                <span class='nav-text'>Mapa</span>
-            </a>
-            <a href='/MapaAyos/baranggays' class='nav-item'>
-                <i class='bi bi-pin-map'></i>
-                <span class='nav-text'>Baranggays</span>
             </a>
         ";
     }
+
+    echo "
+        <a href='/MapaAyos/mapa' class='nav-item'>
+            <i class='bi bi-map'></i>
+            <span class='nav-text'>Mapa</span>
+        </a>
+        <a href='/MapaAyos/baranggays' class='nav-item'>
+            <i class='bi bi-pin-map'></i>
+            <span class='nav-text'>Baranggays</span>
+        </a>
+    ";
 
     echo "</div>";
     echo ($isAuthenticated ? logOutButton() : "");

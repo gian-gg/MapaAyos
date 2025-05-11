@@ -4,6 +4,7 @@ require_once __DIR__ . '/../../models/UserModel.php';
 require_once __DIR__ . '/../../controllers/AuthController.php';
 
 require_once __DIR__ . '/../components/sidebar.php';
+require_once __DIR__ . '/../components/header.php';
 
 requireSignIn();
 
@@ -55,7 +56,13 @@ if (isset($_POST['logout'])) {
         )
         ?>
         <main class="main-content">
-            <h1>Admin Dashboard</h1>
+            <?php
+            renderHeader(
+                isAuthenticated(),
+                $user ? $user["hasProfilePic"] : false,
+                $userID
+            );
+            ?>
 
             <div class="cards-grid">
                 <div class="card">
