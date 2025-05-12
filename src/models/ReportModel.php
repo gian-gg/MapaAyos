@@ -20,16 +20,32 @@ function registerReport($lat, $lng, $title, $description, $imagePath, $createdBy
     return $stmt->execute();
 }
 
-function getReportsById($userID)
+function getReportsById($userID, $statusFilter)
 {
     global $pdo;
-    $sql = "SELECT * FROM reports WHERE createdBy = :userID";
-    $stmt = $pdo->prepare($sql);
-    $stmt->bindParam(':userID', $userID);
-    $stmt->execute();
+
+    if ($statusFilter == "all") {
+        $sql = "SELECT * FROM reports WHERE createdBy = :userID";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':userID', $userID);
+        $stmt->execute();
+    } else if ($statusFilter == "pending") {
+        $sql = "SELECT * FROM reports WHERE createdBy = :userID AND status = 'pending'";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':userID', $userID);
+        $stmt->execute();
+    } else if ($statusFilter == "verified") {
+        $sql = "SELECT * FROM reports WHERE createdBy = :userID AND status = 'verified'";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':userID', $userID);
+        $stmt->execute();
+    }
 
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
+
+
+
 
 function getReports($statusFilter)
 {

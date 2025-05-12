@@ -63,7 +63,16 @@ switch ($mode) {
         }
 
         $userID = $_GET['userID'];
-        $reports = getReportsById($userID);
+        if (!isset($_GET['status'])) {
+            echo json_encode([
+                'status' => 'error',
+                'message' => 'status not specified.'
+            ]);
+            exit;
+        }
+
+        $status = $_GET['status'];
+        $reports = getReportsById($userID, $status);
         if (empty($reports)) {
             echo json_encode([
                 'status' => 'error',

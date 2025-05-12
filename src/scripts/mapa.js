@@ -1,7 +1,9 @@
 import {
   isInBaranggay,
+  displayReports,
   createBaranggayBoundary,
   displayPopUp,
+  removeAllPins,
 } from "./utils/mapa-utils.js";
 
 import { fetchAPI } from "./utils/api-utils.js";
@@ -11,6 +13,7 @@ let currentBaranggayCoords = null;
 let currentBaranggayPolygon = null;
 
 const infoContainer = document.getElementById("info-container");
+const selectFilterInput = document.getElementById("selectFilterInput");
 
 // Event listener for map click
 map.on("click", (e) => {
@@ -29,68 +32,6 @@ map.on("click", (e) => {
   } else {
     showToast("Error", "You clicked outside the baranggay boundary.");
   }
-});
-
-fetchAPI(
-  "http://localhost/MapaAyos/api/reports?mode=getReports&status=all"
-).then((data) => {
-  const reports = data.reports;
-
-  if (!reports) return;
-
-  reports.forEach((report) => {
-    const marker = L.marker([report.lat, report.lng]).addTo(map);
-    marker.setIcon(
-      L.icon({
-        iconUrl: "/MapaAyos/public/img/pins/default.png",
-        iconSize: [24, 32],
-        iconAnchor: [12, 12],
-      })
-    );
-
-    marker.on("click", () => {
-      infoContainer.classList.remove("hidden");
-      infoContainer.innerHTML = `
-        <h3>${report.title}</h3>
-        <img src="/MapaAyos/public/uploads/reports/${report.imagePath}" alt="Report Image" />
-        <p>${report.description}</p>
-        <p>Status: ${report.status}</p>
-        <p>Created At: ${report.createdAt}</p>
-        <button id="infoContainerCloseButton">Close</button>
-      `;
-
-      // Reset all markers to default icon
-      map.eachLayer((layer) => {
-        if (layer instanceof L.Marker) {
-          layer.setIcon(
-            L.icon({
-              iconUrl: "/MapaAyos/public/img/pins/default.png",
-              iconSize: [24, 32],
-              iconAnchor: [12, 12],
-            })
-          );
-        }
-      });
-
-      // Change the clicked marker icon to selected
-      marker.setIcon(
-        L.icon({
-          iconUrl: "/MapaAyos/public/img/pins/selected.png",
-          iconSize: [24, 32],
-          iconAnchor: [12, 12],
-        })
-      );
-
-      const closeButton = document.getElementById("infoContainerCloseButton");
-      if (closeButton) {
-        closeButton.addEventListener("click", () => {
-          infoContainer.classList.add("hidden");
-        });
-      }
-    });
-
-    map.flyTo(marker.getLatLng(), 15, { duration: 1 });
-  });
 });
 
 document
@@ -126,3 +67,29 @@ document
       );
     });
   });
+
+displayReports(
+  "http://localhost/MapaAyos/api/reports?mode=getReports&status=verified"
+);
+document.getElementById("selectFilterInput").addEventListener("change", (e) => {
+  const selectedFilter = e.target.value;
+  removeAllPins();
+
+  if (selectedFilter === "all-verified") {
+    displayReports(
+      "http://localhost/MapaAyos/api/reports?mode=getReports&status=verified"
+    );
+  } else if (selectedFilter === "my-reports") {
+    displayReports(
+      `http://localhost/MapaAyos/api/reports?mode=getReportsByUserID&userID=${currentUser}&status=all`
+    );
+  } else if (selectedFilter === "my-pending") {
+    displayReports(
+      `http://localhost/MapaAyos/api/reports?mode=getReportsByUserID&userID=${currentUser}&status=pending`
+    );
+  } else if (selectedFilter === "my-verified") {
+    displayReports(
+      `http://localhost/MapaAyos/api/reports?mode=getReportsByUserID&userID=${currentUser}&status=verified`
+    );
+  }
+});

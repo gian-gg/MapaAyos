@@ -19,7 +19,6 @@ RewriteRule ^.*$ /src/views/404.php [L]
 RewriteRule ^signin$ src/views/signin.php [NC,L]
 RewriteRule ^signup$ src/views/signup.php [NC,L]
 RewriteRule ^mapa$ src/views/mapa.php [NC,L]
-RewriteRule ^baranggays$ src/views/baranggays.php [NC,L]
 
 # Nested Views
 RewriteRule ^(admin|official)/(.+)$ src/views/$1/$2.php [NC,L]

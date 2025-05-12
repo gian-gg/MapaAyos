@@ -6,7 +6,7 @@ function hasReachedMaxReports($userID)
 {
     $maxReports = 3; // Maximum number of reports allowed
 
-    $reports = getReportsById($userID);
+    $reports = getReportsById($userID, "all");
     $currentDate = date('Y-m-d');
     $reports = array_filter($reports, function ($report) use ($currentDate) {
         return date('Y-m-d', strtotime($report['createdAt'])) === $currentDate;

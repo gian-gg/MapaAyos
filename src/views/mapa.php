@@ -119,16 +119,30 @@ if (isset($_POST['logout'])) {
             ?>
 
             <div class="map-wrapper">
-                <select name="selectBaranggayInput" id="selectBaranggayInput">
-                    <option value="null" selected disabled>Select Baranggay To Report</option>
-                    <?php
-                    $baranggays = getBaranggays();
+                <div class="select-group">
+                    <select name="selectBaranggayInput" id="selectBaranggayInput" class="ma-select">
+                        <option value="null" selected disabled>Select Baranggay To Report</option>
+                        <?php
+                        $baranggays = getBaranggays();
 
-                    foreach ($baranggays as $baranggay) {
-                        echo "<option value='" . htmlspecialchars($baranggay['name']) . "'>" . htmlspecialchars($baranggay['name']) . "</option>";
+                        foreach ($baranggays as $baranggay) {
+                            echo "<option value='" . htmlspecialchars($baranggay['name']) . "'>" . htmlspecialchars($baranggay['name']) . "</option>";
+                        }
+                        ?>
+                    </select>
+                    <?php
+                    if (isAuthenticated() && !($user["role"] == "admin" || $user["role"] == "official")) {
+                        echo "
+                            <select name='selectFilterInput' id='selectFilterInput' class='ma-select'>
+                                <option value='all-verified' selected>All Verified</option>
+                                <option value='my-reports'>My Reports</option>
+                                <option value='my-pending'>My Pending</option>
+                                <option value='my-verified'>My Verified</option>
+                            </select>
+                            ";
                     }
                     ?>
-                </select>
+                </div>
                 <div id="map"></div> <!-- Map -->
                 <div class="card info-container hidden" id="info-container"></div>
                 <div class="map-controls-container">

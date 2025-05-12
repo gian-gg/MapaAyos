@@ -1,4 +1,5 @@
 import { getAddressFromCoords } from "./api-utils.js";
+import { fetchAPI } from "./api-utils.js";
 
 function isInBaranggay(point, polygon) {
   const [x, y] = point;
@@ -78,4 +79,80 @@ function displayPopUp(lat, lng) {
   });
 }
 
-export { isInBaranggay, createBaranggayBoundary, displayPopUp };
+function displayReports(API_URL) {
+  fetchAPI(API_URL).then((data) => {
+    const reports = data.reports;
+
+    if (!reports) return;
+
+    reports.forEach((report) => {
+      const marker = L.marker([report.lat, report.lng]).addTo(map);
+      marker.setIcon(
+        L.icon({
+          iconUrl: "/MapaAyos/public/img/pins/default.png",
+          iconSize: [24, 32],
+          iconAnchor: [12, 12],
+        })
+      );
+
+      marker.on("click", () => {
+        infoContainer.classList.remove("hidden");
+        infoContainer.innerHTML = `
+        <h3>${report.title}</h3>
+        <img src="/MapaAyos/public/uploads/reports/${report.imagePath}" alt="Report Image" />
+        <p>${report.description}</p>
+        <p>Status: ${report.status}</p>
+        <p>Created At: ${report.createdAt}</p>
+        <button id="infoContainerCloseButton">Close</button>
+      `;
+
+        // Reset all markers to default icon
+        map.eachLayer((layer) => {
+          if (layer instanceof L.Marker) {
+            layer.setIcon(
+              L.icon({
+                iconUrl: "/MapaAyos/public/img/pins/default.png",
+                iconSize: [24, 32],
+                iconAnchor: [12, 12],
+              })
+            );
+          }
+        });
+
+        // Change the clicked marker icon to selected
+        marker.setIcon(
+          L.icon({
+            iconUrl: "/MapaAyos/public/img/pins/selected.png",
+            iconSize: [24, 32],
+            iconAnchor: [12, 12],
+          })
+        );
+
+        const closeButton = document.getElementById("infoContainerCloseButton");
+        if (closeButton) {
+          closeButton.addEventListener("click", () => {
+            infoContainer.classList.add("hidden");
+          });
+        }
+      });
+
+      map.flyTo(marker.getLatLng(), 15, { duration: 1 });
+    });
+  });
+}
+
+function removeAllPins() {
+  map.eachLayer((layer) => {
+    if (layer instanceof L.Marker) {
+      map.removeLayer(layer);
+    }
+  });
+}
+
+export {
+  isInBaranggay,
+  createBaranggayBoundary,
+  displayPopUp,
+  displayReports,
+  removeAllPins,
+};
