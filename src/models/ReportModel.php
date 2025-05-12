@@ -2,16 +2,17 @@
 require_once __DIR__ . '/../../config/db.php';
 
 
-function registerReport($lat, $lng, $title, $description, $imagePath, $createdBy) // a function for signing up a user
+function registerReport($lat, $lng, $baranggay, $title, $description, $imagePath, $createdBy) // a function for signing up a user
 {
     global $pdo;
-    $sql = "INSERT INTO reports (lat, lng, title, description, imagePath, createdBy) 
-                VALUES (:lat, :lng, :title, :description, :imagePath, :createdBy)";
+    $sql = "INSERT INTO reports (lat, lng,baranggay, title, description, imagePath, createdBy) 
+                VALUES (:lat, :lng, :baranggay, :title, :description, :imagePath, :createdBy)";
 
     $stmt = $pdo->prepare($sql);
 
     $stmt->bindParam(':lat', $lat);
     $stmt->bindParam(':lng', $lng);
+    $stmt->bindParam(':baranggay', $baranggay);
     $stmt->bindParam(':title', $title);
     $stmt->bindParam(':description', $description);
     $stmt->bindParam(':imagePath', $imagePath);
@@ -34,8 +35,8 @@ function getReportsById($userID, $statusFilter)
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':userID', $userID);
         $stmt->execute();
-    } else if ($statusFilter == "verified") {
-        $sql = "SELECT * FROM reports WHERE createdBy = :userID AND status = 'verified'";
+    } else if ($statusFilter == "active") {
+        $sql = "SELECT * FROM reports WHERE createdBy = :userID AND status = 'active'";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':userID', $userID);
         $stmt->execute();
@@ -43,9 +44,6 @@ function getReportsById($userID, $statusFilter)
 
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
-
-
-
 
 function getReports($statusFilter)
 {
@@ -62,6 +60,28 @@ function getReports($statusFilter)
         $stmt->execute();
     }
 
+
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function getReportsData($baranggay, $statusFilter)
+{
+    global $pdo;
+
+    if ($statusFilter == "!pending") {
+        $sql = "SELECT * FROM reports WHERE baranggay = :baranggay AND status != 'pending'";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':baranggay', $baranggay);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    $sql = "SELECT * FROM reports WHERE baranggay = :baranggay AND status = :statusFilter";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':baranggay', $baranggay);
+    $stmt->bindParam(':statusFilter', $statusFilter);
+    $stmt->execute();
 
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }

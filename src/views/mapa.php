@@ -5,10 +5,11 @@ require_once __DIR__ . '/../models/UserModel.php';
 require_once __DIR__ . '/../models/BaranggayModel.php';
 require_once __DIR__ . '/../controllers/AuthController.php';
 require_once __DIR__ . '/../controllers/ReportController.php';
-require_once __DIR__ . '/../controllers/ProcessFileController.php';
+require_once __DIR__ . '/../utils/ProcessFile.php';
 
 require_once __DIR__ . '/components/sidebar.php';
 require_once __DIR__ . '/components/header.php';
+require_once __DIR__ . '/components/toasts.php';
 
 $userID = $_SESSION['userID'] ?? null;
 $user = findUserByID($userID);
@@ -19,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo "<script>alert('You have reached the maximum number of reports for today.');</script>";
     } else {
         $fileUpload = uploadImage($_FILES, $userID);
-        handleRegisterReport($_POST['latInput'], $_POST['lngInput'], $_POST['titleInput'], $_POST['descriptionInput'], $fileUpload, $userID);
+        handleRegisterReport($_POST['latInput'], $_POST['lngInput'], $_POST['baranggayInput'], $_POST['titleInput'], $_POST['descriptionInput'], $fileUpload, $userID);
     }
 }
 
@@ -35,7 +36,7 @@ if (isset($_POST['logout'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MapaAyos - User Mapa</title>
+    <title>MapaAyos - Mapa</title>
     <link rel="shortcut icon" href="/MapaAyos/public/img/favicon.png" type="image/png">
 
     <!-- Bootstrap -->
@@ -58,17 +59,7 @@ if (isset($_POST['logout'])) {
 </head>
 
 <body>
-    <div class="toast-container position-fixed bottom-0 end-0 p-3">
-        <div id="ma-toast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-            <div class="toast-header">
-                <strong class="me-auto" id="ma-toast-title">Toast Title</strong>
-                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-            </div>
-            <div class="toast-body" id="ma-toast-body">
-                Toast Message
-            </div>
-        </div>
-    </div>
+    <?php renderToasts(); ?>
 
     <!-- Report Modal -->
     <div class="modal" id="reportModal" tabindex="-1" aria-labelledby="reportModalLabel" aria-hidden="true">
@@ -91,6 +82,7 @@ if (isset($_POST['logout'])) {
                         <br>
                         <input type="hidden" name="latInput" id="latInput" required>
                         <input type="hidden" name="lngInput" id="lngInput" required>
+                        <input type="hidden" name="baranggayInput" id="baranggayInput" required>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="ma-btn">Submit</button>
@@ -134,10 +126,10 @@ if (isset($_POST['logout'])) {
                     if (isAuthenticated() && !($user["role"] == "admin" || $user["role"] == "official")) {
                         echo "
                             <select name='selectFilterInput' id='selectFilterInput' class='ma-select'>
-                                <option value='all-verified' selected>All Verified</option>
+                                <option value='all-active' selected>All Active</option>
                                 <option value='my-reports'>My Reports</option>
                                 <option value='my-pending'>My Pending</option>
-                                <option value='my-verified'>My Verified</option>
+                                <option value='my-active'>My Active</option>
                             </select>
                             ";
                     }

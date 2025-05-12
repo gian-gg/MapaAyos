@@ -39,9 +39,10 @@ function createBaranggayBoundary(currentBaranggayPolygon, baranggayCoords) {
   return currentBaranggayPolygon;
 }
 
-function displayPopUp(lat, lng) {
+function displayPopUp(lat, lng, baranggay) {
   document.getElementById("latInput").value = lat;
   document.getElementById("lngInput").value = lng;
+  document.getElementById("baranggayInput").value = baranggay;
 
   // loading animation as address info is loading
   const loadingPopup = L.popup()
@@ -79,7 +80,7 @@ function displayPopUp(lat, lng) {
   });
 }
 
-function displayReports(API_URL) {
+function displayReports(API_URL, infoContainer) {
   fetchAPI(API_URL).then((data) => {
     const reports = data.reports;
 

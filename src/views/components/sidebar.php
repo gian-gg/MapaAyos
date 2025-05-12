@@ -45,6 +45,10 @@ function renderSideBar($role, $activePage, $isAuthenticated)
             <i class='bi bi-map'></i>
             <span class='nav-text'>Mapa</span>
         </a>
+            <a href='/MapaAyos/baranggays' class='nav-item'>
+            <i class='bi bi-pin-map'></i>
+            <span class='nav-text'>Baranggays</span>
+        </a>
     ";
 
     echo "</div>";

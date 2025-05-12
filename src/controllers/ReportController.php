@@ -15,11 +15,12 @@ function hasReachedMaxReports($userID)
     return count($reports) >= $maxReports;
 }
 
-function handleRegisterReport($lat, $lng, $title, $description, $filePath, $createdBy)
+function handleRegisterReport($lat, $lng, $baranggay, $title, $description, $filePath, $createdBy)
 { // all returns and echo are for temporary testing
     // Sanitize Input
     $lat = htmlspecialchars(trim($lat));
     $lng = htmlspecialchars(trim($lng));
+    $baranggay = htmlspecialchars(trim($baranggay));
     $title = htmlspecialchars(trim($title));
     $description = htmlspecialchars(trim($description));
 
@@ -29,12 +30,12 @@ function handleRegisterReport($lat, $lng, $title, $description, $filePath, $crea
         return;
     }
 
-    if (empty($lat) && empty($lng)) {
+    if (empty($lat) && empty($lng) && empty($baranggay)) {
         echo "Location is required.";
         return;
     }
 
-    if (!(registerReport($lat, $lng, $title, $description, $filePath, $createdBy))) {
+    if (!(registerReport($lat, $lng, $baranggay, $title, $description, $filePath, $createdBy))) {
         echo "script>alert('Error signing up. Please try again.');</script>";
         return;
     }

@@ -13,6 +13,7 @@ let currentBaranggayCoords = null;
 let currentBaranggayPolygon = null;
 
 const infoContainer = document.getElementById("info-container");
+const baranggaySelect = document.getElementById("selectBaranggayInput");
 const selectFilterInput = document.getElementById("selectFilterInput");
 
 // Event listener for map click
@@ -28,25 +29,24 @@ map.on("click", (e) => {
   const { lat, lng } = e.latlng;
 
   if (isInBaranggay([lat, lng], currentBaranggayCoords)) {
-    displayPopUp(lat, lng);
+    displayPopUp(lat, lng, baranggaySelect.value);
   } else {
     showToast("Error", "You clicked outside the baranggay boundary.");
   }
 });
 
-document
-  .getElementById("selectBaranggayInput")
-  .addEventListener("change", (e) => {
-    const selectedBaranggay = e.target.value;
+baranggaySelect.addEventListener("change", (e) => {
+  const selectedBaranggay = e.target.value;
 
-    infoContainer.classList.remove("hidden");
+  infoContainer.classList.remove("hidden");
 
-    fetchAPI(
-      "http://localhost/MapaAyos/api/baranggay?baranggay=" + selectedBaranggay
-    ).then((data) => {
-      currentBaranggayCoords = JSON.parse(data.data[0].geojson)["coordinates"];
+  fetchAPI(
+    "http://localhost/MapaAyos/api/baranggay?mode=getBaranggayByName&baranggay=" +
+      selectedBaranggay
+  ).then((data) => {
+    currentBaranggayCoords = JSON.parse(data.data[0].geojson)["coordinates"];
 
-      infoContainer.innerHTML = `
+    infoContainer.innerHTML = `
         <img src="/MapaAyos/public/img/baranggays/${data.data[0].name}.jpg" alt="Report Image" />
         <h3>${data.data[0].name}</h3>
         <p>${data.data[0].city}, ${data.data[0].country}</p>
@@ -54,42 +54,47 @@ document
 
       `;
 
-      const closeButton = document.getElementById("infoContainerCloseButton");
-      if (closeButton) {
-        closeButton.addEventListener("click", () => {
-          infoContainer.classList.add("hidden");
-        });
-      }
+    const closeButton = document.getElementById("infoContainerCloseButton");
+    if (closeButton) {
+      closeButton.addEventListener("click", () => {
+        infoContainer.classList.add("hidden");
+      });
+    }
 
-      currentBaranggayPolygon = createBaranggayBoundary(
-        currentBaranggayPolygon,
-        [currentBaranggayCoords]
-      );
-    });
+    currentBaranggayPolygon = createBaranggayBoundary(currentBaranggayPolygon, [
+      currentBaranggayCoords,
+    ]);
   });
+});
 
 displayReports(
-  "http://localhost/MapaAyos/api/reports?mode=getReports&status=verified"
+  "http://localhost/MapaAyos/api/reports?mode=getReports&status=active",
+  infoContainer
 );
-document.getElementById("selectFilterInput").addEventListener("change", (e) => {
+
+selectFilterInput.addEventListener("change", (e) => {
   const selectedFilter = e.target.value;
   removeAllPins();
 
-  if (selectedFilter === "all-verified") {
+  if (selectedFilter === "all-active") {
     displayReports(
-      "http://localhost/MapaAyos/api/reports?mode=getReports&status=verified"
+      "http://localhost/MapaAyos/api/reports?mode=getReports&status=active",
+      infoContainer
     );
   } else if (selectedFilter === "my-reports") {
     displayReports(
-      `http://localhost/MapaAyos/api/reports?mode=getReportsByUserID&userID=${currentUser}&status=all`
+      `http://localhost/MapaAyos/api/reports?mode=getReportsByUserID&userID=${currentUser}&status=all`,
+      infoContainer
     );
   } else if (selectedFilter === "my-pending") {
     displayReports(
-      `http://localhost/MapaAyos/api/reports?mode=getReportsByUserID&userID=${currentUser}&status=pending`
+      `http://localhost/MapaAyos/api/reports?mode=getReportsByUserID&userID=${currentUser}&status=pending`,
+      infoContainer
     );
-  } else if (selectedFilter === "my-verified") {
+  } else if (selectedFilter === "my-active") {
     displayReports(
-      `http://localhost/MapaAyos/api/reports?mode=getReportsByUserID&userID=${currentUser}&status=verified`
+      `http://localhost/MapaAyos/api/reports?mode=getReportsByUserID&userID=${currentUser}&status=active`,
+      infoContainer
     );
   }
 });
