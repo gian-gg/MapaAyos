@@ -77,29 +77,31 @@ displayReports(
   infoContainer
 );
 
-selectFilterInput.addEventListener("change", (e) => {
-  const selectedFilter = e.target.value;
-  removeAllPins();
+if (selectFilterInput) {
+  selectFilterInput.addEventListener("change", (e) => {
+    const selectedFilter = e.target.value;
+    removeAllPins();
 
-  if (selectedFilter === "all-active") {
-    displayReports(
-      "http://localhost/MapaAyos/api/reports?mode=getReports&status=active",
-      infoContainer
-    );
-  } else if (selectedFilter === "my-reports") {
-    displayReports(
-      `http://localhost/MapaAyos/api/reports?mode=getReportsByUserID&userID=${currentUser}&status=all`,
-      infoContainer
-    );
-  } else if (selectedFilter === "my-pending") {
-    displayReports(
-      `http://localhost/MapaAyos/api/reports?mode=getReportsByUserID&userID=${currentUser}&status=pending`,
-      infoContainer
-    );
-  } else if (selectedFilter === "my-active") {
-    displayReports(
-      `http://localhost/MapaAyos/api/reports?mode=getReportsByUserID&userID=${currentUser}&status=active`,
-      infoContainer
-    );
-  }
-});
+    if (selectedFilter === "all-active") {
+      displayReports(
+        "http://localhost/MapaAyos/api/reports?mode=getReports&status=active",
+        infoContainer
+      );
+    } else if (selectedFilter === "my-reports") {
+      displayReports(
+        `http://localhost/MapaAyos/api/reports?mode=getReportsByUserID&userID=${currentUser}&status=all`,
+        infoContainer
+      );
+    } else if (selectedFilter === "my-pending") {
+      displayReports(
+        `http://localhost/MapaAyos/api/reports?mode=getReportsByUserID&userID=${currentUser}&status=pending`,
+        infoContainer
+      );
+    } else if (selectedFilter === "my-active") {
+      displayReports(
+        `http://localhost/MapaAyos/api/reports?mode=getReportsByUserID&userID=${currentUser}&status=active`,
+        infoContainer
+      );
+    }
+  });
+}
