@@ -69,3 +69,20 @@ function findUserByID($userID) // a function to find a user by ID
         return false;
     }
 }
+
+function getBaranggayOfficial($userID) // a function to get the baranggay of a user
+{
+    global $pdo;
+    try {
+        $sql = "SELECT * FROM officialsInfo WHERE userID = :userID LIMIT 1";
+
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':userID', $userID);
+        $stmt->execute();
+
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        error_log("Error getting baranggay official: " . $e->getMessage());
+        return false;
+    }
+}

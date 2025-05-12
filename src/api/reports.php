@@ -27,6 +27,30 @@ if (!isset($_GET['mode'])) {
 $mode = $_GET['mode'];
 
 switch ($mode) {
+    case 'getReportByID':
+        if (!isset($_GET['reportID'])) {
+            echo json_encode([
+                'status' => 'error',
+                'message' => 'Report ID not specified.'
+            ]);
+            exit;
+        }
+
+        $reportID = $_GET['reportID'];
+        $report = getReportByID($reportID);
+        if (empty($report)) {
+            echo json_encode([
+                'status' => 'error',
+                'message' => 'Report not found.'
+            ]);
+            exit;
+        } else {
+            echo json_encode([
+                'status' => 'success',
+                'report' => $report
+            ]);
+        }
+        break;
     case 'getReports':
         if (!isset($_GET['status'])) {
             echo json_encode([

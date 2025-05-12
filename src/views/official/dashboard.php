@@ -2,6 +2,8 @@
 session_start();
 require_once __DIR__ . '/../../models/UserModel.php';
 require_once __DIR__ . '/../../controllers/AuthController.php';
+require_once __DIR__ . '/../../models/ReportModel.php';
+require_once __DIR__ . '/../../models/BaranggayModel.php';
 
 require_once __DIR__ . '/../components/sidebar.php';
 require_once __DIR__ . '/../components/header.php';
@@ -10,11 +12,28 @@ requireSignIn();
 
 $userID = $_SESSION['userID'] ?? null;
 $user = findUserByID($userID);
+$officerData = getBaranggayOfficial($userID);
+$baranggayData = getBaranggayData($officerData["baranggayID"]);
 
 redirectIfNotAllowed($user["role"], "official");
 
 if (isset($_POST['logout'])) {
     handleSignOut();
+}
+
+$reportFilter = $_GET['filter'] ?? 'all';
+
+if ($reportFilter !== 'all' && $reportFilter != 'pending' && $reportFilter != 'resolved' && $reportFilter != 'denied') {
+    $reportFilter = 'all'; // Default to 'all' if the filter is invalid
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    updateReport(
+        $_POST['reportID'],
+        $_POST['verificationStatus'],
+        $_POST['comment'],
+        $userID
+    );
 }
 
 ?>
@@ -44,6 +63,7 @@ if (isset($_POST['logout'])) {
     <link rel="stylesheet" href="/MapaAyos/public/css/mapa-init.css">
     <link rel="stylesheet" href="/MapaAyos/public/css/sidebar.css">
     <link rel="stylesheet" href="/MapaAyos/public/css/header.css">
+    <link rel="stylesheet" href="/MapaAyos/public/css/baranggay.css">
 </head>
 
 <body>
@@ -70,21 +90,87 @@ if (isset($_POST['logout'])) {
 
                 <div class="cards-grid">
                     <div class="card">
-                        <div class="card-title">Assigned Reports</div>
-                        <div class="card-value">45</div>
+                        <div class="card-title">Total Reports</div>
+                        <div class="card-value"><?= count(getReportsData($baranggayData["name"], "all")) ?></div>
                     </div>
                     <div class="card">
-                        <div class="card-title">Pending Actions</div>
-                        <div class="card-value">12</div>
+                        <div class="card-title">Pending Reports</div>
+                        <div class="card-value"><?= count(getReportsData($baranggayData["name"], "pending")) ?></div>
                     </div>
                     <div class="card">
-                        <div class="card-title">Resolved by You</div>
-                        <div class="card-value">78%</div>
+                        <div class="card-title">Resolved Reports</div>
+                        <div class="card-value"><?= count(getReportsData($baranggayData["name"], "resolved")) ?></div>
+                    </div>
+                </div>
+
+                <div class="reports-table">
+                    <h2>Reports</h2>
+                    <form method="GET" action="" id="filterForm">
+                        <select name="filter" id="filterInput" onchange="document.getElementById('filterForm').submit()">
+                            <option value="all" <?= $reportFilter === 'all' ? 'selected' : '' ?>>All</option>
+                            <option value="pending" <?= $reportFilter === 'pending' ? 'selected' : '' ?>>Pending</option>
+                            <option value="resolved" <?= $reportFilter === 'resolved' ? 'selected' : '' ?>>Resolved</option>
+                            <option value="denied" <?= $reportFilter === 'denied' ? 'selected' : '' ?>>Denied</option>
+                        </select>
+                    </form>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Report ID</th>
+                                <th>Title</th>
+                                <th>Status</th>
+                                <th>Date Submitted</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $reports = getReportsData($baranggayData["name"], $reportFilter);
+                            if (empty($reports)) {
+                                echo "<tr><td colspan='4' class='text-center'>No reports found.</td></tr>";
+                            }
+
+                            foreach ($reports as $report) {
+                                $reportID = htmlspecialchars($report['id'], ENT_QUOTES, 'UTF-8');
+                                echo "<tr class='report-row' id='report-{$reportID}' onclick=\"displayReport('{$reportID}')\" style=\"cursor: pointer;\">";
+                                echo "<td>{$report['id']}</td>";
+                                echo "<td>{$report['title']}</td>";
+                                echo "<td>{$report['status']}</td>";
+                                echo "<td>{$report['createdAt']}</td>";
+                                echo "</tr>";
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="d-flex gap-5">
+                    <div class="card" id="report-information"></div>
+                    <div class="map-wrapper" style="width: 40vw; height: 50vh;">
+                        <div id="map"></div> <!-- Map -->
+                        <div class="card info-container hidden" id="info-container"></div>
+                        <div class="map-controls-container">
+                            <button id="my-location-btn"><i class="bi bi-crosshair"></i></button>
+                            <button id="zoom-in-btn" class="zoom-btn">+</button>
+                            <button id="zoom-out-btn" class="zoom-btn">−</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </main>
     </div>
+
+    <script>
+        const currentUser = "<?php echo $userID ?>";
+        const currentBaranggay = "<?php echo $baranggayData ? $baranggayData["name"] : "null" ?>";
+        const currentFilter = "<?php echo $reportFilter ?>";
+    </script>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <script src="/MapaAyos/src/scripts/mapa-init.js"></script>
+    <script type="module" src="/MapaAyos/src/scripts/officer-mapa.js"></script>
+
+
 </body>
 
 </html>

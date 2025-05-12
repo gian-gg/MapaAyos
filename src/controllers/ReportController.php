@@ -40,3 +40,33 @@ function handleRegisterReport($lat, $lng, $baranggay, $title, $description, $fil
         return;
     }
 }
+
+function handleUpdateReport($reportID, $status, $comment, $updatedBy)
+{
+    // Sanitize Input
+    $reportID = htmlspecialchars(trim($reportID));
+    $status = htmlspecialchars(trim($status));
+    $comment = htmlspecialchars(trim($comment));
+    $updatedBy = htmlspecialchars(trim($updatedBy));
+
+    // Validation of Data
+    if (empty($reportID)) {
+        echo "Report ID is required.";
+        return;
+    }
+
+    if (empty($status)) {
+        echo "Status is required.";
+        return;
+    }
+
+    if (empty($comment)) {
+        echo "Comment is required.";
+        return;
+    }
+
+    if (!(updateReport($reportID, $status, $comment, $updatedBy))) {
+        echo "script>alert('Error updating report. Please try again.');</script>";
+        return;
+    }
+}

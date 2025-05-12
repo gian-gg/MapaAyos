@@ -76,3 +76,7 @@ nav {
   font-size: 1.5rem;
   font-weight: 600;
 }
+
+.reports-table table tr.active > td {
+  background-color: pink !important;
+}

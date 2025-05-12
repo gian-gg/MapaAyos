@@ -21,6 +21,20 @@ function registerReport($lat, $lng, $baranggay, $title, $description, $imagePath
     return $stmt->execute();
 }
 
+function updateReport($reportID, $status, $comment, $moderatedBy)
+{
+    global $pdo;
+
+    $sql = "UPDATE reports SET status = :status, comment = :comment, moderatedBy = :moderatedBy WHERE id = :reportID";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':status', $status);
+    $stmt->bindParam(':comment', $comment);
+    $stmt->bindParam(':moderatedBy', $moderatedBy);
+    $stmt->bindParam(':reportID', $reportID);
+
+    return $stmt->execute();
+}
+
 function getReportsById($userID, $statusFilter)
 {
     global $pdo;
@@ -45,6 +59,18 @@ function getReportsById($userID, $statusFilter)
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
+function getReportById($reportID)
+{
+    global $pdo;
+
+    $sql = "SELECT * FROM reports WHERE id = :reportID";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':reportID', $reportID);
+    $stmt->execute();
+
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+}
+
 function getReports($statusFilter)
 {
     global $pdo;
@@ -67,6 +93,15 @@ function getReports($statusFilter)
 function getReportsData($baranggay, $statusFilter)
 {
     global $pdo;
+
+    if ($statusFilter == "all") {
+        $sql = "SELECT * FROM reports WHERE baranggay = :baranggay";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':baranggay', $baranggay);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 
     if ($statusFilter == "!pending") {
         $sql = "SELECT * FROM reports WHERE baranggay = :baranggay AND status != 'pending'";
