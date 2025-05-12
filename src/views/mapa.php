@@ -5,7 +5,9 @@ require_once __DIR__ . '/../models/UserModel.php';
 require_once __DIR__ . '/../models/BaranggayModel.php';
 require_once __DIR__ . '/../controllers/AuthController.php';
 require_once __DIR__ . '/../controllers/ReportController.php';
+
 require_once __DIR__ . '/../utils/ProcessFile.php';
+require_once __DIR__ . '/../utils/Misc.php';
 
 require_once __DIR__ . '/components/sidebar.php';
 require_once __DIR__ . '/components/header.php';
@@ -118,7 +120,7 @@ if (isset($_POST['logout'])) {
                         $baranggays = getBaranggays();
 
                         foreach ($baranggays as $baranggay) {
-                            echo "<option value='" . htmlspecialchars($baranggay['name']) . "'>" . htmlspecialchars($baranggay['name']) . "</option>";
+                            echo "<option value='" . htmlspecialchars($baranggay['name']) . "'>" . htmlspecialchars(capitalizeFirstLetter($baranggay['name'])) . "</option>";
                         }
                         ?>
                     </select>

@@ -17,7 +17,7 @@ function renderSideBar($role, $activePage, $isAuthenticated)
 
     echo "
         <aside class='sidebar'>
-            <a href='/MapaAyos/index.php'>
+            <a href='/MapaAyos/'>
                 <div class='branding'>
                     <img src='/MapaAyos/public/img/brand-logo.png' alt='MapaAyos' width='34' height='34' style='border-radius: 5px;'>
                     <div class='brand-title'>

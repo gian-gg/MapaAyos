@@ -6,6 +6,7 @@ import {
   removeAllPins,
 } from "./utils/mapa-utils.js";
 
+import { capitalizeFirstLetter } from "./utils/helpers.js";
 import { fetchAPI } from "./utils/api-utils.js";
 import { showToast } from "./utils/toast-utils.js";
 
@@ -47,9 +48,13 @@ baranggaySelect.addEventListener("change", (e) => {
     currentBaranggayCoords = JSON.parse(data.data[0].geojson)["coordinates"];
 
     infoContainer.innerHTML = `
-        <img src="/MapaAyos/public/img/baranggays/${data.data[0].name}.jpg" alt="Report Image" />
-        <h3>${data.data[0].name}</h3>
-        <p>${data.data[0].city}, ${data.data[0].country}</p>
+        <img src="/MapaAyos/public/img/baranggays/${
+          data.data[0].name
+        }.jpg" alt="Report Image" />
+        <h3>${capitalizeFirstLetter(data.data[0].name)}</h3>
+        <p>${capitalizeFirstLetter(data.data[0].city)}, ${capitalizeFirstLetter(
+      data.data[0].country
+    )}</p>
         <button id="infoContainerCloseButton">Close</button>
 
       `;

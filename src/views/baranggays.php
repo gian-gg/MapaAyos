@@ -112,7 +112,7 @@ if ($currentBaranggay) {
                     $baranggayReportsData = getReportsData($currentBaranggay, "!pending");
                     $resolvedReports = getReportsData($currentBaranggay, "resolved");
 
-                    echo "<h1>" . htmlspecialchars($currentBaranggay) . "</h1>";
+                    echo "<h1>" . htmlspecialchars(capitalizeFirstLetter($currentBaranggay)) . "</h1>";
                     echo "<img src='/MapaAyos/public/img/baranggays/" . htmlspecialchars($currentBaranggay, ENT_QUOTES, 'UTF-8') . ".jpg' alt='Baranggay Image' class='img-fluid mb-3'>";
                     echo "<p>" . htmlspecialchars($baranggayInfo["description"]) . "</p>";
                     echo "<div class='baranggay-dashboard'>
@@ -225,10 +225,10 @@ if ($currentBaranggay) {
                             foreach ($baranggays as $baranggay) {
                                 echo "
                                     <tr onclick=\"window.location='/MapaAyos/baranggays?baranggay=" . htmlspecialchars($baranggay['name'], ENT_QUOTES, 'UTF-8') . "';\" style=\"cursor: pointer;\">
-                                        <td>" . htmlspecialchars($baranggay['name'], ENT_QUOTES, 'UTF-8') . "</td>
-                                        <td>" . htmlspecialchars($baranggay['city'], ENT_QUOTES, 'UTF-8') . "</td>
-                                        <td>" . htmlspecialchars($baranggay['country'], ENT_QUOTES, 'UTF-8') . "</td>
-                                        <td><span class='badge bg-success'>active</span></td>
+                                        <td>" . htmlspecialchars(capitalizeFirstLetter($baranggay['name']), ENT_QUOTES, 'UTF-8') . "</td>
+                                        <td>" . htmlspecialchars(capitalizeFirstLetter($baranggay['city']), ENT_QUOTES, 'UTF-8') . "</td>
+                                        <td>" . htmlspecialchars(capitalizeFirstLetter($baranggay['country']), ENT_QUOTES, 'UTF-8') . "</td>
+                                        <td><span class='badge bg-" . getStatusColor($baranggay['status']) . "'>" . htmlspecialchars(capitalizeFirstLetter($baranggay['status']), ENT_QUOTES, 'UTF-8') . "</span></td>
                                     </tr>
                                 ";
                             }

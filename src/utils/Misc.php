@@ -17,6 +17,11 @@ function getRelativeDate($dateTimeString)
     };
 }
 
+function capitalizeFirstLetter($string)
+{
+    return ucfirst(strtolower($string));
+}
+
 
 function getStatusColor($status)
 {
