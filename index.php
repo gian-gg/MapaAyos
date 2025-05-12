@@ -4,6 +4,9 @@ session_start();
 require_once __DIR__ .  '/config/db.php';
 require_once __DIR__ . '/src/controllers/AuthController.php';
 
+$userID = $_SESSION['userID'] ?? null;
+$user = findUserByID($userID) ?? null;
+
 ?>
 
 <!DOCTYPE html>
@@ -59,7 +62,11 @@ require_once __DIR__ . '/src/controllers/AuthController.php';
         <div class="btn-group d-none d-md-flex">
             <?php
             if (isAuthenticated()) {
-                echo '<a class="signup-btn" href="/MapaAyos/mapa">Mapa</a>';
+                if ($user['role'] == 'admin' || $user['role'] == 'official') {
+                    echo '<a class="signup-btn" href="/MapaAyos/' . $user['role'] . '/dashboard">Dashboard</a>';
+                } else {
+                    echo '<a class="signup-btn" href="/MapaAyos/mapa">Mapa</a>';
+                }
             } else {
                 echo '<a class="signin-btn" href="/MapaAyos/signin">Sign In</a>';
                 echo '<a class="signup-btn" href="/MapaAyos/signup">Sign Up</a>';
