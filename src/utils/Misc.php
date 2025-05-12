@@ -30,5 +30,6 @@ function getStatusColor($status)
         'active' => 'green',
         'pending' => 'yellow',
         'inactive' => 'red',
+        'denied' => 'red',
     };
 }

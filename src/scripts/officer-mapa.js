@@ -1,13 +1,7 @@
-import {
-  isInBaranggay,
-  createBaranggayBoundary,
-  displayPopUp,
-  removeAllPins,
-} from "./utils/mapa-utils.js";
+import { createBaranggayBoundary, removeAllPins } from "./utils/mapa-utils.js";
 
 import { capitalizeFirstLetter } from "./utils/helpers.js";
 import { fetchAPI } from "./utils/api-utils.js";
-import { showToast } from "./utils/toast-utils.js";
 
 let currentBaranggayCoords = null;
 let currentBaranggayPolygon = null;

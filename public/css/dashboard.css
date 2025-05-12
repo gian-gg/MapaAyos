@@ -80,3 +80,7 @@ nav {
 .reports-table table tr.active > td {
   background-color: pink !important;
 }
+
+.users-table table tr.active > td {
+  background-color: pink !important;
+}

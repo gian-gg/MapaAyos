@@ -86,3 +86,81 @@ function getBaranggayOfficial($userID) // a function to get the baranggay of a u
         return false;
     }
 }
+
+function getAllUsers() // a function to get all users
+{
+    global $pdo;
+    try {
+        $sql = "SELECT * FROM users";
+
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        error_log("Error getting all users: " . $e->getMessage());
+        return false;
+    }
+}
+
+function getAllUsersByRole($role) // a function to get all users by role
+{
+    global $pdo;
+    try {
+        if ($role === "all") {
+            $sql = "SELECT * FROM users";
+            $stmt = $pdo->prepare($sql);
+        } else {
+            $sql = "SELECT * FROM users WHERE role = :role";
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindParam(':role', $role);
+        }
+
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        error_log("Error getting all users by role: " . $e->getMessage());
+        return false;
+    }
+}
+
+function getAllBaranggayOfficials() // a function to get all baranggay officials
+{
+    global $pdo;
+    try {
+        $sql = "SELECT * FROM officialsInfo";
+
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        error_log("Error getting all baranggay officials: " . $e->getMessage());
+        return false;
+    }
+}
+
+
+function updateUserRole($userID, $newRole, $assignedBaranggay) // a function to update a user
+{
+    global $pdo;
+
+    if ($assignedBaranggay === "none") {
+        $assignedBaranggay = null; // Set to null if "none" is selected
+    }
+
+    try {
+        $sql = "UPDATE users SET role = :role, assignedBaranggay = :assignedBaranggay WHERE id = :id";
+
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':role', $newRole);
+        $stmt->bindParam(':assignedBaranggay', $assignedBaranggay);
+        $stmt->bindParam(':id', $userID);
+        $stmt->execute();
+
+        return true;
+    } catch (PDOException $e) {
+        error_log("Error updating user role: " . $e->getMessage());
+        return false;
+    }
+}

@@ -12,8 +12,7 @@ requireSignIn();
 
 $userID = $_SESSION['userID'] ?? null;
 $user = findUserByID($userID);
-$officerData = getBaranggayOfficial($userID);
-$baranggayData = getBaranggayData($officerData["baranggayID"]);
+$baranggayData = getBaranggayData($user["assignedBaranggay"]);
 
 redirectIfNotAllowed($user["role"], "official");
 
