@@ -62,15 +62,16 @@ if ($currentBaranggay) {
     <link rel="stylesheet" href="/MapaAyos/public/css/baranggay.css">
     <link rel="stylesheet" href="/MapaAyos/public/css/sidebar.css">
     <link rel="stylesheet" href="/MapaAyos/public/css/header.css">
+    <link rel="stylesheet" href="/MapaAyos/public/css/baranggay-enhanced.css">
 
 </head>
 
-<body>
+<body class="bg-light">
     <!-- Report Modal -->
-    <div class="modal" id="modal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-            <div class="modal-content">
-                <div class="modal-header">
+            <div class="modal-content border-0 shadow">
+                <div class="modal-header border-bottom-0">
                     <h1 class="modal-title fs-5" id="modalLabel"></h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
@@ -86,7 +87,7 @@ if ($currentBaranggay) {
         <?php
         renderSideBar(
             $user ? $user["role"] : null,
-            "mapa",
+            "baranggays",
             isAuthenticated()
         )
         ?>
@@ -94,15 +95,13 @@ if ($currentBaranggay) {
         <main class="main-content">
             <?php
             renderHeader(
-                isAuthenticated(),
-                $user ? $user["hasProfilePic"] : false,
-                $userID
+                $user ?? null
             );
             ?>
-            <div class="main-content">
+            <div class="main-content" style="width: 78vw;">
                 <?php
                 if ($currentBaranggay) {
-                    echo '<a href="/MapaAyos/baranggays" class="btn btn-secondary mb-2"><i class="bi bi-arrow-left"></i> Back</a>';
+                    echo '<a href="/MapaAyos/baranggays" class="btn btn-back mb-4"><i class="bi bi-arrow-left"></i> Back to Baranggays</a>';
                 }
                 ?>
 
@@ -112,9 +111,13 @@ if ($currentBaranggay) {
                     $baranggayReportsData = getReportsData($currentBaranggay, "!pending");
                     $resolvedReports = getReportsData($currentBaranggay, "resolved");
 
+                    echo "<div class='page-header'>";
                     echo "<h1>" . htmlspecialchars(capitalizeFirstLetter($currentBaranggay)) . "</h1>";
-                    echo "<img src='/MapaAyos/public/img/baranggays/" . htmlspecialchars($currentBaranggay, ENT_QUOTES, 'UTF-8') . ".jpg' alt='Baranggay Image' class='img-fluid mb-3'>";
-                    echo "<p>" . htmlspecialchars($baranggayInfo["description"]) . "</p>";
+                    echo "</div>";
+                    
+                    echo "<img src='/MapaAyos/public/img/baranggays/" . htmlspecialchars($currentBaranggay, ENT_QUOTES, 'UTF-8') . ".jpg' alt='Baranggay Image' class='baranggay-image'>";
+                    echo "<p class='page-description mb-4'>" . htmlspecialchars($baranggayInfo["description"]) . "</p>";
+                    
                     echo "<div class='baranggay-dashboard'>
                             <div class='stats-grid'>
                                 <div class='stat-card'>
@@ -167,27 +170,28 @@ if ($currentBaranggay) {
                                 <div class='info-card'>
                                     <h3>Operating Hours</h3>
                                     <div class='info-content'>
-                                        <p><strong>Monday - Friday:</strong> " . ($baranggay['weekday_hours'] ?? '8:00 AM - 5:00 PM') . "</p>
-                                        <p><strong>Saturday:</strong> " . ($baranggay['saturday_hours'] ?? '8:00 AM - 12:00 PM') . "</p>
-                                        <p><strong>Sunday:</strong> " . ($baranggay['sunday_hours'] ?? 'Closed') . "</p>
+                                        <p><i class='bi bi-clock'></i> <strong>Monday - Friday:</strong> " . ($baranggay['weekday_hours'] ?? '8:00 AM - 5:00 PM') . "</p>
+                                        <p><i class='bi bi-clock'></i> <strong>Saturday:</strong> " . ($baranggay['saturday_hours'] ?? '8:00 AM - 12:00 PM') . "</p>
+                                        <p><i class='bi bi-clock'></i> <strong>Sunday:</strong> " . ($baranggay['sunday_hours'] ?? 'Closed') . "</p>
                                     </div>
                                 </div>
                             </div>
                         </div>";
 
                     echo "
-                        <div class='reports-container'>
-                            <h2>Recent Reports</h2>
-                            <table class='table table-hover align-middle'>
-                                <thead class='table-light'>
-                                    <tr>
-                                        <th scope='col'>#</th>
-                                        <th scope='col'>Title</th>
-                                        <th scope='col'>Status</th>
-                                        <th scope='col'>Date</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
+                        <div class='reports-container mt-4'>
+                            <h2 class='mb-3'>Recent Reports</h2>
+                            <div class='table-responsive'>
+                                <table class='table table-hover align-middle mb-0'>
+                                    <thead>
+                                        <tr>
+                                            <th scope='col'>#</th>
+                                            <th scope='col'>Title</th>
+                                            <th scope='col'>Status</th>
+                                            <th scope='col'>Date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
                     ";
 
                     $reportCount = 1;
@@ -205,41 +209,49 @@ if ($currentBaranggay) {
                         $reportCount++;
                     }
 
-                    echo "</tbody></table></div>";
+                    echo "</tbody></table></div></div>";
                 } else if ($currentBaranggay && !$baranggayExists) {
-                    echo "<h1>Baranggay is not yet Supported.</h1>";
+                    echo "<div class='alert alert-warning' role='alert'>
+                            <h4 class='alert-heading'><i class='bi bi-exclamation-triangle-fill me-2'></i>Baranggay Not Supported</h4>
+                            <p class='mb-0'>This baranggay is not yet supported in our system. Please check back later.</p>
+                          </div>";
                 } else {
                 ?>
-                    <table class="table table-hover align-middle">
-                        <thead class="table-light">
-                            <tr>
-                                <th scope="col">Name</th>
-                                <th scope="col">City</th>
-                                <th scope="col">Country</th>
-                                <th scope="col">Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            echo "<h1>Baranggays</h1>";
-                            foreach ($baranggays as $baranggay) {
-                                echo "
-                                    <tr onclick=\"window.location='/MapaAyos/baranggays?baranggay=" . htmlspecialchars($baranggay['name'], ENT_QUOTES, 'UTF-8') . "';\" style=\"cursor: pointer;\">
-                                        <td>" . htmlspecialchars(capitalizeFirstLetter($baranggay['name']), ENT_QUOTES, 'UTF-8') . "</td>
-                                        <td>" . htmlspecialchars(capitalizeFirstLetter($baranggay['city']), ENT_QUOTES, 'UTF-8') . "</td>
-                                        <td>" . htmlspecialchars(capitalizeFirstLetter($baranggay['country']), ENT_QUOTES, 'UTF-8') . "</td>
-                                        <td><span class='badge bg-" . getStatusColor($baranggay['status']) . "'>" . htmlspecialchars(capitalizeFirstLetter($baranggay['status']), ENT_QUOTES, 'UTF-8') . "</span></td>
-                                    </tr>
-                                ";
-                            }
-                            ?>
-                        </tbody>
-                    </table>
+                    <div class="page-header">
+                        <h1>Baranggays</h1>
+                        <p class="page-description">Explore and manage baranggays in your area</p>
+                    </div>
+                    
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle mb-0">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">City</th>
+                                    <th scope="col">Country</th>
+                                    <th scope="col">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                foreach ($baranggays as $baranggay) {
+                                    echo "
+                                        <tr onclick=\"window.location='/MapaAyos/baranggays?baranggay=" . htmlspecialchars($baranggay['name'], ENT_QUOTES, 'UTF-8') . "';\" style=\"cursor: pointer;\">
+                                            <td>" . htmlspecialchars(capitalizeFirstLetter($baranggay['name']), ENT_QUOTES, 'UTF-8') . "</td>
+                                            <td>" . htmlspecialchars(capitalizeFirstLetter($baranggay['city']), ENT_QUOTES, 'UTF-8') . "</td>
+                                            <td>" . htmlspecialchars(capitalizeFirstLetter($baranggay['country']), ENT_QUOTES, 'UTF-8') . "</td>
+                                            <td><span class='badge bg-" . getStatusColor($baranggay['status']) . "'>" . htmlspecialchars(capitalizeFirstLetter($baranggay['status']), ENT_QUOTES, 'UTF-8') . "</span></td>
+                                        </tr>
+                                    ";
+                                }
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
                 <?php
                 }
                 ?>
             </div>
-
         </main>
     </div>
 

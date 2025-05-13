@@ -140,3 +140,7 @@ body {
 .spin {
   animation: spin 1s linear infinite;
 }
+
+.primary-color {
+  background-color: var(--primary) !important;
+}

@@ -99,13 +99,19 @@ function displayReports(API_URL, infoContainer) {
       marker.on("click", () => {
         infoContainer.classList.remove("hidden");
         infoContainer.innerHTML = `
-        <h3>${report.title}</h3>
-        <img src="/MapaAyos/public/uploads/reports/${report.imagePath}" alt="Report Image" />
-        <p>${report.description}</p>
-        <p>Status: ${report.status}</p>
-        <p>Created At: ${report.createdAt}</p>
-        <button id="infoContainerCloseButton">Close</button>
-      `;
+    <div class="card-body">
+      <h3 class="card-title mb-3 text-center fw-bold">${report.title}</h3>
+      <img src="/MapaAyos/public/uploads/reports/${report.imagePath}" 
+           alt="Report Image" 
+           class="img-fluid rounded-3 mb-3" 
+           style="object-fit: cover; max-height: 300px; width: 100%;" />
+      <p class="card-text mb-2">${report.description}</p>
+      <p class="card-text mb-1"><strong>Status:</strong> ${report.status}</p>
+      <p class="card-text mb-4"><strong>Created At:</strong> ${new Date(
+        report.createdAt
+      ).toLocaleString()}</p>
+    </div>
+`;
 
         // Reset all markers to default icon
         map.eachLayer((layer) => {
@@ -128,13 +134,6 @@ function displayReports(API_URL, infoContainer) {
             iconAnchor: [12, 12],
           })
         );
-
-        const closeButton = document.getElementById("infoContainerCloseButton");
-        if (closeButton) {
-          closeButton.addEventListener("click", () => {
-            infoContainer.classList.add("hidden");
-          });
-        }
       });
 
       map.flyTo(marker.getLatLng(), 15, { duration: 1 });

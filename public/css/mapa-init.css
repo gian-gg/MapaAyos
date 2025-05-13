@@ -142,7 +142,7 @@ body {
   position: absolute;
   top: 1rem;
   left: 1rem;
-  z-index: 1100;
+  z-index: 1000;
 
   display: flex;
   gap: 8px;

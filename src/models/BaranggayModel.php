@@ -32,3 +32,14 @@ function getBaranggayData($baranggayID)
 
     return $stmt->fetch(PDO::FETCH_ASSOC);
 }
+
+function getBaranggayInfo($baranggayID)
+{
+    global $pdo;
+    $sql = "SELECT * FROM baranggayInfo WHERE baranggayID = :baranggayID";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':baranggayID', $baranggayID);
+    $stmt->execute();
+
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+}

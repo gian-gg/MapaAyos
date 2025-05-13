@@ -4,7 +4,7 @@ function logOutButton()
 {
     return "
         <form method='POST'>
-            <button type='submit' name='logout' class='nav-item'>
+            <button type='submit' name='logout' class='logout-btn'>
                 <i class='bi bi-box-arrow-right'></i>
                 <span class='nav-text'>Logout</span>
             </button>
@@ -51,7 +51,14 @@ function renderSideBar($role, $activePage, $isAuthenticated)
         </a>
     ";
 
-    echo "</div>";
+    echo "</div><div class='nav-bottom'>";
+
+    echo ($isAuthenticated ? "
+            <a href='/MapaAyos/settings' class='nav-item no-style-button'>
+                <i class='bi bi-gear'></i>
+                <span class='nav-text'>Settings</span>
+            </a>"
+        : "");
     echo ($isAuthenticated ? logOutButton() : "");
-    echo "</nav></aside>";
+    echo "</div></nav></aside>";
 }

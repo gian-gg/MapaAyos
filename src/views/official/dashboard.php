@@ -63,6 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="/MapaAyos/public/css/sidebar.css">
     <link rel="stylesheet" href="/MapaAyos/public/css/header.css">
     <link rel="stylesheet" href="/MapaAyos/public/css/baranggay.css">
+    <link rel="stylesheet" href="/MapaAyos/public/css/official-dashboard.css">
 </head>
 
 <body>
@@ -70,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php
         renderSideBar(
             $user ? $user["role"] : "null",
-            "mapa",
+            "dashboard",
             isAuthenticated()
         )
         ?>
@@ -81,75 +82,116 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="dashboard-container">
                 <?php
                 renderHeader(
-                    isAuthenticated(),
-                    $user ? $user["hasProfilePic"] : false,
-                    $userID
+                    $user ?? null
                 );
                 ?>
 
                 <div class="cards-grid">
                     <div class="card">
-                        <div class="card-title">Total Reports</div>
+                        <div class="card-title">
+                            <i class="bi bi-file-text me-2"></i>
+                            Total Reports
+                        </div>
                         <div class="card-value"><?= count(getReportsData($baranggayData["name"], "all")) ?></div>
                     </div>
                     <div class="card">
-                        <div class="card-title">Pending Reports</div>
+                        <div class="card-title">
+                            <i class="bi bi-hourglass-split me-2"></i>
+                            Pending Reports
+                        </div>
                         <div class="card-value"><?= count(getReportsData($baranggayData["name"], "pending")) ?></div>
                     </div>
                     <div class="card">
-                        <div class="card-title">Resolved Reports</div>
+                        <div class="card-title">
+                            <i class="bi bi-check-circle me-2"></i>
+                            Resolved Reports
+                        </div>
                         <div class="card-value"><?= count(getReportsData($baranggayData["name"], "resolved")) ?></div>
                     </div>
                 </div>
 
                 <div class="reports-table">
-                    <h2>Reports</h2>
-                    <form method="GET" action="" id="filterForm">
-                        <select name="filter" id="filterInput" onchange="document.getElementById('filterForm').submit()">
-                            <option value="all" <?= $reportFilter === 'all' ? 'selected' : '' ?>>All</option>
-                            <option value="pending" <?= $reportFilter === 'pending' ? 'selected' : '' ?>>Pending</option>
-                            <option value="resolved" <?= $reportFilter === 'resolved' ? 'selected' : '' ?>>Resolved</option>
-                            <option value="denied" <?= $reportFilter === 'denied' ? 'selected' : '' ?>>Denied</option>
-                        </select>
-                    </form>
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>Report ID</th>
-                                <th>Title</th>
-                                <th>Status</th>
-                                <th>Date Submitted</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            $reports = getReportsData($baranggayData["name"], $reportFilter);
-                            if (empty($reports)) {
-                                echo "<tr><td colspan='4' class='text-center'>No reports found.</td></tr>";
-                            }
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h2>
+                            <i class="bi bi-table me-2"></i>
+                            Reports Overview
+                        </h2>
+                        <form method="GET" action="" id="filterForm" class="mb-0">
+                            <select name="filter" id="filterInput" onchange="document.getElementById('filterForm').submit()">
+                                <option value="all" <?= $reportFilter === 'all' ? 'selected' : '' ?>>All Reports</option>
+                                <option value="pending" <?= $reportFilter === 'pending' ? 'selected' : '' ?>>Pending Reports</option>
+                                <option value="resolved" <?= $reportFilter === 'resolved' ? 'selected' : '' ?>>Resolved Reports</option>
+                                <option value="denied" <?= $reportFilter === 'denied' ? 'selected' : '' ?>>Denied Reports</option>
+                            </select>
+                        </form>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Report ID</th>
+                                    <th>Title</th>
+                                    <th>Status</th>
+                                    <th>Date Submitted</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                $reports = getReportsData($baranggayData["name"], $reportFilter);
+                                if (empty($reports)) {
+                                    echo "<tr><td colspan='4' class='text-center py-4'><i class='bi bi-inbox me-2'></i>No reports found.</td></tr>";
+                                }
 
-                            foreach ($reports as $report) {
-                                $reportID = htmlspecialchars($report['id'], ENT_QUOTES, 'UTF-8');
-                                echo "<tr class='report-row' id='report-{$reportID}' onclick=\"displayReport('{$reportID}')\" style=\"cursor: pointer;\">";
-                                echo "<td>{$report['id']}</td>";
-                                echo "<td>{$report['title']}</td>";
-                                echo "<td>{$report['status']}</td>";
-                                echo "<td>{$report['createdAt']}</td>";
-                                echo "</tr>";
-                            }
-                            ?>
-                        </tbody>
-                    </table>
+                                foreach ($reports as $report) {
+                                    $reportID = htmlspecialchars($report['id'], ENT_QUOTES, 'UTF-8');
+                                    $statusClass = '';
+                                    $statusIcon = '';
+                                    
+                                    switch($report['status']) {
+                                        case 'pending':
+                                            $statusClass = 'text-warning';
+                                            $statusIcon = 'hourglass-split';
+                                            break;
+                                        case 'resolved':
+                                            $statusClass = 'text-success';
+                                            $statusIcon = 'check-circle';
+                                            break;
+                                        case 'denied':
+                                            $statusClass = 'text-danger';
+                                            $statusIcon = 'x-circle';
+                                            break;
+                                        default:
+                                            $statusClass = 'text-primary';
+                                            $statusIcon = 'circle';
+                                    }
+                                    
+                                    echo "<tr class='report-row' id='report-{$reportID}' onclick=\"displayReport('{$reportID}')\">";
+                                    echo "<td><small class='text-muted'>#</small>{$report['id']}</td>";
+                                    echo "<td>{$report['title']}</td>";
+                                    echo "<td><i class='bi bi-{$statusIcon} me-2 {$statusClass}'></i><span class='{$statusClass}'>" . ucfirst($report['status']) . "</span></td>";
+                                    echo "<td>" . date('M d, Y', strtotime($report['createdAt'])) . "</td>";
+                                    echo "</tr>";
+                                }
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-                <div class="d-flex gap-5">
-                    <div class="card" id="report-information"></div>
-                    <div class="map-wrapper" style="width: 40vw; height: 50vh;">
-                        <div id="map"></div> <!-- Map -->
+
+                <div class="d-flex gap-4 justify-content-between" style="height: 50vh;">
+                    <div class="card flex-grow-1" id="report-information">
+                        <div class="text-center py-5 text-muted">
+                            <i class="bi bi-file-earmark-text display-4"></i>
+                            <p class="mt-3">Select a report to view details</p>
+                        </div>
+                    </div>
+                    <div class="map-wrapper">
+                        <div id="map"></div>
                         <div class="card info-container hidden" id="info-container"></div>
                         <div class="map-controls-container">
-                            <button id="my-location-btn"><i class="bi bi-crosshair"></i></button>
-                            <button id="zoom-in-btn" class="zoom-btn">+</button>
-                            <button id="zoom-out-btn" class="zoom-btn">−</button>
+                            <button id="my-location-btn" title="My Location"><i class="bi bi-crosshair"></i></button>
+                            <button id="zoom-in-btn" class="zoom-btn" title="Zoom In">+</button>
+                            <button id="zoom-out-btn" class="zoom-btn" title="Zoom Out">−</button>
                         </div>
                     </div>
                 </div>

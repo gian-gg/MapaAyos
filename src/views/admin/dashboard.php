@@ -67,16 +67,14 @@ if ($userFilter != 'admin' && $userFilter != 'official' && $userFilter != 'user'
         <?php
         renderSideBar(
             $user ? $user["role"] : "null",
-            "mapa",
+            "dashboard",
             isAuthenticated()
         )
         ?>
         <main class="main-content">
             <?php
             renderHeader(
-                isAuthenticated(),
-                $user ? $user["hasProfilePic"] : false,
-                $userID
+                $user ?? null
             );
             ?>
 
@@ -84,57 +82,75 @@ if ($userFilter != 'admin' && $userFilter != 'official' && $userFilter != 'user'
                 <div class="card">
                     <div class="card-title">Total Users</div>
                     <div class="card-value"><?= count($allUsers) ?></div>
+                    <div class="card-trend">
+                        <i class="bi bi-people-fill"></i>
+                    </div>
                 </div>
                 <div class="card">
                     <div class="card-title">Registered Baranggays</div>
                     <div class="card-value"><?= count($allBaranggays) ?></div>
+                    <div class="card-trend">
+                        <i class="bi bi-buildings-fill"></i>
+                    </div>
                 </div>
                 <div class="card">
                     <div class="card-title">Reports Issued</div>
                     <div class="card-value"><?= count($allReports) ?></div>
+                    <div class="card-trend">
+                        <i class="bi bi-file-text-fill"></i>
+                    </div>
                 </div>
             </div>
 
             <div class="users-table">
-                <h2>Users</h2>
-                <form method="GET" action="" id="filterForm">
-                    <select name="filter" id="filterInput" onchange="document.getElementById('filterForm').submit()">
-                        <option value="all" <?= $userFilter === 'all' ? 'selected' : '' ?>>All</option>
-                        <option value="user" <?= $userFilter === 'user' ? 'selected' : '' ?>>User</option>
-                        <option value="admin" <?= $userFilter === 'admin' ? 'selected' : '' ?>>Admin</option>
-                        <option value="official" <?= $userFilter === 'official' ? 'selected' : '' ?>>Official</option>
-                    </select>
-                </form>
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Email</th>
-                            <th>Role</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        $users = getAllUsersByRole($userFilter);
-                        foreach ($users as $user) {
-                            $userID = htmlspecialchars($user['id'], ENT_QUOTES, 'UTF-8');
-                            echo "<tr class='user-row' id='user-{$userID}' onclick=\"displayUser('{$userID}')\" style=\"cursor: pointer;\">";
-                            echo "<td>{$userID}</td>";
-                            echo "<td>{$user['firstName']}</td>";
-                            echo "<td>{$user['lastName']}</td>";
-                            echo "<td>{$user['email']}</td>";
-                            echo "<td>{$user['role']}</td>";
-                            echo "</tr>";
-                        }
-                        ?>
-                    </tbody>
-                </table>
+                <div class="table-header">
+                    <h2>Users Management</h2>
+                    <form method="GET" action="" id="filterForm" class="filter-form">
+                        <div class="input-group">
+                            <label for="filterInput">Filter by role:</label>
+                            <select name="filter" id="filterInput" onchange="document.getElementById('filterForm').submit()">
+                                <option value="all" <?= $userFilter === 'all' ? 'selected' : '' ?>>All Users</option>
+                                <option value="user" <?= $userFilter === 'user' ? 'selected' : '' ?>>Regular Users</option>
+                                <option value="admin" <?= $userFilter === 'admin' ? 'selected' : '' ?>>Administrators</option>
+                                <option value="official" <?= $userFilter === 'official' ? 'selected' : '' ?>>Barangay Officials</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                
+                <div class="table-container">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Email</th>
+                                <th>Role</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $users = getAllUsersByRole($userFilter);
+                            foreach ($users as $user) {
+                                $userID = htmlspecialchars($user['id'], ENT_QUOTES, 'UTF-8');
+                                $roleClass = strtolower($user['role']);
+                                echo "<tr class='user-row {$roleClass}' id='user-{$userID}' onclick=\"displayUser('{$userID}')\">";
+                                echo "<td><span class='user-id'>{$userID}</span></td>";
+                                echo "<td>{$user['firstName']}</td>";
+                                echo "<td>{$user['lastName']}</td>";
+                                echo "<td><span class='user-email'>{$user['email']}</span></td>";
+                                echo "<td><span class='role-badge {$roleClass}'>{$user['role']}</span></td>";
+                                echo "</tr>";
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-            <div class="card" id="user-information"></div>
-    </div>
-    </main>
+            
+            <div class="card user-details" id="user-information"></div>
+        </main>
     </div>
     <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"

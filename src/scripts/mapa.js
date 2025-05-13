@@ -48,23 +48,25 @@ baranggaySelect.addEventListener("change", (e) => {
     currentBaranggayCoords = JSON.parse(data.data[0].geojson)["coordinates"];
 
     infoContainer.innerHTML = `
-        <img src="/MapaAyos/public/img/baranggays/${
-          data.data[0].name
-        }.jpg" alt="Report Image" />
-        <h3>${capitalizeFirstLetter(data.data[0].name)}</h3>
-        <p>${capitalizeFirstLetter(data.data[0].city)}, ${capitalizeFirstLetter(
+    <img src="/MapaAyos/public/img/baranggays/${
+      data.data[0].name
+    }.jpg" class="card-img-top" alt="Report Image" />
+    <div class="card-body text-center">
+      <h5 class="card-title text-capitalize fw-semibold">${capitalizeFirstLetter(
+        data.data[0].name
+      )}</h5>
+      <p class="card-text text-muted mb-0">
+        ${capitalizeFirstLetter(data.data[0].city)}, ${capitalizeFirstLetter(
       data.data[0].country
-    )}</p>
-        <button id="infoContainerCloseButton">Close</button>
-
-      `;
-
-    const closeButton = document.getElementById("infoContainerCloseButton");
-    if (closeButton) {
-      closeButton.addEventListener("click", () => {
-        infoContainer.classList.add("hidden");
-      });
-    }
+    )}
+      </p>
+      <a href="/MapaAyos/baranggays?baranggay=${
+        data.data[0].name
+      }" class="btn btn-primary mt-2 primary-color" id="reportBtn">
+        Go to Baranggays Page
+      </a>
+    </div>
+`;
 
     currentBaranggayPolygon = createBaranggayBoundary(currentBaranggayPolygon, [
       currentBaranggayCoords,
