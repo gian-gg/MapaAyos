@@ -2,6 +2,16 @@ body {
   background: url("../img/dotgrid.png") repeat center/contain, var(--bg-primary);
   color: var(--text-primary);
   gap: 20px;
+
+  margin: 0 auto;
+  padding: 0;
+}
+
+.page-wrapper {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 .card {
