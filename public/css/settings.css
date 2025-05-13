@@ -29,9 +29,61 @@ body, .dashboard, .settings-main {
     margin-bottom: 0.8rem;
 }
 
-.profile-row .profile-img {
-    width: 120px;
-    height: 120px;
+.profile-image-container {
+    margin-bottom: 2rem;
+}
+
+.profile-image-wrapper {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.profile-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile-image-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 8px;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.profile-image-wrapper:hover .profile-image-overlay {
+    opacity: 1;
+}
+
+.btn-change-photo {
+    width: 100%;
+    background: transparent;
+    border: none;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.btn-change-photo:hover {
+    color: #f0f0f0;
+}
+
+.cropper-container {
+    max-height: 500px;
+    margin: 0 auto;
 }
 
 .settings-label {

@@ -17,45 +17,7 @@ $role = isset($user['role']) ? $user['role'] : 'user';
 // Handle profile image upload
 $uploadError = '';
 if (isset($_POST['upload_image'])) {
-    if (isset($_FILES['profile_image']) && $_FILES['profile_image']['error'] === UPLOAD_ERR_OK) {
-        $fileTmpPath = $_FILES['profile_image']['tmp_name'];
-        $fileName = $_FILES['profile_image']['name'];
-        $fileSize = $_FILES['profile_image']['size'];
-        $fileType = $_FILES['profile_image']['type'];
-        $fileNameCmps = explode('.', $fileName);
-        $fileExtension = strtolower(end($fileNameCmps));
-        $allowedfileExtensions = ['jpg', 'jpeg', 'png', 'gif'];
-        if (in_array($fileExtension, $allowedfileExtensions)) {
-            $newFileName = 'profile_' . time() . '.' . $fileExtension;
-            $userFolder = $userID;
-
-            // Create user-specific directory
-            $uploadFileDir = __DIR__ . '/../../public/images/profiles/' . $userFolder;
-            if (!file_exists($uploadFileDir)) {
-                if (!mkdir($uploadFileDir, 0777, true)) {
-                    error_log("Failed to create directory: " . $uploadFileDir);
-                    $uploadError = 'Error creating directory for profile image.';
-                    return;
-                }
-            }
-
-            $dest_path = $uploadFileDir . '/' . $newFileName;
-            if (move_uploaded_file($fileTmpPath, $dest_path)) {
-                global $pdo;
-                $dbPath = $userFolder . '/' . $newFileName;
-                $stmt = $pdo->prepare("UPDATE user_preferences SET profile_image = ? WHERE user_id = ?");
-                $stmt->execute([$dbPath, $userID]);
-                $user['profile_image'] = $dbPath;
-            } else {
-                error_log("Failed to move uploaded file to: " . $dest_path);
-                $uploadError = 'Error saving the profile image.';
-            }
-        } else {
-            $uploadError = 'Invalid file type. Only JPG, PNG, GIF allowed.';
-        }
-    } else {
-        $uploadError = 'No file uploaded or upload error.';
-    }
+    $uploadError = 'Please use the crop tool to upload your profile picture.';
 }
 
 // Handle password change
@@ -103,34 +65,47 @@ if (isset($_POST['update_info'])) {
 // Handle cropped profile image upload via base64 data from hidden input
 if (!empty($_POST['cropped_image_data'])) {
     $data = $_POST['cropped_image_data'];
-    // basically the same as the upload_image function but for cropped images   
-    if (preg_match('/^data:image\/(png|jpeg);base64,/', $data, $matches)) {
-        $type = $matches[1];
+    $uploadError = '';
+    
+    if (preg_match('/^data:image\/(png|jpeg);base64,/', $data)) {
         $data = substr($data, strpos($data, ',') + 1);
         $data = base64_decode($data);
-        $fileName = 'profile_' . time() . '.png';
-        $userFolder = $userID;
-        $uploadFileDir = dirname(dirname(dirname(__DIR__))) . '/public/images/profiles/' . $userFolder . '/';
-
-        // Create directory if it doesn't exist
-        if (!file_exists($uploadFileDir)) {
-            // 0777 = default permissions for directories
-            if (!mkdir($uploadFileDir, 0777, true)) {
-                $uploadError = 'Error creating directory for profile image.';
-                return;
+        
+        // Define the upload directory and file path
+        $uploadDir = __DIR__ . '/../../public/uploads/pfp/';
+        $fileName = $userID . '.png';
+        $filePath = $uploadDir . $fileName;
+        
+        // Ensure upload directory exists
+        if (!file_exists($uploadDir)) {
+            if (!mkdir($uploadDir, 0777, true)) {
+                $uploadError = 'Error creating upload directory.';
+                error_log("Failed to create directory: " . $uploadDir);
             }
         }
-
-        $dest_path = $uploadFileDir . $fileName;
-        if (file_put_contents($dest_path, $data)) {
-            global $pdo;
-            $dbPath = $userFolder . '/' . $fileName;
-            $stmt = $pdo->prepare("UPDATE user_preferences SET profile_image = ? WHERE user_id = ?");
-            $stmt->execute([$dbPath, $userID]);
-            $user['profile_image'] = $dbPath;
-        } else {
-            $uploadError = 'Error saving the profile image.';
+        
+        if (empty($uploadError)) {
+            // Save the new profile picture
+            if (file_put_contents($filePath, $data)) {
+                try {
+                    global $pdo;
+                    // Update hasProfilePic in users table
+                    $stmt = $pdo->prepare("UPDATE users SET hasProfilePic = 1 WHERE id = ?");
+                    $stmt->execute([$userID]);
+                    
+                    // Refresh user data
+                    $user = findUserByID($userID);
+                } catch (PDOException $e) {
+                    error_log("Database error: " . $e->getMessage());
+                    $uploadError = 'Error updating profile image in database.';
+                }
+            } else {
+                error_log("Failed to write file: " . $filePath);
+                $uploadError = 'Error saving the profile image.';
+            }
         }
+    } else {
+        $uploadError = 'Invalid image format.';
     }
 }
 
@@ -138,7 +113,7 @@ if (isset($_POST['logout'])) {
     handleSignOut();
 }
 
-$profileImg = !empty($user['profile_image']) ? '/MapaAyos/public/images/profiles/' . $user['profile_image'] : '/MapaAyos/public/img/default-profile.png';
+$profileImg = $user['hasProfilePic'] ? '/MapaAyos/public/uploads/pfp/' . $userID . '.png' : '/MapaAyos/public/img/default-profile.png';
 
 ?>
 <!DOCTYPE html>
@@ -167,6 +142,8 @@ $profileImg = !empty($user['profile_image']) ? '/MapaAyos/public/images/profiles
     <link rel="stylesheet" href="/MapaAyos/public/css/header.css">
     <link rel="stylesheet" href="/MapaAyos/public/css/sidebar.css">
     <link rel="stylesheet" href="/MapaAyos/public/css/settings.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css">
 </head>
 
 <body>
@@ -192,27 +169,38 @@ $profileImg = !empty($user['profile_image']) ? '/MapaAyos/public/images/profiles
                     <hr class="section-divider">
                     <div class="profile-row">
                         <form method="POST" enctype="multipart/form-data" id="accountSettingsForm">
-                            <div style="display:flex;align-items:center;gap:1.2rem;">
-                                <img src="<?= htmlspecialchars($profileImg) ?>" class="profile-img" id="profileImgPreview" alt="Profile Image">
-                                <button type="button" id="triggerProfileImage" class="btn-settings">Change</button>
+                            <div class="profile-image-container">
+                                <div class="profile-image-wrapper">
+                                    <img src="<?= htmlspecialchars($profileImg) ?>" class="profile-img" id="profileImgPreview" alt="Profile Image">
+                                    <div class="profile-image-overlay">
+                                        <button type="button" id="triggerProfileImage" class="btn-change-photo">
+                                            <i class="bi bi-camera-fill"></i>
+                                            <span>Change</span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <?php if ($uploadError): ?>
+                                    <div class="alert alert-danger mt-2"><?= htmlspecialchars($uploadError) ?></div>
+                                <?php endif; ?>
                             </div>
                             <input type="file" id="profile_image_input" accept="image/*" style="display:none;">
+                            <input type="hidden" name="cropped_image_data" id="cropped_image_data">
                             <!-- Cropper Modal -->
                             <div class="modal fade" id="cropperModal" tabindex="-1" aria-labelledby="cropperModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-dialog modal-lg modal-dialog-centered">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h5 class="modal-title" id="cropperModalLabel">Crop Profile Image</h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            <div style="max-width:100%;max-height:350px;">
-                                                <img id="cropperImage" style="max-width:100%;max-height:350px;">
+                                            <div class="cropper-container">
+                                                <img id="cropperImage" style="max-width:100%; max-height:500px;">
                                             </div>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                            <button type="button" class="btn btn-primary" id="uploadCroppedImage">Crop</button>
+                                            <button type="button" class="btn btn-primary" id="uploadCroppedImage">Save Photo</button>
                                         </div>
                                     </div>
                                 </div>
@@ -233,11 +221,9 @@ $profileImg = !empty($user['profile_image']) ? '/MapaAyos/public/images/profiles
                                     <input type="email" class="settings-input" name="update_email" id="update_email" value="<?= htmlspecialchars($user['email']) ?>" required>
                                 </div>
                             </div>
-                            <input type="hidden" name="cropped_image_data" id="cropped_image_data">
                             <div>
                                 <button type="submit" name="update_info" class="btn-settings mt-2">Save</button>
                                 <?php if (!empty($infoUpdateMsg)): ?><div class="text-success mt-2"><?= htmlspecialchars($infoUpdateMsg) ?></div><?php endif; ?>
-                                <?php if ($uploadError): ?><div class="text-danger small mt-1"><?= htmlspecialchars($uploadError) ?></div><?php endif; ?>
                             </div>
                         </form>
                     </div>
