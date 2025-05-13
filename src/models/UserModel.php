@@ -5,34 +5,20 @@ function signUp($firstName, $lastName, $email, $hashedPassword) // a function fo
 {
     global $pdo;
     try {
-        $pdo->beginTransaction();
-
-        // Insert into users table
         $sql = "INSERT INTO users (firstName, lastName, email, password) 
                 VALUES (:firstName, :lastName, :email, :password)";
 
         $stmt = $pdo->prepare($sql);
+
         $stmt->bindParam(':firstName', $firstName);
         $stmt->bindParam(':lastName', $lastName);
         $stmt->bindParam(':email', $email);
         $stmt->bindParam(':password', $hashedPassword);
-        $stmt->execute();
 
-        // Get the new user's ID
-        $userID = $pdo->lastInsertId();
-
-        // Create user_preferences entry
-        $sql = "INSERT INTO user_preferences (user_id) VALUES (:user_id)";
-        $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(':user_id', $userID);
-        $stmt->execute();
-
-        $pdo->commit();
-        return true;
+        return $stmt->execute();
     } catch (PDOException $e) {
-        $pdo->rollBack();
         error_log("Error signing up user: " . $e->getMessage());
-        return false;
+        return false; // can change this to throw a custom exception if needed
     }
 }
 
