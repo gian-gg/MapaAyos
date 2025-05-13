@@ -19,14 +19,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>MapaAyos - Sign Up</title>
     <link rel="shortcut icon" href="/public/img/favicon.png" type="image/png">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="/public/css/root.css">
-    <link rel="stylesheet" href="/public/css/main.css">
-    <link rel="stylesheet" href="/public/css/navbar.css">
-    <link rel="stylesheet" href="/public/css/signinup.css">
+    <link rel="stylesheet" href="/MapaAyos/public/css/root.css">
+    <link rel="stylesheet" href="/MapaAyos/public/css/main.css">
+    <link rel="stylesheet" href="/MapaAyos/public/css/navbar.css">
+    <link rel="stylesheet" href="/MapaAyos/public/css/signinup.css">
 
-    <link rel="stylesheet" href="/public/css/signinup-mobile.css">
+    <link rel="stylesheet" href="/MapaAyos/public/css/signinup-mobile.css">
+    <link rel="stylesheet" href="/MapaAyos/public/css/navbar-mobile.css">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
 </head>
@@ -34,12 +35,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body class="signing-body">
     <!-- header | navbar -->
     <header>
-        <a href="/index.php">
+        <a href="/MapaAyos/index.php">
             <div class="branding">
-                <img src="/public/img/logo.png" alt="MapaAyos">
+                <img src="/MapaAyos/public/img/logo.png" alt="MapaAyos">
                 <div class="brand-title">
                     <h1>MapaAyos</h1>
-                    <p>nisi commodo laborum</p>
+                    <p>Map your concerns, track the change</p>
                 </div>
             </div>
         </a>
@@ -50,19 +51,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </button>
 
         <div class="nav-items d-none d-md-flex">
-            <a href="/index.php#how_it_works">How it Works</a>
-            <a href="/index.php#features">Features</a>
-            <a href="/index.php#about">About</a>
-            <a href="/index.php#contact">Contact</a>
+            <a href="/MapaAyos/index.php#how_it_works">How it Works</a>
+            <a href="/MapaAyos/index.php#features">Features</a>
+            <a href="/MapaAyos/index.php#contact">Contact</a>
         </div>
 
         <div class="btn-group d-none d-md-flex">
             <?php
             if (!isAuthenticated()) {
-                echo '<a class="signin-btn" href="/signin">Sign In</a>';
-                echo '<a class="signup-btn" href="/signup">Sign Up</a>';
+                echo '<a class="signin-btn" href="/MapaAyos/signin">Sign In</a>';
+                echo '<a class="signup-btn" href="/MapaAyos/signup">Sign Up</a>';
             } else {
-                echo '<a class="btn" href="/user/dashboard">Dashboard</a>';
+                echo '<a class="btn" href="/MapaAyos/user/dashboard">Dashboard</a>';
             }
             ?>
         </div>
@@ -84,10 +84,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="mt-3">
                 <?php
                 if (!isAuthenticated()) {
-                    echo '<a class="btn btn-outline-primary w-100 mb-2" href="/signin" data-bs-dismiss="offcanvas">Sign In</a>';
-                    echo '<a class="btn btn-primary w-100" href="/signup" data-bs-dismiss="offcanvas">Sign Up</a>';
+                    echo '<a class="btn btn-outline-primary w-100 mb-2" href="/MapaAyos/signin" data-bs-dismiss="offcanvas">Sign In</a>';
+                    echo '<a class="btn btn-primary w-100" href="/MapaAyos/signup" data-bs-dismiss="offcanvas">Sign Up</a>';
                 } else {
-                    echo '<a class="btn btn-primary w-100" href="/user/dashboard" data-bs-dismiss="offcanvas">Dashboard</a>';
+                    echo '<a class="btn btn-primary w-100" href="/MapaAyos/user/dashboard" data-bs-dismiss="offcanvas">Dashboard</a>';
                 }
                 ?>
             </div>
@@ -97,9 +97,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <main class="signing-main">
         <section class="card">
             <div class="feature-card">
-                <img src="/public/img/feature.png" alt="MapaAyos">
+            <div class="image-wrapper">
+                <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60" fill="none">
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                    d="M59.9111 59.9562H37.6599C32.7331 59.9562 27.7296 60.2851 22.9007 59.141C18.2019 58.0277 13.6719 55.7207 10.0894 52.4725C6.79413 49.4847 4.14302 45.9267 2.3839 41.8321C-3.19568 28.8448 1.30984 13.4452 12.8614 5.3385C16.4727 2.80413 20.6088 1.25205 24.9235 0.445607C28.2092 -0.168513 31.7526 -0.132714 35.0377 0.459613C38.2943 1.0467 41.5181 2.07782 44.4027 3.72299C47.7762 5.64705 50.8164 8.08998 53.258 11.1261C56.7043 15.4116 58.8877 20.5156 59.6546 25.9549C60.2319 30.0494 59.9111 34.3321 59.9111 38.462V59.9562ZM30 20.5989C24.8095 20.5989 20.5955 24.8114 20.5955 30C20.5955 35.1885 24.8095 39.401 30 39.401C35.1904 39.401 39.4044 35.1885 39.4044 30C39.4044 24.8114 35.1904 20.5989 30 20.5989Z"
+                    fill="#F6F8F9" />
+                </svg>
+                <img src="/MapaAyos/public/img/feature.png" alt="MapaAyos">
             </div>
-
+            </div>
+            
             <div class="log-card">
                 <h1>Sign Up</h1>
                 <p>Tuloy po kayo! Please enter your details below.</p>
