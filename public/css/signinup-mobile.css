@@ -34,7 +34,7 @@
     */
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
     /*
     .signing-main {
         padding-top: 3rem;
@@ -63,4 +63,7 @@
         font-size: 1rem;
     }
     */
+    .image-wrapper {
+        display: none:
+    }
 }
