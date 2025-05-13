@@ -1,0 +1,116 @@
+@media (max-width: 1024px) {
+  .hero {
+    width: 90vw;
+    height: 70vh;
+  }
+
+  .hero::before {
+      background-position: left bottom;
+      background-size: contain;
+  }
+
+  .hero-head {
+    width: 70vw;
+  }
+
+  .hero-head h1 {
+    font-size: 2.5rem;
+  }
+
+  .cta-btn {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .sponsors {
+    height: auto;
+    flex-direction: column;
+    padding: 1rem;
+  }
+
+  .hiw, .ftrs, .abt-sec {
+    height: auto;
+    padding: 2rem 0;
+  }
+
+  .arrow {
+    display: none;
+  }
+}
+
+/* small screens (phones) */
+@media (max-width: 600px) {
+  .hero {
+    width: 95vw;
+    height: auto;
+    padding: 2rem 1rem;
+    flex-direction: column;
+  }
+
+  .hero::before {
+      background-position: left bottom;
+      background-size: contain;
+  }
+
+  .hero-head {
+    width: 90vw;
+  }
+
+  .hero-head h1 {
+    font-size: 2rem;
+    text-align: center;
+  }
+
+  .cta-btn {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .btn1, .btn2 {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .sponsors {
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+  }
+
+  .hiw, .ftrs, .abt-sec {
+    width: 95vw;
+    padding: 2rem 1rem;
+  }
+  
+  .arrow {
+    display: none;
+  }
+  
+  .hero {
+    width: 95vw; /* Adjust to full screen width with small margins */
+    max-width: 100%; /* Ensure it doesn't exceed the viewport width */
+    height: auto; /* Allow height to adjust naturally */
+    max-height: none; /* Remove any max-height restriction */
+    margin: 0 auto; /* Center it horizontally */
+    padding: 2rem 1rem; /* Add padding for better spacing */
+    box-sizing: border-box; /* Include padding in total width calculation */
+    flex-direction: column; /* Stack contents vertically if needed */
+  }
+}
+
+
+
+@media (max-width: 600px) {
+  .hero,
+  .hero-head,
+  .hiw,
+  .ftrs,
+  .abt-sec,
+  .sponsors {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+}
