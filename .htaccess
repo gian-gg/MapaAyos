@@ -1,5 +1,4 @@
 RewriteEngine On
-RewriteBase /MapaAyos/
 
 Options -Indexes
 
@@ -8,8 +7,8 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 
 # Custom 404 page
-ErrorDocument 404 /MapaAyos/src/views/404.php
-ErrorDocument 403 /MapaAyos/src/views/404.php
+ErrorDocument 404 /src/views/404.php
+ErrorDocument 403 /src/views/404.php
 
 # Block direct access to backend folders
 RewriteCond %{REQUEST_URI} ^/(config|database|src) [NC]

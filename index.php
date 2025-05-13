@@ -16,18 +16,18 @@ $user = findUserByID($userID) ?? null;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MapaAyos</title>
-    <link rel="shortcut icon" href="/MapaAyos/public/img/favicon.png" type="image/png">
+    <link rel="shortcut icon" href="/public/img/favicon.png" type="image/png">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="/MapaAyos/public/css/root.css">
-    <link rel="stylesheet" href="/MapaAyos/public/css/main.css">
-    <link rel="stylesheet" href="/MapaAyos/public/css/landing.css">
+    <link rel="stylesheet" href="/public/css/root.css">
+    <link rel="stylesheet" href="/public/css/main.css">
+    <link rel="stylesheet" href="/public/css/landing.css">
 
-    <link rel="stylesheet" href="/MapaAyos/public/css/footer.css">
-    <link rel="stylesheet" href="/MapaAyos/public/css/navbar.css">
-    <link rel="stylesheet" href="/MapaAyos/public/css/navbar-mobile.css">
-    <link rel="stylesheet" href="/MapaAyos/public/css/footer-mobile.css">
+    <link rel="stylesheet" href="/public/css/footer.css">
+    <link rel="stylesheet" href="/public/css/navbar.css">
+    <link rel="stylesheet" href="/public/css/navbar-mobile.css">
+    <link rel="stylesheet" href="/public/css/footer-mobile.css">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
@@ -37,9 +37,9 @@ $user = findUserByID($userID) ?? null;
 <body>
     <!-- header | navbar -->
     <header>
-        <a href="/MapaAyos/">
+        <a href="/">
             <div class=" branding">
-                <img src="/MapaAyos/public/img/logo.png" alt="MapaAyos">
+                <img src="/public/img/logo.png" alt="MapaAyos">
                 <div class="brand-title">
                     <h1>MapaAyos</h1>
                     <p>nisi commodo laborum</p>
@@ -63,13 +63,13 @@ $user = findUserByID($userID) ?? null;
             <?php
             if (isAuthenticated()) {
                 if ($user['role'] == 'admin' || $user['role'] == 'official') {
-                    echo '<a class="signup-btn" href="/MapaAyos/' . $user['role'] . '/dashboard">Dashboard</a>';
+                    echo '<a class="signup-btn" href="/' . $user['role'] . '/dashboard">Dashboard</a>';
                 } else {
-                    echo '<a class="signup-btn" href="/MapaAyos/mapa">Mapa</a>';
+                    echo '<a class="signup-btn" href="/mapa">Mapa</a>';
                 }
             } else {
-                echo '<a class="signin-btn" href="/MapaAyos/signin">Sign In</a>';
-                echo '<a class="signup-btn" href="/MapaAyos/signup">Sign Up</a>';
+                echo '<a class="signin-btn" href="/signin">Sign In</a>';
+                echo '<a class="signup-btn" href="/signup">Sign Up</a>';
             }
             ?>
         </div>
@@ -91,10 +91,10 @@ $user = findUserByID($userID) ?? null;
             <div class="mt-3">
                 <?php
                 if (isAuthenticated()) {
-                    echo '<a class="signup-btn" href="/MapaAyos/mapa">Mapa</a>';
+                    echo '<a class="signup-btn" href="/mapa">Mapa</a>';
                 } else {
-                    echo '<a class="signin-btn" href="/MapaAyos/signin">Sign In</a>';
-                    echo '<a class="signup-btn" href="/MapaAyos/signup">Sign Up</a>';
+                    echo '<a class="signin-btn" href="/signin">Sign In</a>';
+                    echo '<a class="signup-btn" href="/signup">Sign Up</a>';
                 }
                 ?>
             </div>
@@ -113,11 +113,11 @@ $user = findUserByID($userID) ?? null;
                 <div class="cta-btn">
                     <?php
                     if (isAuthenticated()) {
-                        echo '<a class="btn1" href="/MapaAyos/#how_it_works">How it Works</a>';
-                        echo '<a class="btn2" href="/MapaAyos/mapa">Mapa</a>';
+                        echo '<a class="btn1" href="/#how_it_works">How it Works</a>';
+                        echo '<a class="btn2" href="/mapa">Mapa</a>';
                     } else {
-                        echo '<a class="btn1" href="/MapaAyos/signup">Mag-Report Na</a>';
-                        echo '<a class="btn2" href="/MapaAyos/mapa">Mapa</a>';
+                        echo '<a class="btn1" href="/signup">Mag-Report Na</a>';
+                        echo '<a class="btn2" href="/mapa">Mapa</a>';
                     }
                     ?>
 
@@ -127,13 +127,13 @@ $user = findUserByID($userID) ?? null;
 
         <!--placeholders for partners logo-->
         <section class="partners_logo">
-            <img src="/MapaAyos/public/img/usc.png" alt="USC Logo">
-            <img src="/MapaAyos/public/img/deped.png" alt="DepEd Logo">
-            <img src="/MapaAyos/public/img/dost.png" alt="DOST Logo">
+            <img src="/public/img/usc.png" alt="USC Logo">
+            <img src="/public/img/deped.png" alt="DepEd Logo">
+            <img src="/public/img/dost.png" alt="DOST Logo">
 
-            <img src="/MapaAyos/public/img/usc.png" alt="USC Logo">
-            <img src="/MapaAyos/public/img/deped.png" alt="DepEd Logo">
-            <img src="/MapaAyos/public/img/dost.png" alt="DOST Logo">
+            <img src="/public/img/usc.png" alt="USC Logo">
+            <img src="/public/img/deped.png" alt="DepEd Logo">
+            <img src="/public/img/dost.png" alt="DOST Logo">
         </section>
 
         <!-- how it works section -->

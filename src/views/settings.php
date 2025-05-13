@@ -66,16 +66,16 @@ if (isset($_POST['update_info'])) {
 if (!empty($_POST['cropped_image_data'])) {
     $data = $_POST['cropped_image_data'];
     $uploadError = '';
-    
+
     if (preg_match('/^data:image\/(png|jpeg);base64,/', $data)) {
         $data = substr($data, strpos($data, ',') + 1);
         $data = base64_decode($data);
-        
+
         // Define the upload directory and file path
         $uploadDir = __DIR__ . '/../../public/uploads/pfp/';
         $fileName = $userID . '.png';
         $filePath = $uploadDir . $fileName;
-        
+
         // Ensure upload directory exists
         if (!file_exists($uploadDir)) {
             if (!mkdir($uploadDir, 0777, true)) {
@@ -83,7 +83,7 @@ if (!empty($_POST['cropped_image_data'])) {
                 error_log("Failed to create directory: " . $uploadDir);
             }
         }
-        
+
         if (empty($uploadError)) {
             // Save the new profile picture
             if (file_put_contents($filePath, $data)) {
@@ -92,7 +92,7 @@ if (!empty($_POST['cropped_image_data'])) {
                     // Update hasProfilePic in users table
                     $stmt = $pdo->prepare("UPDATE users SET hasProfilePic = 1 WHERE id = ?");
                     $stmt->execute([$userID]);
-                    
+
                     // Refresh user data
                     $user = findUserByID($userID);
                 } catch (PDOException $e) {
@@ -113,7 +113,7 @@ if (isset($_POST['logout'])) {
     handleSignOut();
 }
 
-$profileImg = $user['hasProfilePic'] ? '/MapaAyos/public/uploads/pfp/' . $userID . '.png' : '/MapaAyos/public/img/default-profile.png';
+$profileImg = $user['hasProfilePic'] ? '/public/uploads/pfp/' . $userID . '.png' : '/public/img/default-profile.png';
 
 ?>
 <!DOCTYPE html>
@@ -123,7 +123,7 @@ $profileImg = $user['hasProfilePic'] ? '/MapaAyos/public/uploads/pfp/' . $userID
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MapaAyos - Settings</title>
-    <link rel="shortcut icon" href="/MapaAyos/public/img/favicon.png" type="image/png">
+    <link rel="shortcut icon" href="/public/img/favicon.png" type="image/png">
 
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
@@ -135,14 +135,14 @@ $profileImg = $user['hasProfilePic'] ? '/MapaAyos/public/uploads/pfp/' . $userID
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
     <!-- Project CSS -->
-    <link rel="stylesheet" href="/MapaAyos/public/css/root.css">
-    <link rel="stylesheet" href="/MapaAyos/public/css/main.css">
-    <link rel="stylesheet" href="/MapaAyos/public/css/dashboard.css">
-    <link rel="stylesheet" href="/MapaAyos/public/css/mapa-init.css">
-    <link rel="stylesheet" href="/MapaAyos/public/css/header.css">
-    <link rel="stylesheet" href="/MapaAyos/public/css/sidebar.css">
-    <link rel="stylesheet" href="/MapaAyos/public/css/settings.css">
-    
+    <link rel="stylesheet" href="/public/css/root.css">
+    <link rel="stylesheet" href="/public/css/main.css">
+    <link rel="stylesheet" href="/public/css/dashboard.css">
+    <link rel="stylesheet" href="/public/css/mapa-init.css">
+    <link rel="stylesheet" href="/public/css/header.css">
+    <link rel="stylesheet" href="/public/css/sidebar.css">
+    <link rel="stylesheet" href="/public/css/settings.css">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css">
 </head>
 
@@ -257,9 +257,9 @@ $profileImg = $user['hasProfilePic'] ? '/MapaAyos/public/uploads/pfp/' . $userID
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="/MapaAyos/public/js/sidebar.js"></script>
+    <script src="/public/js/sidebar.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
-    <script src="/MapaAyos/public/js/settings.js"></script>
+    <script src="/public/js/settings.js"></script>
 </body>
 
 </html>

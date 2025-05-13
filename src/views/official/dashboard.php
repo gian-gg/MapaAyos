@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MapaAyos - Officials Dashboard</title>
-    <link rel="shortcut icon" href="/MapaAyos/public/img/favicon.png" type="image/png">
+    <link rel="shortcut icon" href="/public/img/favicon.png" type="image/png">
 
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
@@ -56,14 +56,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
     <!-- Project CSS -->
-    <link rel="stylesheet" href="/MapaAyos/public/css/root.css">
-    <link rel="stylesheet" href="/MapaAyos/public/css/main.css">
-    <link rel="stylesheet" href="/MapaAyos/public/css/dashboard.css">
-    <link rel="stylesheet" href="/MapaAyos/public/css/mapa-init.css">
-    <link rel="stylesheet" href="/MapaAyos/public/css/sidebar.css">
-    <link rel="stylesheet" href="/MapaAyos/public/css/header.css">
-    <link rel="stylesheet" href="/MapaAyos/public/css/baranggay.css">
-    <link rel="stylesheet" href="/MapaAyos/public/css/official-dashboard.css">
+    <link rel="stylesheet" href="/public/css/root.css">
+    <link rel="stylesheet" href="/public/css/main.css">
+    <link rel="stylesheet" href="/public/css/dashboard.css">
+    <link rel="stylesheet" href="/public/css/mapa-init.css">
+    <link rel="stylesheet" href="/public/css/sidebar.css">
+    <link rel="stylesheet" href="/public/css/header.css">
+    <link rel="stylesheet" href="/public/css/baranggay.css">
+    <link rel="stylesheet" href="/public/css/official-dashboard.css">
 </head>
 
 <body>
@@ -146,8 +146,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     $reportID = htmlspecialchars($report['id'], ENT_QUOTES, 'UTF-8');
                                     $statusClass = '';
                                     $statusIcon = '';
-                                    
-                                    switch($report['status']) {
+
+                                    switch ($report['status']) {
                                         case 'pending':
                                             $statusClass = 'text-warning';
                                             $statusIcon = 'hourglass-split';
@@ -164,7 +164,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                             $statusClass = 'text-primary';
                                             $statusIcon = 'circle';
                                     }
-                                    
+
                                     echo "<tr class='report-row' id='report-{$reportID}' onclick=\"displayReport('{$reportID}')\">";
                                     echo "<td><small class='text-muted'>#</small>{$report['id']}</td>";
                                     echo "<td>{$report['title']}</td>";
@@ -208,8 +208,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-    <script src="/MapaAyos/src/scripts/mapa-init.js"></script>
-    <script type="module" src="/MapaAyos/src/scripts/officer-mapa.js"></script>
+    <script src="/src/scripts/mapa-init.js"></script>
+    <script type="module" src="/src/scripts/officer-mapa.js"></script>
 
 
 </body>

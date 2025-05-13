@@ -2,7 +2,7 @@ import { fetchAPI } from "./utils/api-utils.js";
 
 function displayUser(userID) {
   const userInfoElement = document.getElementById("user-information");
-  
+
   // Add loading state
   userInfoElement.style.display = "block";
   userInfoElement.innerHTML = `
@@ -13,34 +13,35 @@ function displayUser(userID) {
     </div>
   `;
 
-  fetchAPI(
-    "http://localhost/MapaAyos/api/user?mode=getUserByID&userID=" + userID
-  ).then((data) => {
-    const user = data.data;
-    if (!user) {
-      userInfoElement.innerHTML = `
+  fetchAPI("http:/.dcism.org/api/user?mode=getUserByID&userID=" + userID).then(
+    (data) => {
+      const user = data.data;
+      if (!user) {
+        userInfoElement.innerHTML = `
         <div class="text-center text-danger">
           <i class="bi bi-exclamation-circle"></i>
           <p>User not found</p>
         </div>
       `;
-      return;
-    }
+        return;
+      }
 
-    document.querySelectorAll(".user-row").forEach((row) => {
-      row.classList.remove("active");
-    });
-    document.getElementById("user-" + userID).classList.add("active");
+      document.querySelectorAll(".user-row").forEach((row) => {
+        row.classList.remove("active");
+      });
+      document.getElementById("user-" + userID).classList.add("active");
 
-    let userElement = `
+      let userElement = `
       <div class="user-info-header">
-        <img src="/MapaAyos/public/uploads/pfp/${
+        <img src="/public/uploads/pfp/${
           user["hasProfilePic"] ? userID : "default"
         }.png" alt="Profile Image" />
         <div class="user-info-title">
           <h3>${user["firstName"]} ${user["lastName"]}</h3>
           <p><i class="bi bi-envelope"></i> ${user["email"]}</p>
-          <span class="role-badge ${user["role"].toLowerCase()}">${user["role"]}</span>
+          <span class="role-badge ${user["role"].toLowerCase()}">${
+        user["role"]
+      }</span>
         </div>
       </div>
 
@@ -70,28 +71,32 @@ function displayUser(userID) {
       </form>
     `;
 
-    userInfoElement.innerHTML = userElement;
-    userInfoElement.classList.add("visible");
+      userInfoElement.innerHTML = userElement;
+      userInfoElement.classList.add("visible");
 
-    // Attach change event listener after rendering
-    const updateRoleSelect = document.getElementById("update-role");
-    const barangayContainer = document.getElementById("barangay-select-container");
+      // Attach change event listener after rendering
+      const updateRoleSelect = document.getElementById("update-role");
+      const barangayContainer = document.getElementById(
+        "barangay-select-container"
+      );
 
-    updateRoleSelect.addEventListener("change", () => {
-      if (updateRoleSelect.value === "official") {
-        barangayContainer.innerHTML = `
+      updateRoleSelect.addEventListener("change", () => {
+        if (updateRoleSelect.value === "official") {
+          barangayContainer.innerHTML = `
           <div class="text-center my-3">
             <div class="spinner-border spinner-border-sm text-primary" role="status">
               <span class="visually-hidden">Loading...</span>
             </div>
           </div>
         `;
-        
-        fetchAPI("http://localhost/MapaAyos/api/baranggay?mode=getAllBaranggays")
-          .then((response) => {
-            const barangays = response.data;
-            if (barangays && barangays.length > 0) {
-              barangayContainer.innerHTML = `
+
+          fetchAPI(
+            "http://mapaayos.dcism.org/api/baranggay?mode=getAllBaranggays"
+          )
+            .then((response) => {
+              const barangays = response.data;
+              if (barangays && barangays.length > 0) {
+                barangayContainer.innerHTML = `
                 <div class="form-group">
                   <label for="baranggay">
                     <i class="bi bi-geo-alt"></i> Assign Barangay
@@ -107,29 +112,30 @@ function displayUser(userID) {
                   </select>
                 </div>
               `;
-            } else {
-              barangayContainer.innerHTML = `
+              } else {
+                barangayContainer.innerHTML = `
                 <p class="text-warning">
                   <i class="bi bi-exclamation-triangle"></i>
                   No barangays available.
                 </p>
               `;
-            }
-          })
-          .catch((error) => {
-            console.error("Error fetching barangays:", error);
-            barangayContainer.innerHTML = `
+              }
+            })
+            .catch((error) => {
+              console.error("Error fetching barangays:", error);
+              barangayContainer.innerHTML = `
               <p class="text-danger">
                 <i class="bi bi-exclamation-circle"></i>
                 Error loading barangays.
               </p>
             `;
-          });
-      } else {
-        barangayContainer.innerHTML = ""; // Clear it if another role is selected
-      }
-    });
-  });
+            });
+        } else {
+          barangayContainer.innerHTML = ""; // Clear it if another role is selected
+        }
+      });
+    }
+  );
 }
 
 window.displayUser = displayUser;

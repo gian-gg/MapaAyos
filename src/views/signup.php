@@ -17,16 +17,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MapaAyos - Sign Up</title>
-    <link rel="shortcut icon" href="/MapaAyos/public/img/favicon.png" type="image/png">
+    <link rel="shortcut icon" href="/public/img/favicon.png" type="image/png">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="/MapaAyos/public/css/root.css">
-    <link rel="stylesheet" href="/MapaAyos/public/css/main.css">
-    <link rel="stylesheet" href="/MapaAyos/public/css/navbar.css">
-    <link rel="stylesheet" href="/MapaAyos/public/css/signinup.css">
+    <link rel="stylesheet" href="/public/css/root.css">
+    <link rel="stylesheet" href="/public/css/main.css">
+    <link rel="stylesheet" href="/public/css/navbar.css">
+    <link rel="stylesheet" href="/public/css/signinup.css">
 
-    <link rel="stylesheet" href="/MapaAyos/public/css/signinup-mobile.css">
+    <link rel="stylesheet" href="/public/css/signinup-mobile.css">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
 </head>
@@ -34,9 +34,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body class="signing-body">
     <!-- header | navbar -->
     <header>
-        <a href="/MapaAyos/index.php">
+        <a href="/index.php">
             <div class="branding">
-                <img src="/MapaAyos/public/img/logo.png" alt="MapaAyos">
+                <img src="/public/img/logo.png" alt="MapaAyos">
                 <div class="brand-title">
                     <h1>MapaAyos</h1>
                     <p>nisi commodo laborum</p>
@@ -50,19 +50,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </button>
 
         <div class="nav-items d-none d-md-flex">
-            <a href="/MapaAyos/index.php#how_it_works">How it Works</a>
-            <a href="/MapaAyos/index.php#features">Features</a>
-            <a href="/MapaAyos/index.php#about">About</a>
-            <a href="/MapaAyos/index.php#contact">Contact</a>
+            <a href="/index.php#how_it_works">How it Works</a>
+            <a href="/index.php#features">Features</a>
+            <a href="/index.php#about">About</a>
+            <a href="/index.php#contact">Contact</a>
         </div>
 
         <div class="btn-group d-none d-md-flex">
             <?php
             if (!isAuthenticated()) {
-                echo '<a class="signin-btn" href="/MapaAyos/signin">Sign In</a>';
-                echo '<a class="signup-btn" href="/MapaAyos/signup">Sign Up</a>';
+                echo '<a class="signin-btn" href="/signin">Sign In</a>';
+                echo '<a class="signup-btn" href="/signup">Sign Up</a>';
             } else {
-                echo '<a class="btn" href="/MapaAyos/user/dashboard">Dashboard</a>';
+                echo '<a class="btn" href="/user/dashboard">Dashboard</a>';
             }
             ?>
         </div>
@@ -84,10 +84,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="mt-3">
                 <?php
                 if (!isAuthenticated()) {
-                    echo '<a class="btn btn-outline-primary w-100 mb-2" href="/MapaAyos/signin" data-bs-dismiss="offcanvas">Sign In</a>';
-                    echo '<a class="btn btn-primary w-100" href="/MapaAyos/signup" data-bs-dismiss="offcanvas">Sign Up</a>';
+                    echo '<a class="btn btn-outline-primary w-100 mb-2" href="/signin" data-bs-dismiss="offcanvas">Sign In</a>';
+                    echo '<a class="btn btn-primary w-100" href="/signup" data-bs-dismiss="offcanvas">Sign Up</a>';
                 } else {
-                    echo '<a class="btn btn-primary w-100" href="/MapaAyos/user/dashboard" data-bs-dismiss="offcanvas">Dashboard</a>';
+                    echo '<a class="btn btn-primary w-100" href="/user/dashboard" data-bs-dismiss="offcanvas">Dashboard</a>';
                 }
                 ?>
             </div>
@@ -97,7 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <main class="signing-main">
         <section class="card">
             <div class="feature-card">
-                <img src="/MapaAyos/public/img/feature.png" alt="MapaAyos">
+                <img src="/public/img/feature.png" alt="MapaAyos">
             </div>
 
             <div class="log-card">
@@ -123,21 +123,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </div>
                     <br>
                     <?php
-                if (isset($_GET['error'])) {
-                    echo '<div class="text-center message error-message">' . htmlspecialchars($_GET['error']) . '</div>';
-                }
-                if (isset($_GET['success'])) {
-                    echo '<div class="text-center message success-message">' . htmlspecialchars($_GET['success']) . '</div>';
-                }
-                ?>
+                    if (isset($_GET['error'])) {
+                        echo '<div class="text-center message error-message">' . htmlspecialchars($_GET['error']) . '</div>';
+                    }
+                    if (isset($_GET['success'])) {
+                        echo '<div class="text-center message success-message">' . htmlspecialchars($_GET['success']) . '</div>';
+                    }
+                    ?>
                     <button class="btn" type="submit">Sign Up</button>
                 </form>
-                <p>May account ka na? <a href="/MapaAyos/signin">Sign in here</a></p>
+                <p>May account ka na? <a href="/signin">Sign in here</a></p>
             </div>
         </section>
     </main>
 
-    <script src="/MapaAyos/public/js/password.js"></script>
+    <script src="/public/js/password.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
 </body>
 

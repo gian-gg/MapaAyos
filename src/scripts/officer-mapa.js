@@ -8,7 +8,7 @@ let currentBaranggayPolygon = null;
 let currentReportID = null;
 
 fetchAPI(
-  "http://localhost/MapaAyos/api/baranggay?mode=getBaranggayByName&baranggay=" +
+  "http://localhost/api/baranggay?mode=getBaranggayByName&baranggay=" +
     currentBaranggay
 ).then((data) => {
   currentBaranggayCoords = JSON.parse(data.data[0].geojson)["coordinates"];
@@ -38,8 +38,7 @@ function displayReport(reportID) {
   `;
 
   fetchAPI(
-    "http://localhost/MapaAyos/api/reports?mode=getReportByID&reportID=" +
-      reportID
+    "http://localhost/api/reports?mode=getReportByID&reportID=" + reportID
   ).then((data) => {
     const report = data.report;
 
@@ -78,7 +77,7 @@ function displayReport(reportID) {
 
     let reportElement = `
       <div class="position-relative">
-        <img src="/MapaAyos/public/uploads/reports/${
+        <img src="/public/uploads/reports/${
           report["imagePath"]
         }" alt="Report Image" class="report-image" />
         <div class="position-absolute bottom-0 start-0 p-2 m-2 bg-white rounded-pill ${statusClass}">
@@ -160,7 +159,7 @@ function displayReport(reportID) {
     const marker = L.marker([report.lat, report.lng]).addTo(map);
     marker.setIcon(
       L.icon({
-        iconUrl: "/MapaAyos/public/img/pins/default.png",
+        iconUrl: "/public/img/pins/default.png",
         iconSize: [24, 32],
         iconAnchor: [12, 12],
       })

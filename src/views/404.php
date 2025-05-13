@@ -5,12 +5,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>MapaAyos - 404 Not Found</title>
-    <link rel="shortcut icon" href="/MapaAyos/public/img/favicon.png" type="image/png">
+    <link rel="shortcut icon" href="/public/img/favicon.png" type="image/png">
 
-    <link rel="stylesheet" href="/MapaAyos/public/css/root.css" />
-    <link rel="stylesheet" href="/MapaAyos/public/css/main.css" />
-    <link rel="stylesheet" href="/MapaAyos/public/css/landing.css" />
-    <link rel="stylesheet" href="/MapaAyos/public/css/404.css" />
+    <link rel="stylesheet" href="/public/css/root.css" />
+    <link rel="stylesheet" href="/public/css/main.css" />
+    <link rel="stylesheet" href="/public/css/landing.css" />
+    <link rel="stylesheet" href="/public/css/404.css" />
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
 </head>
@@ -26,7 +26,7 @@
                     Oops! The page you’re looking for isn’t here. It might have been moved, deleted, or never existed.
                     Balik na lang tayo sa dashboard para ayos ulit ang lahat.
                 </p>
-                <a href="/MapaAyos/" class="ma-btn">
+                <a href="/" class="ma-btn">
                     <i class="bi bi-chevron-left"></i> | <p>Balik sa Dashboard</p>
                 </a>
             </div>
