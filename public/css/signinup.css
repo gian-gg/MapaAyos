@@ -160,3 +160,24 @@ main.signing-main {
     align-self: flex-start;
     margin-bottom: 2vh;
 }
+
+.message {
+    padding: 8px 12px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    text-align: center;
+    width: 100%;
+    font-size: 0.8rem;
+}
+
+.error-message {
+    background-color: #fff2f2;
+    color: #dc3545;
+    border: 1px solid #ffcdd2;
+}
+
+.success-message {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    border: 1px solid #c8e6c9;
+}

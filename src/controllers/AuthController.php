@@ -11,34 +11,34 @@ function handleSignUp($firstName, $lastName, $email, $password)
 
     // Validation of Data
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        echo "Invalid email format";
-        return;
+        header("Location: /MapaAyos/signup?error=" . urlencode("Invalid email format"));
+        exit();
     }
 
     if (strlen($firstName) < 2 || strlen($lastName) < 2) {
-        echo "First and Last name must be at least 2 characters.";
-        return;
+        header("Location: /MapaAyos/signup?error=" . urlencode("First and Last name must be at least 2 characters"));
+        exit();
     }
 
     if (strlen($password) < 6) {
-        echo "Password must be at least 6 characters.";
-        return;
+        header("Location: /MapaAyos/signup?error=" . urlencode("Password must be at least 6 characters"));
+        exit();
     }
 
     // Hash the password
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
     if (findUserByEmail($email)) {
-        echo "Email already exists.";
-        return;
+        header("Location: /MapaAyos/signup?error=" . urlencode("Email already exists"));
+        exit();
     }
 
     if (signUp($firstName, $lastName, $email, $hashedPassword)) {
-        echo "User registered successfully.";
-        header("Location: /MapaAyos/signin"); // Redirect to sign-in page
+        header("Location: /MapaAyos/signin?success=" . urlencode("User registered successfully"));
         exit();
     } else {
-        echo "Error signing up. Please try again.";
+        header("Location: /MapaAyos/signup?error=" . urlencode("Error signing up. Please try again"));
+        exit();
     }
 }
 
@@ -49,13 +49,13 @@ function handleSignIn($email, $password)
 
     // Validation of Data
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        echo "Invalid email format";
-        return;
+        header("Location: /MapaAyos/signin?error=" . urlencode("Invalid email format"));
+        exit();
     }
 
     if (strlen($password) < 4) {
-        echo "Password must be at least 4 characters.";
-        return;
+        header("Location: /MapaAyos/signin?error=" . urlencode("Password must be at least 4 characters"));
+        exit();
     }
 
     $user = findUserByEmail($email);
@@ -71,7 +71,8 @@ function handleSignIn($email, $password)
         }
         exit();
     } else {
-        echo "Invalid email or password.";
+        header("Location: /MapaAyos/signin?error=" . urlencode("Invalid email or password"));
+        exit();
     }
 }
 

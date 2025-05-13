@@ -122,6 +122,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </span>
                     </div>
                     <br>
+                    <?php
+                if (isset($_GET['error'])) {
+                    echo '<div class="text-center message error-message">' . htmlspecialchars($_GET['error']) . '</div>';
+                }
+                if (isset($_GET['success'])) {
+                    echo '<div class="text-center message success-message">' . htmlspecialchars($_GET['success']) . '</div>';
+                }
+                ?>
                     <button class="btn" type="submit">Sign Up</button>
                 </form>
                 <p>May account ka na? <a href="/MapaAyos/signin">Sign in here</a></p>
