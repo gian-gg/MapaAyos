@@ -1,6 +1,6 @@
 <?php
 $servername = "localhost";
-$username = "root";
+$username = "s24100907_mapaayosDB";
 $password = "mapaayos123";
 $dbname = "s24100907_mapaayosDB";
 
