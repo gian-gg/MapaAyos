@@ -8,7 +8,7 @@ let currentBaranggayPolygon = null;
 let currentReportID = null;
 
 fetchAPI(
-  "http://localhost/api/baranggay?mode=getBaranggayByName&baranggay=" +
+  "https://localhost/api/baranggay?mode=getBaranggayByName&baranggay=" +
     currentBaranggay
 ).then((data) => {
   currentBaranggayCoords = JSON.parse(data.data[0].geojson)["coordinates"];
@@ -38,7 +38,7 @@ function displayReport(reportID) {
   `;
 
   fetchAPI(
-    "http://localhost/api/reports?mode=getReportByID&reportID=" + reportID
+    "https://localhost/api/reports?mode=getReportByID&reportID=" + reportID
   ).then((data) => {
     const report = data.report;
 

@@ -13,7 +13,7 @@ function displayUser(userID) {
     </div>
   `;
 
-  fetchAPI("http:/.dcism.org/api/user?mode=getUserByID&userID=" + userID).then(
+  fetchAPI("https:/.dcism.org/api/user?mode=getUserByID&userID=" + userID).then(
     (data) => {
       const user = data.data;
       if (!user) {
@@ -91,7 +91,7 @@ function displayUser(userID) {
         `;
 
           fetchAPI(
-            "http://mapaayos.dcism.org/api/baranggay?mode=getAllBaranggays"
+            "https://mapaayos.dcism.org/api/baranggay?mode=getAllBaranggays"
           )
             .then((response) => {
               const barangays = response.data;

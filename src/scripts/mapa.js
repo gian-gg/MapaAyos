@@ -42,7 +42,7 @@ baranggaySelect.addEventListener("change", (e) => {
   infoContainer.classList.remove("hidden");
 
   fetchAPI(
-    "http://mapaayos.dcism.org/api/baranggay?mode=getBaranggayByName&baranggay=" +
+    "https://mapaayos.dcism.org/api/baranggay?mode=getBaranggayByName&baranggay=" +
       selectedBaranggay
   ).then((data) => {
     currentBaranggayCoords = JSON.parse(data.data[0].geojson)["coordinates"];
@@ -75,7 +75,7 @@ baranggaySelect.addEventListener("change", (e) => {
 });
 
 displayReports(
-  "http://mapaayos.dcism.org/api/reports?mode=getReports&status=active",
+  "https://mapaayos.dcism.org/api/reports?mode=getReports&status=active",
   infoContainer
 );
 
@@ -86,22 +86,22 @@ if (selectFilterInput) {
 
     if (selectedFilter === "all-active") {
       displayReports(
-        "http://mapaayos.dcism.org/api/reports?mode=getReports&status=active",
+        "https://mapaayos.dcism.org/api/reports?mode=getReports&status=active",
         infoContainer
       );
     } else if (selectedFilter === "my-reports") {
       displayReports(
-        `http://mapaayos.dcism.org/api/reports?mode=getReportsByUserID&userID=${currentUser}&status=all`,
+        `https://mapaayos.dcism.org/api/reports?mode=getReportsByUserID&userID=${currentUser}&status=all`,
         infoContainer
       );
     } else if (selectedFilter === "my-pending") {
       displayReports(
-        `http://mapaayos.dcism.org/api/reports?mode=getReportsByUserID&userID=${currentUser}&status=pending`,
+        `https://mapaayos.dcism.org/api/reports?mode=getReportsByUserID&userID=${currentUser}&status=pending`,
         infoContainer
       );
     } else if (selectedFilter === "my-active") {
       displayReports(
-        `http://mapaayos.dcism.org/api/reports?mode=getReportsByUserID&userID=${currentUser}&status=active`,
+        `https://mapaayos.dcism.org/api/reports?mode=getReportsByUserID&userID=${currentUser}&status=active`,
         infoContainer
       );
     }
