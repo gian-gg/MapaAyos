@@ -8,7 +8,7 @@ let currentBaranggayPolygon = null;
 let currentReportID = null;
 
 fetchAPI(
-  "https://localhost/api/baranggay?mode=getBaranggayByName&baranggay=" +
+  "https://mapaayos.dcism.org/api/baranggay?mode=getBaranggayByName&baranggay=" +
     currentBaranggay
 ).then((data) => {
   currentBaranggayCoords = JSON.parse(data.data[0].geojson)["coordinates"];
@@ -38,7 +38,8 @@ function displayReport(reportID) {
   `;
 
   fetchAPI(
-    "https://localhost/api/reports?mode=getReportByID&reportID=" + reportID
+    "https://mapaayos.dcism.org/api/reports?mode=getReportByID&reportID=" +
+      reportID
   ).then((data) => {
     const report = data.report;
 
