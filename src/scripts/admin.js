@@ -14,7 +14,7 @@ function displayUser(userID) {
   `;
 
   fetchAPI(
-    "https://mapaayos.dcism.org/api/user?mode=getUserByID&userID=" + userID
+    "http://localhost/MapaAyos/api/user?mode=getUserByID&userID=" + userID
   ).then((data) => {
     const user = data.data;
     if (!user) {
@@ -34,7 +34,7 @@ function displayUser(userID) {
 
     let userElement = `
       <div class="user-info-header">
-        <img src="/public/uploads/pfp/${
+        <img src="/MapaAyos/public/uploads/pfp/${
           user["hasProfilePic"] ? userID : "default"
         }.png" alt="Profile Image" />
         <div class="user-info-title">
@@ -92,7 +92,7 @@ function displayUser(userID) {
         `;
 
         fetchAPI(
-          "https://mapaayos.dcism.org/api/baranggay?mode=getAllBaranggays"
+          "http://localhost/MapaAyos/api/baranggay?mode=getAllBaranggays"
         )
           .then((response) => {
             const barangays = response.data;

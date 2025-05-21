@@ -42,13 +42,13 @@ baranggaySelect.addEventListener("change", (e) => {
   infoContainer.classList.remove("hidden");
 
   fetchAPI(
-    "https://mapaayos.dcism.org/api/baranggay?mode=getBaranggayByName&baranggay=" +
+    "http://localhost/MapaAyos/api/baranggay?mode=getBaranggayByName&baranggay=" +
       selectedBaranggay
   ).then((data) => {
     currentBaranggayCoords = JSON.parse(data.data[0].geojson)["coordinates"];
 
     infoContainer.innerHTML = `
-    <img src="/public/img/baranggays/${
+    <img src="/MapaAyos/public/img/baranggays/${
       data.data[0].name
     }.jpg" class="card-img-top" alt="Report Image" />
     <div class="card-body text-center">
@@ -75,7 +75,7 @@ baranggaySelect.addEventListener("change", (e) => {
 });
 
 displayReports(
-  "https://mapaayos.dcism.org/api/reports?mode=getReports&status=active",
+  "http://localhost/MapaAyos/api/reports?mode=getReports&status=active",
   infoContainer
 );
 
@@ -86,22 +86,22 @@ if (selectFilterInput) {
 
     if (selectedFilter === "all-active") {
       displayReports(
-        "https://mapaayos.dcism.org/api/reports?mode=getReports&status=active",
+        "http://localhost/MapaAyos/api/reports?mode=getReports&status=active",
         infoContainer
       );
     } else if (selectedFilter === "my-reports") {
       displayReports(
-        `https://mapaayos.dcism.org/api/reports?mode=getReportsByUserID&userID=${currentUser}&status=all`,
+        `http://localhost/MapaAyos/api/reports?mode=getReportsByUserID&userID=${currentUser}&status=all`,
         infoContainer
       );
     } else if (selectedFilter === "my-pending") {
       displayReports(
-        `https://mapaayos.dcism.org/api/reports?mode=getReportsByUserID&userID=${currentUser}&status=pending`,
+        `http://localhost/MapaAyos/api/reports?mode=getReportsByUserID&userID=${currentUser}&status=pending`,
         infoContainer
       );
     } else if (selectedFilter === "my-active") {
       displayReports(
-        `https://mapaayos.dcism.org/api/reports?mode=getReportsByUserID&userID=${currentUser}&status=active`,
+        `http://localhost/MapaAyos/api/reports?mode=getReportsByUserID&userID=${currentUser}&status=active`,
         infoContainer
       );
     }

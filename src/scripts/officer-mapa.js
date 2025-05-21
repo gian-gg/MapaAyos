@@ -8,7 +8,7 @@ let currentBaranggayPolygon = null;
 let currentReportID = null;
 
 fetchAPI(
-  "https://mapaayos.dcism.org/api/baranggay?mode=getBaranggayByName&baranggay=" +
+  "http://localhost/MapaAyos/api/baranggay?mode=getBaranggayByName&baranggay=" +
     currentBaranggay
 ).then((data) => {
   currentBaranggayCoords = JSON.parse(data.data[0].geojson)["coordinates"];
@@ -38,7 +38,7 @@ function displayReport(reportID) {
   `;
 
   fetchAPI(
-    "https://mapaayos.dcism.org/api/reports?mode=getReportByID&reportID=" +
+    "http://localhost/MapaAyos/api/reports?mode=getReportByID&reportID=" +
       reportID
   ).then((data) => {
     const report = data.report;
@@ -78,7 +78,7 @@ function displayReport(reportID) {
 
     let reportElement = `
       <div class="position-relative">
-        <img src="/public/uploads/reports/${
+        <img src="/MapaAyos/public/uploads/reports/${
           report["imagePath"]
         }" alt="Report Image" class="report-image" />
         <div class="position-absolute bottom-0 start-0 p-2 m-2 bg-white rounded-pill ${statusClass}">

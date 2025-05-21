@@ -1,8 +1,8 @@
 <?php
 $servername = "localhost";
-$username = "s24100907_mapaayosDB";
-$password = "mapaayos123";
-$dbname = "s24100907_mapaayosDB";
+$username = "root";
+$password = "";
+$dbname = "mapaayosDB";
 
 try {
     $dsn = "mysql:host=$servername;dbname=$dbname;charset=utf8mb4";

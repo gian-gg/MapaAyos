@@ -6,7 +6,7 @@ function displayModal(report) {
   document.getElementById("modal-body").innerHTML = `
     <div class="report-modal">
       <div class="image-container mb-4">
-        <img src="/public/uploads/reports/${report.imagePath}" 
+        <img src="/MapaAyos/public/uploads/reports/${report.imagePath}" 
              class="img-fluid rounded shadow" 
              alt="Report Image" />
       </div>

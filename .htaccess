@@ -7,22 +7,22 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 
 # Custom 404 page
-ErrorDocument 404 /src/views/404.php
-ErrorDocument 403 /src/views/404.php
+ErrorDocument 404 /MapaAyos/src/views/404.php
+ErrorDocument 403 /MapaAyos/src/views/404.php
 
 # Block direct access to backend folders
 RewriteCond %{REQUEST_URI} ^/(config|database|src) [NC]
-RewriteRule ^.*$ /src/views/404.php [L]
+RewriteRule ^.*$ /MapaAyos/src/views/404.php [L]
 
 # Public-facing routes
-RewriteRule ^signin$ src/views/signin.php [NC,L]
-RewriteRule ^signup$ src/views/signup.php [NC,L]
-RewriteRule ^mapa$ src/views/mapa.php [NC,L]
-RewriteRule ^baranggays$ src/views/baranggays.php [NC,L]
-RewriteRule ^settings$ src/views/settings.php [NC,L]
+RewriteRule ^signin$ /MapaAyos/src/views/signin.php [NC,L]
+RewriteRule ^signup$ /MapaAyos/src/views/signup.php [NC,L]
+RewriteRule ^mapa$ /MapaAyos/src/views/mapa.php [NC,L]
+RewriteRule ^baranggays$ /MapaAyos/src/views/baranggays.php [NC,L]
+RewriteRule ^settings$ /MapaAyos/src/views/settings.php [NC,L]
 
 # Nested Views
-RewriteRule ^(admin|official)/(.+)$ src/views/$1/$2.php [NC,L]
+RewriteRule ^(admin|official)/(.+)$ /MapaAyos/src/views/$1/$2.php [NC,L]
 
 # API endpoint
-RewriteRule ^api/(.+)$ src/api/$1.php [NC,L]
+RewriteRule ^api/(.+)$ /MapaAyos/src/api/$1.php [NC,L]
