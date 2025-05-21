@@ -39,3 +39,84 @@
   }
 }
 
+/* Sidenavbar / Offcanvas sidebar styling */
+#mobileSidebar {
+  background-color: var(--bg-primary);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  border-right:  1px solid var(--outline);
+}
+
+#mobileSidebar .offcanvas-header {
+  color: var(--primary);
+  padding: 1rem 1.5rem;
+
+  border-radius: 0 8px 0 0;
+}
+
+#mobileSidebar .offcanvas-title {
+  font-weight: 700;
+  font-size: 1.25rem;
+  font-family: var(--poppins);
+}
+
+#mobileSidebar .offcanvas-body {
+  padding: 1rem 1.5rem;
+}
+
+#mobileSidebar nav.nav.flex-column {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+#mobileSidebar nav.nav.flex-column .nav-link {
+  color: var(--text-primary);
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  font-family: var(--poppins);
+}
+
+#mobileSidebar nav.nav.flex-column .nav-link:hover,
+#mobileSidebar nav.nav.flex-column .nav-link:focus {
+  background-color: var(--bg-tertiary);
+  text-decoration: none;
+}
+
+#mobileSidebar .mt-3 a.signin-btn,
+#mobileSidebar .mt-3 a.signup-btn {
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 0.6rem 0;
+  margin-bottom: 0.5rem;
+  border-radius: 6px;
+  font-weight: 700;
+  font-family: var(--poppins);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#mobileSidebar .mt-3 a.signin-btn {
+  background-color: var(--bg-primary);
+  border: 1px solid var(--outline) ;
+}
+
+#mobileSidebar .mt-3 a.signin-btn:hover {
+  background-color: var(--secondary);
+  color: var(--bg-primary);
+}
+
+#mobileSidebar .mt-3 a.signup-btn {
+  background: url("/MapaAyos/public/img/button.png") lightgray 50% / cover no-repeat;
+  text-decoration: none;
+  color: var(--text-secondary);
+  font-weight: 800;
+}
+
+#mobileSidebar .mt-3 a.signup-btn:hover {
+  font-size: 900;
+}
+
+

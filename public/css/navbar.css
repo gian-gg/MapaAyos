@@ -2,31 +2,34 @@
 header {
   display: flex;
   height: 58px;
-  width: 100%;
-  padding: 0 140px;
+  max-width: var(--max-width);
+  width: 90%;
+  padding: 0 1rem;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  position: relative; /* added for absolute positioning of nav-items */
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  box-sizing: border-box;
 
-  margin-top: 10px;
+  margin-top: 1%;
   background: #ffffff33;
   backdrop-filter: blur(2px);
-  position: fixed;
   z-index: 999;
 }
 
 .nav-items {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
   display: flex;
   align-items: center;
   gap: 32px;
-  top: 50%;
-  transform: translate(-50%, -50%);
   white-space: nowrap;
   z-index: 1000;
+  flex: 1;
+  justify-content: center;
+  margin: 0 1rem;
+  position: static;
+  transform: none;
 }
 
 .nav-items {
@@ -54,6 +57,7 @@ header {
   align-items: center;
   gap: 0.5rem;
   margin: 0;
+  position: static;
 }
 
 .btn-group a {

@@ -1,17 +1,26 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const hamburger = document.querySelector('.hamburger'); // or use ID if needed
-    const sidebar = document.querySelector('.mobile-sidebar');
-  
-    hamburger.addEventListener('click', function (e) {
-      e.stopPropagation(); // Prevent click from bubbling
-      sidebar.classList.toggle('active');
-    });
-  
-    // Optional: click outside the sidebar to close it
-    document.addEventListener('click', function (e) {
-      if (!sidebar.contains(e.target) && !hamburger.contains(e.target)) {
-        sidebar.classList.remove('active');
-      }
+
+  var myOffcanvas = document.getElementById('mobileSidebar');
+  var offcanvas = new bootstrap.Offcanvas(myOffcanvas);
+
+  const hamburger = document.querySelector('.hamburger');
+  hamburger.addEventListener('click', function (e) {
+    e.stopPropagation(); 
+    offcanvas.show(); 
+  });
+
+  document.addEventListener('click', function (e) {
+    if (!myOffcanvas.contains(e.target) && !hamburger.contains(e.target)) {
+      offcanvas.hide(); 
+    }
+  });
+
+  const navLinks = document.querySelectorAll('.offcanvas-body .nav-link');
+  navLinks.forEach(function (link) {
+    link.addEventListener('click', function (e) {
+      setTimeout(function() {
+        offcanvas.hide();
+      }, 200);
     });
   });
-  
+});

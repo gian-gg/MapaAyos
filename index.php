@@ -35,14 +35,15 @@ $user = findUserByID($userID) ?? null;
 </head>
 
 <body>
+<div class="page-wrapper">
     <!-- header | navbar -->
     <header>
-        <a href="/">
+        <a href="/MapaAyos/">
             <div class=" branding">
-                <img src="/public/img/logo.png" alt="MapaAyos">
+                <img src="/MapaAyos/public/img/logo.png" alt="MapaAyos">
                 <div class="brand-title">
                     <h1>MapaAyos</h1>
-                    <p>nisi commodo laborum</p>
+                    <p>Map your concerns, track the change</p>
                 </div>
             </div>
         </a>
@@ -55,7 +56,6 @@ $user = findUserByID($userID) ?? null;
         <div class="nav-items d-none d-md-flex">
             <a href="#how_it_works">How it Works</a>
             <a href="#features">Features</a>
-            <a href="#about">About</a>
             <a href="#contact">Contact</a>
         </div>
 
@@ -83,13 +83,12 @@ $user = findUserByID($userID) ?? null;
         </div>
         <div class="offcanvas-body">
             <nav class="nav flex-column">
-                <a class="nav-link" href="#how_it_works" data-bs-dismiss="offcanvas">How it Works</a>
-                <a class="nav-link" href="#features" data-bs-dismiss="offcanvas">Features</a>
-                <a class="nav-link" href="#about" data-bs-dismiss="offcanvas">About</a>
-                <a class="nav-link" href="#contact" data-bs-dismiss="offcanvas">Contact</a>
+                <a class="nav-link" href="/MapaAyos/index#how_it_works" data-bs-dismiss="offcanvas">How it Works</a>
+                <a class="nav-link" href="/MapaAyos/index#features" data-bs-dismiss="offcanvas">Features</a>
+                <a class="nav-link" href="/MapaAyos/index#contact" data-bs-dismiss="offcanvas">Contact</a>
             </nav>
             <div class="mt-3">
-                <?php
+               <?php
                 if (isAuthenticated()) {
                     echo '<a class="signup-btn" href="/mapa">Mapa</a>';
                 } else {
@@ -102,6 +101,7 @@ $user = findUserByID($userID) ?? null;
     </div>
 
     <main>
+        <div class="container">
         <!-- hero -->
         <section class="hero">
             <div class="hero-content">
@@ -127,14 +127,27 @@ $user = findUserByID($userID) ?? null;
 
         <!--placeholders for partners logo-->
         <section class="partners_logo">
-            <img src="/public/img/usc.png" alt="USC Logo">
-            <img src="/public/img/deped.png" alt="DepEd Logo">
-            <img src="/public/img/dost.png" alt="DOST Logo">
+            <!-- Gradient overlays -->
+            <div class="fade-left"></div>
+            <div class="fade-right"></div>
 
-            <img src="/public/img/usc.png" alt="USC Logo">
-            <img src="/public/img/deped.png" alt="DepEd Logo">
-            <img src="/public/img/dost.png" alt="DOST Logo">
+            <div class="scrolling-wrapper">
+                <div class="scrolling-content">
+                    <img src="/MapaAyos/public/img/usc.png" alt="USC Logo">
+                    <img src="/MapaAyos/public/img/deped.png" alt="DepEd Logo">
+                    <img src="/MapaAyos/public/img/dost.png" alt="DOST Logo">
+
+                    <img src="/MapaAyos/public/img/usc.png" alt="USC Logo">
+                    <img src="/MapaAyos/public/img/deped.png" alt="DepEd Logo">
+                    <img src="/MapaAyos/public/img/dost.png" alt="DOST Logo">
+
+                    <img src="/MapaAyos/public/img/usc.png" alt="USC Logo">
+                    <img src="/MapaAyos/public/img/deped.png" alt="DepEd Logo">
+                    <img src="/MapaAyos/public/img/dost.png" alt="DOST Logo">
+                </div>
+            </div>
         </section>
+
 
         <!-- how it works section -->
         <section class="hiw" id="how_it_works">
@@ -144,40 +157,69 @@ $user = findUserByID($userID) ?? null;
             </div>
 
             <div class="hiw-cards">
-                <div class="hiw-card-cont">
-                    <div class="hiw-card-content">
-
+                <div class="card-row">
+                    <div class="hiw-card card-step">
+                        <div class="card-body">
+                            <h2>Iulat ang Problema</h2>
+                            <p>
+                                See a broken streetlight or an uncollected pile of garbage? 
+                                Quickly report it through MapaAyos with just a few clicks. <br>
+                                <strong><em>Simulan ang aksyon sa pamamagitan ng iyong ulat.</em></strong>
+                            </p>
+                        </div>
                     </div>
-                    <div class="hiw-card-media">
 
+                    <div class="hiw-card card-step highlight">
+                        <div class="card-body">
+                            <h2>Suriin ng Opisyal</h2>
+                            <p>
+                                All reports are automatically reviewed and validated by local officials using our system.
+                                This ensures proper action is taken for each issue. <br>
+                                <strong><em>Ang bawat ulat ay sinusuri para sa tamang solusyon.</em></strong>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="hiw-card card-step">
+                        <div class="card-body">
+                            <h2>Subaybayan ang Solusyon</h2>
+                            <p>
+                                Track the progress of your report—from acceptance by the LGU to resolution—right within the app. <br>
+                                <strong><em>Makita ang epekto ng iyong partisipasyon sa pagbabago.</em></strong>
+                            </p>
+                        </div>
                     </div>
                 </div>
-                <div class="hiw-card-cont">
-                    <div class="hiw-card-content">
-
-                    </div>
-                    <div class="hiw-card-media">
-
-                    </div>
-                </div>
-                <div class="hiw-card-cont">
-                    <div class="hiw-card-ccontent">
-
-                    </div>
-
-                    <div class="hiw-card-media">
-
-                    </div>
-                </div>
+                <div class="arrow"><img src="/MapaAyos/public/img/arrow.gif" alt="arrow"></div>
             </div>
         </section>
+
+
         <!-- feature section -->
         <section class="ftrs" id="features">
             <h1>Bakit MapaAyos?</h1>
-        </section>
-        <!-- about section -->
-        <section class="abt-sec" id="about">
-            <h1>about section</h1>
+            <div class="feature-cards">
+                <div class="feat-col left-feat">
+                <div class="feature-card">
+                    <h3>Community Engagement</h3>
+                    <p>Empowering residents to report and track local issues easily and effectively.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Real-time Updates</h3>
+                    <p>Stay informed with instant notifications on the progress of reported concerns.</p>
+                </div>
+                </div>
+                <div class="feat-col right-feat">
+                <div class="feature-card">
+                    <h3>Official Validation</h3>
+                    <p>Ensuring every report is reviewed and validated by local government officials.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Impact Tracking</h3>
+                    <p>Monitor the resolution progress and see the tangible changes in your community.</p>
+                </div>
+                </div>
+            </div>
         </section>
 
         <!-- footer section -->
@@ -186,7 +228,7 @@ $user = findUserByID($userID) ?? null;
                 <div class="ftr-content">
                     <div class="ftr-top">
                         <h1>Want to Hear More from Us?</h1>
-                        <p>incididunt laborum in officia aliqua excepteur laborum minim dolor dolor</p>
+                        <p>Be the first to know when change is happening near you</p>
                         <form action="">
                             <input
                                 type="email"
@@ -203,7 +245,7 @@ $user = findUserByID($userID) ?? null;
                                     <path fill-rule="evenodd" clip-rule="evenodd" d="M35.9467 35.9737H22.596C19.6399 35.9737 16.6378 36.1711 13.7404 35.4846C10.9211 34.8166 8.20316 33.4324 6.05365 31.4835C4.07648 29.6908 2.48581 27.556 1.43034 25.0993C-1.91741 17.3069 0.785908 8.06711 7.71687 3.2031C9.88364 1.68248 12.3653 0.751231 14.9541 0.267364C16.9255 -0.101108 19.0516 -0.0796282 21.0226 0.275768C22.9766 0.628018 24.9109 1.24669 26.6416 2.23379C28.6657 3.38823 30.4898 4.85399 31.9548 6.67568C34.0226 9.24698 35.3326 12.3094 35.7928 15.5729C36.1391 18.0296 35.9467 20.5993 35.9467 23.0772V35.9737ZM18 12.3594C14.8857 12.3594 12.3573 14.8868 12.3573 18C12.3573 21.1131 14.8857 23.6406 18 23.6406C21.1143 23.6406 23.6427 21.1131 23.6427 18C23.6427 14.8868 21.1143 12.3594 18 12.3594Z" fill="#F6F8F9" />
                                 </svg>
                                 <h1>MapaAyos</h1>
-                                <p>nisi commodo laborum</p>
+                                <p>Map your concerns, track the change</p>
                             </div>
                         </div>
                         <div id="right">
@@ -212,7 +254,6 @@ $user = findUserByID($userID) ?? null;
                                 <ul>
                                     <li><a href="#how_it_works">How it Works</a></li>
                                     <li><a href="#features">Features</a></li>
-                                    <li><a href="#about">About</a></li>
                                     <li><a href="#contact">Contact</a></li>
                                 </ul>
                             </div>
@@ -248,9 +289,12 @@ $user = findUserByID($userID) ?? null;
                     </a>
                 </div>
             </section>
+        </div>
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+    <script src="/MapaAyos/public/js/partners.js"></script>
+    <script src="/MapaAyos/public/js/sidenavbar.js"></script>
 </body>
 
 </html>
