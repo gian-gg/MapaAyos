@@ -33,6 +33,40 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 
 <body class="signing-body">
+    <!-- Forgot Password Modal -->
+    <div class="modal" id="forgotPasswordModal" tabindex="-1" aria-labelledby="forgotPasswordModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="forgotPasswordModalLabel">Password Reset</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center mb-4">
+                        <i class="bi bi-shield-lock fs-1" style="color: #317A88;"></i>
+                    </div>
+                    <h5 class="text-center mb-3">Forgot your password?</h5>
+                    <p class="text-muted text-center mb-4">Please contact MapaAyos support at <a href="mailto:support@mapaayos.com" class="text-decoration-none">support@mapaayos.com</a> with the following information:</p>
+
+                    <ul class="list-unstyled ps-4">
+                        <li><i class="bi bi-check-circle-fill text-success me-2"></i>Your registered username</li>
+                        <li><i class="bi bi-check-circle-fill text-success me-2"></i>Your registered email address</li>
+                        <li><i class="bi bi-check-circle-fill text-success me-2"></i>Subject line: "Password Reset Request"</li>
+                    </ul>
+                    <div class="alert d-flex align-items-center" style="background-color: #E8F5E9; border-color:#C8E6C9; color: #2E7D32;" role="alert">
+                        <i class="bi bi-info-circle-fill me-2"></i>
+                        <div>
+                            You will receive instructions within 24 hours.
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a href="mailto:reset@mapaayos.com" class="btn primary-color text-white">Contact Support</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- header | navbar -->
     <header>
         <a href="/MapaAyos/index.php">
@@ -114,14 +148,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <label for="email">Email:</label>
                     <input type="email" id="email" name="email" required>
                     <br>
-                    <label for="password">Password:</label>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <label for="password">Password:</label>
+                        <button type="button"
+                            style="
+                                background: none;
+                                border: none;
+                                padding: 0;
+                                margin: 0;
+                                color: #6CC8BE;
+                                text-align: right;
+                                text-decoration: underline;
+                                cursor: pointer;
+                                font-size: 0.8rem;
+                            "
+                            data-bs-toggle="modal"
+                            data-bs-target="#forgotPasswordModal">
+                            Forgot Password?
+                        </button>
+                    </div>
                     <div class="password-container">
                         <input type="password" id="password" name="password" required>
                         <span class="toggle-password" onclick="togglePasswordVisibility()">
                             <i id="toggleIcon" class="bi bi-eye-slash-fill"></i>
                         </span>
                     </div>
-                    <p style="color:#6CC8BE; text-align:right; text-decoration:underline;">Forgot Password?</p>
                     <br>
                     <?php
                     if (isset($_GET['error'])) {

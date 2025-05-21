@@ -26,7 +26,7 @@
                     Oops! The page you’re looking for isn’t here. It might have been moved, deleted, or never existed.
                     Balik na lang tayo sa dashboard para ayos ulit ang lahat.
                 </p>
-                <a href="/" class="ma-btn">
+                <a href="/MapaAyos/" class="ma-btn">
                     <i class="bi bi-chevron-left"></i> | <p>Balik sa Dashboard</p>
                 </a>
             </div>
