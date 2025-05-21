@@ -13,7 +13,7 @@ INSERT INTO `baranggayInfo` (`baranggayID`, `description`, `landArea`, `populati
 -- Users
 INSERT INTO `users` (`id`, `firstName`, `lastName`, `email`, `password`, `createdAt`, `role`, `hasProfilePic`, `assignedBaranggay`) VALUES
 (5, 'Juan', 'Dela Cruz', 'juan@talamban.com', '$2y$10$VZlZAyGUvvsWweRyC1SV5u87WkbVfN3IQO9dVdp8PBS2BD1dq.2Ve', '2025-05-07 01:26:12', 'official', 0, 1),
-(6, 'Ana', 'Santos', 'ana@talamban.com', '$2y$10$VZlZAyGUvvsWweRyC1SV5u87WkbVfN3IQO9dVdp8PBS2BD1dq.2Ve', '2025-05-07 01:26:12', 'official', 1, 1),
+(6, 'Ana', 'Santos', 'ana@talamban.com', '$2y$10$VZlZAyGUvvsWweRyC1SV5u87WkbVfN3IQO9dVdp8PBS2BD1dq.2Ve', '2025-05-07 01:26:12', 'official', 0, 1),
 (7, 'Carlos', 'Torres', 'carlos@talamban.com', '$2y$10$VZlZAyGUvvsWweRyC1SV5u87WkbVfN3IQO9dVdp8PBS2BD1dq.2Ve', '2025-05-07 01:26:12', 'official', 0, 1),
 (8, 'Maria', 'Reyes', 'maria@banilad.com', '$2y$10$VZlZAyGUvvsWweRyC1SV5u87WkbVfN3IQO9dVdp8PBS2BD1dq.2Ve', '2025-05-07 01:26:12', 'official', 0, 2),
 (9, 'Leo', 'Gutierrez', 'leo@banilad.com', '$2y$10$VZlZAyGUvvsWweRyC1SV5u87WkbVfN3IQO9dVdp8PBS2BD1dq.2Ve', '2025-05-07 01:26:12', 'official', 0, 2),
@@ -21,7 +21,7 @@ INSERT INTO `users` (`id`, `firstName`, `lastName`, `email`, `password`, `create
 (11, 'Jose', 'Lopez', 'jose@lahug.com', '$2y$10$VZlZAyGUvvsWweRyC1SV5u87WkbVfN3IQO9dVdp8PBS2BD1dq.2Ve', '2025-05-07 01:26:12', 'official', 0, 3),
 (12, 'Grace', 'Lim', 'grace@lahug.com', '$2y$10$VZlZAyGUvvsWweRyC1SV5u87WkbVfN3IQO9dVdp8PBS2BD1dq.2Ve', '2025-05-07 01:26:12', 'official', 0, 3),
 (13, 'Mark', 'Rivera', 'mark@lahug.com', '$2y$10$VZlZAyGUvvsWweRyC1SV5u87WkbVfN3IQO9dVdp8PBS2BD1dq.2Ve', '2025-05-07 01:26:12', 'official', 0, 3),
-(17, 'Liam', 'Garcia', 'liam@user.com', '$2y$10$xoiJILSJbUgOYPZHXwEQIeITOfuR/ivmUeJrEBubK7IR1L54ksDqe', '2025-05-07 01:30:35', 'user', 1, NULL),
+(17, 'Liam', 'Garcia', 'liam@user.com', '$2y$10$VZlZAyGUvvsWweRyC1SV5u87WkbVfN3IQO9dVdp8PBS2BD1dq.2Ve', '2025-05-07 01:30:35', 'user', 0, NULL),
 (18, 'Chloe', 'Morales', 'chloe@user.com', '$2y$10$VZlZAyGUvvsWweRyC1SV5u87WkbVfN3IQO9dVdp8PBS2BD1dq.2Ve', '2025-05-07 01:30:35', 'user', 0, NULL),
 (19, 'Noahe', 'Fernandez', 'noahe@user.com', '$2y$10$VZlZAyGUvvsWweRyC1SV5u87WkbVfN3IQO9dVdp8PBS2BD1dq.2Ve', '2025-05-07 01:30:35', 'user', 0, NULL),
-(20, 'admin', 'admin', 'admin@admin.com', '$2y$10$B0OsAybM9ha6zYgyAhLCwe3EcxTfscYRvrW18ImTxjJEEIQ/QzgEG', '2025-05-07 22:50:32', 'admin', 1, NULL);
+(20, 'admin', 'admin', 'admin@admin.com', '$2y$10$B0OsAybM9ha6zYgyAhLCwe3EcxTfscYRvrW18ImTxjJEEIQ/QzgEG', '2025-05-07 22:50:32', 'admin', 0, NULL);

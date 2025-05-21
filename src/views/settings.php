@@ -113,7 +113,7 @@ if (isset($_POST['logout'])) {
     handleSignOut();
 }
 
-$profileImg = $user['hasProfilePic'] ? '/public/uploads/pfp/' . $userID . '.png' : '/public/img/default-profile.png';
+$profileImg = $user['hasProfilePic'] ? '/MapaAyos/public/uploads/pfp/' . $userID . '.png' : '/MapaAyos/public/img/default-profile.png';
 
 ?>
 <!DOCTYPE html>
@@ -123,7 +123,7 @@ $profileImg = $user['hasProfilePic'] ? '/public/uploads/pfp/' . $userID . '.png'
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MapaAyos - Settings</title>
-    <link rel="shortcut icon" href="/public/img/favicon.png" type="image/png">
+    <link rel="shortcut icon" href="/MapaAyos/public/img/favicon.png" type="image/png">
 
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
@@ -135,13 +135,13 @@ $profileImg = $user['hasProfilePic'] ? '/public/uploads/pfp/' . $userID . '.png'
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
     <!-- Project CSS -->
-    <link rel="stylesheet" href="/public/css/root.css">
-    <link rel="stylesheet" href="/public/css/main.css">
-    <link rel="stylesheet" href="/public/css/dashboard.css">
-    <link rel="stylesheet" href="/public/css/mapa-init.css">
-    <link rel="stylesheet" href="/public/css/header.css">
-    <link rel="stylesheet" href="/public/css/sidebar.css">
-    <link rel="stylesheet" href="/public/css/settings.css">
+    <link rel="stylesheet" href="/MapaAyos/public/css/root.css">
+    <link rel="stylesheet" href="/MapaAyos/public/css/main.css">
+    <link rel="stylesheet" href="/MapaAyos/public/css/dashboard.css">
+    <link rel="stylesheet" href="/MapaAyos/public/css/mapa-init.css">
+    <link rel="stylesheet" href="/MapaAyos/public/css/header.css">
+    <link rel="stylesheet" href="/MapaAyos/public/css/sidebar.css">
+    <link rel="stylesheet" href="/MapaAyos/public/css/settings.css">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css">
 </head>
@@ -257,9 +257,9 @@ $profileImg = $user['hasProfilePic'] ? '/public/uploads/pfp/' . $userID . '.png'
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="/public/js/sidebar.js"></script>
+    <script src="/MapaAyos/public/js/sidebar.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
-    <script src="/public/js/settings.js"></script>
+    <script src="/MapaAyos/public/js/settings.js"></script>
 </body>
 
 </html>

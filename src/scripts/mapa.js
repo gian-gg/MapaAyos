@@ -60,7 +60,7 @@ baranggaySelect.addEventListener("change", (e) => {
       data.data[0].country
     )}
       </p>
-      <a href="/baranggays?baranggay=${
+      <a href="/MapaAyos/baranggays?baranggay=${
         data.data[0].name
       }" class="btn btn-primary mt-2 primary-color" id="reportBtn">
         Go to Baranggays Page
