@@ -69,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <!-- header | navbar -->
     <header>
-        <a href="/MapaAyos/index.php">
+        <a href="/MapaAyos/">
             <div class="branding">
                 <img src="/MapaAyos/public/img/logo.png" alt="MapaAyos">
                 <div class="brand-title">
@@ -85,9 +85,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </button>
 
         <div class="nav-items d-none d-md-flex">
-            <a href="/MapaAyos/index.php#how_it_works">How it Works</a>
-            <a href="/MapaAyos/index.php#features">Features</a>
-            <a href="/MapaAyos/index.php#contact">Contact</a>
+            <a href="/MapaAyos/#how_it_works">How it Works</a>
+            <a href="/MapaAyos/#features">Features</a>
+            <a href="/MapaAyos/#contact">Contact</a>
         </div>
 
         <div class="btn-group d-none d-md-flex">
@@ -185,7 +185,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <button class="btn" type="submit">Sign In</button>
                 </form>
 
-                <p>Wala ka pang account? <a href="/signup">Sign up here</a></p>
+                <p>Wala ka pang account? <a href="/MapaAyos/signup">Sign up here</a></p>
             </div>
         </section>
     </main>
