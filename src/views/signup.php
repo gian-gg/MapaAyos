@@ -5,7 +5,7 @@ require_once __DIR__ . '/../controllers/AuthController.php';
 redirectIfNotAllowed("all", "signup");
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    handleSignUp($_POST['firstName'], $_POST['lastName'], $_POST['email'], $_POST['password']);
+    handleSignUp($_POST['firstName'], $_POST['lastName'], $_POST['email'], $_POST['password'], $_POST['confirmPassword']);
 }
 
 ?>
@@ -112,23 +112,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <p>Tuloy po kayo! Please enter your details below.</p>
 
                 <form method="POST">
-                    <label for="firstName">First Name:</label>
-                    <input type="text" id="firstName" name="firstName" required>
-                    <br>
-                    <label for="lastName">Last Name:</label>
-                    <input type="text" id="lastName" name="lastName" required>
-                    <br>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="firstName">First Name:</label>
+                            <input type="text" id="firstName" name="firstName" class="form-control" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="lastName">Last Name:</label>
+                            <input type="text" id="lastName" name="lastName" class="form-control" required>
+                        </div>
+                    </div>
                     <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" required>
-                    <br>
+                    <input type="email" id="email" name="email" class="form-control" required>
+
                     <label for="password">Password:</label>
                     <div class="password-container">
-                        <input type="password" id="password" name="password" required>
+                        <input type="password" id="password" name="password" class="form-control" required>
                         <span class="toggle-password" onclick="togglePasswordVisibility()">
-                            <i id="toggleIcon" class="bi bi-eye-slash-fill"></i>
+                            <i id="toggleIcon1" class="bi bi-eye-slash-fill"></i>
                         </span>
                     </div>
-                    <br>
+
+                    <label for="confirmPassword">Confirm Password:</label>
+                    <div class="password-container">
+                        <input type="password" id="confirmPassword" name="confirmPassword" class="form-control" required>
+                        <span class="toggle-password" onclick="toggleConfirmPasswordVisibility()">
+                            <i id="toggleIcon2" class="bi bi-eye-slash-fill"></i>
+                        </span>
+                    </div>
                     <?php
                     if (isset($_GET['error'])) {
                         echo '<div class="text-center message error-message">' . htmlspecialchars($_GET['error']) . '</div>';
@@ -144,7 +155,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </section>
     </main>
 
-    <script src="/public/js/password.js"></script>
+    <script src="/MapaAyos/public/js/password.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
 </body>
 

@@ -2,7 +2,7 @@
 require_once __DIR__ . '/../models/UserModel.php';
 
 
-function handleSignUp($firstName, $lastName, $email, $password)
+function handleSignUp($firstName, $lastName, $email, $password, $confirmPassword)
 {
     // Sanitize Inputs
     $firstName = htmlspecialchars(trim($firstName));
@@ -20,8 +20,24 @@ function handleSignUp($firstName, $lastName, $email, $password)
         exit();
     }
 
-    if (strlen($password) < 6) {
-        header("Location: /MapaAyos/signup?error=" . urlencode("Password must be at least 6 characters"));
+    if (strlen($password) < 8) {
+        header("Location: /MapaAyos/signup?error=" . urlencode("Password must be at least 8 characters"));
+        exit();
+    }
+
+    if (
+        !preg_match('/[A-Z]/', $password) || // at least one uppercase letter
+        !preg_match('/[a-z]/', $password) || // at least one lowercase letter
+        !preg_match('/[0-9]/', $password) || // at least one digit
+        !preg_match('/[\W_]/', $password)    // at least one special character
+    ) {
+        header("Location: /MapaAyos/signup?error=" . urlencode("Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character"));
+        exit();
+    }
+
+    // Check if the passwords match
+    if ($password !== $confirmPassword) {
+        header("Location: /MapaAyos/signup?error=" . urlencode("Passwords do not match"));
         exit();
     }
 

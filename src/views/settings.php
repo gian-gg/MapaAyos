@@ -32,6 +32,13 @@ if (isset($_POST['change_password'])) {
         $pwChangeMsg = 'New password must be at least 8 characters.';
     } elseif (strlen($new) > 72) {
         $pwChangeMsg = 'New password must be less than 72 characters.';
+    } elseif (
+        !preg_match('/[A-Z]/', $new) || // at least one uppercase letter
+        !preg_match('/[a-z]/', $new) || // at least one lowercase letter
+        !preg_match('/[0-9]/', $new) || // at least one digit
+        !preg_match('/[\W_]/', $new)    // at least one special character
+    ) {
+        $pwChangeMsg = 'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.';
     } elseif (!password_verify($old, $user['password'])) {
         $pwChangeMsg = 'Old password is incorrect.';
     } elseif ($new !== $confirm) {
