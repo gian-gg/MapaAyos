@@ -27,10 +27,9 @@ MapaAyos/
 │   ├── controllers/       # Business logic and interaction with models
 │   ├── models/            # Database entities and queries
 │   ├── scripts/           # App-specific JavaScript logic for roles/pages
+│   ├── utils/             # PHP utility functions
 │   └── views/             # PHP view templates rendered based on routing
-│       ├── admin/         # Views for admin dashboard and controls
-│       ├── official/      # Views for official user roles (e.g., barangay)
-│       └── user/          # Views for regular users
+│       ├── components/    # Resuable UI components
 ```
 
 ---
