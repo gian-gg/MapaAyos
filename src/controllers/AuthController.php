@@ -80,6 +80,13 @@ function handleSignIn($email, $password)
         session_regenerate_id(true);
         $_SESSION['userID'] = $user['id'];
 
+        if ($user['is_first_login']) {
+            // Update is_first_login to 0 now
+            markTutorialComplete($user['id']);
+            header("Location: /MapaAyos/tutorial");
+            exit();
+        }
+
         if ($user["role"] == "user") {
             header("Location: /MapaAyos/mapa");
         } else {
@@ -118,11 +125,32 @@ function redirectIfNotAllowed($userRole, $pageRole)
 {
     if (isAuthenticated()) {
         if ($userRole == "all" && ($pageRole == "signup" || $pageRole == "signin")) {
-            header("Location: /");
+            header("Location: /MapaAyos/complete_tutorial");
             exit();
         } else if ($userRole != $pageRole) {
             header("Location: /" . $userRole . "/dashboard");
             exit();
         }
     }
+}
+
+function completeTutorial()
+{
+    if (!isset($_SESSION['userID'])) {
+        header("Location: /MapaAyos/signin");
+        exit();
+    }
+
+    $userID = $_SESSION['userID'];
+    markTutorialComplete($userID);
+
+    // Fetch user to check role
+    $user = findUserByID($userID);
+    if ($user && $user['role'] == 'user') {
+        header("Location: /MapaAyos/mapa");
+    } else {
+        header("Location: /MapaAyos/" . $user['role'] . "/dashboard");
+    }
+
+    exit();
 }

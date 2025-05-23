@@ -20,6 +20,8 @@ RewriteRule ^signup$ /MapaAyos/src/views/signup.php [NC,L]
 RewriteRule ^mapa$ /MapaAyos/src/views/mapa.php [NC,L]
 RewriteRule ^baranggays$ /MapaAyos/src/views/baranggays.php [NC,L]
 RewriteRule ^settings$ /MapaAyos/src/views/settings.php [NC,L]
+RewriteRule ^tutorial$ /MapaAyos/src/views/tutorial.php [NC,L]
+RewriteRule ^api/(.+)$ /MapaAyos/src/api/$1.php [NC,L]
 
 # Nested Views
 RewriteRule ^(admin|official)/(.+)$ /MapaAyos/src/views/$1/$2.php [NC,L]

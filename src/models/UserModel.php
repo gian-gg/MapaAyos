@@ -5,8 +5,8 @@ function signUp($firstName, $lastName, $email, $hashedPassword) // a function fo
 {
     global $pdo;
     try {
-        $sql = "INSERT INTO users (firstName, lastName, email, password) 
-                VALUES (:firstName, :lastName, :email, :password)";
+        $sql = "INSERT INTO users (firstName, lastName, email, password, is_first_login) 
+                VALUES (:firstName, :lastName, :email, :password, 1)";
 
         $stmt = $pdo->prepare($sql);
 
@@ -149,4 +149,25 @@ function updateUserRole($userID, $newRole, $assignedBaranggay) // a function to 
         error_log("Error updating user role: " . $e->getMessage());
         return false;
     }
+}
+
+function updateFirstLoginStatus($userID) {
+    global $pdo;
+    try {
+        $sql = "UPDATE users SET is_first_login = 0 WHERE id = :id";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':id', $userID);
+        return $stmt->execute();
+    } catch (PDOException $e) {
+        error_log("Error updating first login status: " . $e->getMessage());
+        return false;
+    }
+}
+
+function markTutorialComplete($userId)
+{
+    global $pdo;
+    $stmt = $pdo->prepare("UPDATE users SET is_first_login = 0 WHERE id = :id");
+    $stmt->bindParam(':id', $userId);
+    return $stmt->execute();
 }
