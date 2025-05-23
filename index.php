@@ -148,7 +148,6 @@ $user = findUserByID($userID) ?? null;
                     </div>
                 </section>
 
-
                 <!-- how it works section -->
                 <section class="hiw" id="how_it_works">
                     <div class="hiw-header">
@@ -190,11 +189,42 @@ $user = findUserByID($userID) ?? null;
                                 </div>
                             </div>
                         </div>
-                        <div class="arrow"><img src="/MapaAyos/public/img/arrow.gif" alt="arrow"></div>
                     </div>
                 </section>
 
+                <!--who verifies section-->
+                <section class="who-verifies">
+                    <div class="who-verifies-header">
+                        <h1>Sino ang Nagbabalid ng mga Ulat?</h1>
+                        <p>Ang mga ulat ay sinisiyasat at binabalid ng mga lokal na opisyal.</p>
+                    </div>
 
+                    <div class="who-verifies-cards">
+                        <div class="card-row">
+                            <div class="who-verifies-card card-step">
+                                <div class="card-body">
+                                    <h2>Barangay Officials</h2>
+                                    <p>Local leaders who ensure that community issues are addressed promptly.</p>
+                                </div>
+                            </div>
+
+                            <div class="who-verifies-card card-step highlight">
+                                <div class="card-body">
+                                    <h2>City Officials</h2>
+                                    <p>Responsible for overseeing the resolution of larger community concerns.</p>
+                                </div>
+                            </div>
+
+                            <div class="who-verifies-card card-step">
+                                <div class="card-body">
+                                    <h2>Community Volunteers</h2>
+                                    <p>Dedicated individuals who assist in validating and resolving local issues.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
                 <!-- feature section -->
                 <section class="ftrs" id="features">
                     <h1>Bakit MapaAyos?</h1>
