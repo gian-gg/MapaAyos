@@ -90,7 +90,7 @@ function displayReports(API_URL, infoContainer) {
       const marker = L.marker([report.lat, report.lng]).addTo(map);
       marker.setIcon(
         L.icon({
-          iconUrl: "/MapaAyos/public/img/pins/default.png",
+          iconUrl: "/public/img/pins/default.png",
           iconSize: [24, 32],
           iconAnchor: [12, 12],
         })
@@ -101,7 +101,7 @@ function displayReports(API_URL, infoContainer) {
         infoContainer.innerHTML = `
     <div class="card-body">
       <h3 class="card-title mb-3 text-center fw-bold">${report.title}</h3>
-      <img src="/MapaAyos/public/uploads/reports/${report.imagePath}" 
+      <img src="/public/uploads/reports/${report.imagePath}" 
            alt="Report Image" 
            class="img-fluid rounded-3 mb-3" 
            style="object-fit: cover; max-height: 300px; width: 100%;" />
@@ -118,7 +118,7 @@ function displayReports(API_URL, infoContainer) {
           if (layer instanceof L.Marker) {
             layer.setIcon(
               L.icon({
-                iconUrl: "/MapaAyos/public/img/pins/default.png",
+                iconUrl: "/public/img/pins/default.png",
                 iconSize: [24, 32],
                 iconAnchor: [12, 12],
               })
@@ -129,7 +129,7 @@ function displayReports(API_URL, infoContainer) {
         // Change the clicked marker icon to selected
         marker.setIcon(
           L.icon({
-            iconUrl: "/MapaAyos/public/img/pins/selected.png",
+            iconUrl: "/public/img/pins/selected.png",
             iconSize: [24, 32],
             iconAnchor: [12, 12],
           })

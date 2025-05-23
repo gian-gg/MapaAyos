@@ -18,7 +18,7 @@ function displayReportModal(report) {
   document.getElementById("reportModal-body").innerHTML = `
     <div class="report-modal">
       <div class="image-container">
-        <img src="/MapaAyos/public/uploads/reports/${report.imagePath}" 
+        <img src="/public/uploads/reports/${report.imagePath}" 
              alt="Report Image" />
       </div>
       

@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MapaAyos - Baranggays</title>
-    <link rel="shortcut icon" href="/MapaAyos/public/img/favicon.png" type="image/png">
+    <link rel="shortcut icon" href="/public/img/favicon.png" type="image/png">
 
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
@@ -62,15 +62,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
     <!-- Project CSS -->
-    <link rel="stylesheet" href="/MapaAyos/public/css/root.css">
-    <link rel="stylesheet" href="/MapaAyos/public/css/main.css">
-    <link rel="stylesheet" href="/MapaAyos/public/css/dashboard.css">
-    <link rel="stylesheet" href="/MapaAyos/public/css/mapa-init.css">
-    <link rel="stylesheet" href="/MapaAyos/public/css/baranggay.css">
-    <link rel="stylesheet" href="/MapaAyos/public/css/sidebar.css">
-    <link rel="stylesheet" href="/MapaAyos/public/css/header.css">
-    <link rel="stylesheet" href="/MapaAyos/public/css/baranggay-enhanced.css">
-    <link rel="stylesheet" href="/MapaAyos/public/css/report-modal.css">
+    <link rel="stylesheet" href="/public/css/root.css">
+    <link rel="stylesheet" href="/public/css/main.css">
+    <link rel="stylesheet" href="/public/css/dashboard.css">
+    <link rel="stylesheet" href="/public/css/mapa-init.css">
+    <link rel="stylesheet" href="/public/css/baranggay.css">
+    <link rel="stylesheet" href="/public/css/sidebar.css">
+    <link rel="stylesheet" href="/public/css/header.css">
+    <link rel="stylesheet" href="/public/css/baranggay-enhanced.css">
+    <link rel="stylesheet" href="/public/css/report-modal.css">
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
@@ -187,7 +187,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="main-content" style="width: 78vw;">
                 <?php
                 if ($currentBaranggay) {
-                    echo '<a href="/MapaAyos/baranggays" class="btn btn-back mb-4"><i class="bi bi-arrow-left"></i> Back to Baranggays</a>';
+                    echo '<a href="/baranggays" class="btn btn-back mb-4"><i class="bi bi-arrow-left"></i> Back to Baranggays</a>';
                 }
                 ?>
 
@@ -210,7 +210,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     echo "</div>";
                     echo "</div>";
 
-                    echo "<img src='/MapaAyos/public/img/baranggays/" . htmlspecialchars($currentBaranggay, ENT_QUOTES, 'UTF-8') . ".png' alt='Baranggay Image' class='baranggay-image'>";
+                    echo "<img src='/public/img/baranggays/" . htmlspecialchars($currentBaranggay, ENT_QUOTES, 'UTF-8') . ".png' alt='Baranggay Image' class='baranggay-image'>";
                     echo "<p class='page-description mb-4'>" . htmlspecialchars($baranggayInfo["description"]) . "</p>";
 
                     echo "<div class='baranggay-dashboard'>
@@ -334,7 +334,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 <?php
                                 foreach ($baranggays as $baranggay) {
                                     echo "
-                                        <tr onclick=\"window.location='/MapaAyos/baranggays?baranggay=" . htmlspecialchars($baranggay['name'], ENT_QUOTES, 'UTF-8') . "';\" style=\"cursor: pointer;\">
+                                        <tr onclick=\"window.location='/baranggays?baranggay=" . htmlspecialchars($baranggay['name'], ENT_QUOTES, 'UTF-8') . "';\" style=\"cursor: pointer;\">
                                             <td>" . htmlspecialchars(capitalizeFirstLetter($baranggay['name']), ENT_QUOTES, 'UTF-8') . "</td>
                                             <td>" . htmlspecialchars(capitalizeFirstLetter($baranggay['city']), ENT_QUOTES, 'UTF-8') . "</td>
                                             <td>" . htmlspecialchars(capitalizeFirstLetter($baranggay['country']), ENT_QUOTES, 'UTF-8') . "</td>
@@ -353,9 +353,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </main>
     </div>
 
-    <script type="module" src="/MapaAyos/src/scripts/baranggay.js"></script>
+    <script type="module" src="/src/scripts/baranggay.js"></script>
 
-    <script src="/MapaAyos/public/js/sidebar.js"></script>
+    <script src="/public/js/sidebar.js"></script>
 
 </body>
 

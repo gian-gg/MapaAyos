@@ -17,9 +17,9 @@ function renderSideBar($role, $activePage, $isAuthenticated)
 
     echo "
         <aside class='sidebar'>
-            <a href='/MapaAyos/'>
+            <a href='/'>
                 <div class='branding'>
-                    <img src='/MapaAyos/public/img/brand-logo.png' alt='MapaAyos' width='34' height='34' style='border-radius: 5px;'>
+                    <img src='/public/img/brand-logo.png' alt='MapaAyos' width='34' height='34' style='border-radius: 5px;'>
                     <div class='brand-title'>
                         <h1>MapaAyos</h1>
                         <p>nisi commodo laborum</p>
@@ -33,7 +33,7 @@ function renderSideBar($role, $activePage, $isAuthenticated)
 
     if ($role == "admin" || $role == "official") {
         echo "
-            <a href='/MapaAyos/" . $role . "/dashboard' class='nav-item'>
+            <a href='/" . $role . "/dashboard' class='nav-item'>
                 <i class='bi bi-terminal'></i>
                 <span class='nav-text'>Dashboard</span>
             </a>
@@ -41,11 +41,11 @@ function renderSideBar($role, $activePage, $isAuthenticated)
     }
 
     echo "
-        <a href='/MapaAyos/mapa' class='nav-item'>
+        <a href='/mapa' class='nav-item'>
             <i class='bi bi-map'></i>
             <span class='nav-text'>Mapa</span>
         </a>
-            <a href='/MapaAyos/baranggays' class='nav-item'>
+            <a href='/baranggays' class='nav-item'>
             <i class='bi bi-pin-map'></i>
             <span class='nav-text'>Baranggays</span>
         </a>
@@ -54,7 +54,7 @@ function renderSideBar($role, $activePage, $isAuthenticated)
     echo "</div><div class='nav-bottom'>";
 
     echo ($isAuthenticated ? "
-            <a href='/MapaAyos/settings' class='nav-item no-style-button'>
+            <a href='/settings' class='nav-item no-style-button'>
                 <i class='bi bi-gear'></i>
                 <span class='nav-text'>Settings</span>
             </a>"

@@ -14,7 +14,7 @@ function displayUser(userID) {
   `;
 
   fetchAPI(
-    "http://localhost/MapaAyos/api/user?mode=getUserByID&userID=" + userID
+    "https://mapaayos.dcism.org/api/user?mode=getUserByID&userID=" + userID
   ).then((data) => {
     const user = data.data;
     if (!user) {
@@ -33,8 +33,8 @@ function displayUser(userID) {
     document.getElementById("user-" + userID).classList.add("active");
 
     const pfpPath = user["hasProfilePic"]
-      ? `/MapaAyos/public/uploads/pfp/${userID}`
-      : "/MapaAyos/public/img/default-profile";
+      ? `/public/uploads/pfp/${userID}`
+      : "/public/img/default-profile";
 
     let userElement = `
       <div class="user-info-header">
@@ -94,7 +94,7 @@ function displayUser(userID) {
         `;
 
         fetchAPI(
-          "http://localhost/MapaAyos/api/baranggay?mode=getAllBaranggays"
+          "https://mapaayos.dcism.org/api/baranggay?mode=getAllBaranggays"
         )
           .then((response) => {
             const barangays = response.data;
