@@ -11,17 +11,17 @@ function handleSignUp($firstName, $lastName, $email, $password, $confirmPassword
 
     // Validation of Data
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        header("Location: /MapaAyos/signup?error=" . urlencode("Invalid email format"));
+        header("Location: /signup?error=" . urlencode("Invalid email format"));
         exit();
     }
 
     if (strlen($firstName) < 2 || strlen($lastName) < 2) {
-        header("Location: /MapaAyos/signup?error=" . urlencode("First and Last name must be at least 2 characters"));
+        header("Location: /signup?error=" . urlencode("First and Last name must be at least 2 characters"));
         exit();
     }
 
     if (strlen($password) < 8) {
-        header("Location: /MapaAyos/signup?error=" . urlencode("Password must be at least 8 characters"));
+        header("Location: /signup?error=" . urlencode("Password must be at least 8 characters"));
         exit();
     }
 
@@ -31,13 +31,13 @@ function handleSignUp($firstName, $lastName, $email, $password, $confirmPassword
         !preg_match('/[0-9]/', $password) || // at least one digit
         !preg_match('/[\W_]/', $password)    // at least one special character
     ) {
-        header("Location: /MapaAyos/signup?error=" . urlencode("Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character"));
+        header("Location: /signup?error=" . urlencode("Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character"));
         exit();
     }
 
     // Check if the passwords match
     if ($password !== $confirmPassword) {
-        header("Location: /MapaAyos/signup?error=" . urlencode("Passwords do not match"));
+        header("Location: /signup?error=" . urlencode("Passwords do not match"));
         exit();
     }
 
@@ -45,15 +45,15 @@ function handleSignUp($firstName, $lastName, $email, $password, $confirmPassword
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
     if (findUserByEmail($email)) {
-        header("Location: /MapaAyos/signup?error=" . urlencode("Email already exists"));
+        header("Location: /signup?error=" . urlencode("Email already exists"));
         exit();
     }
 
     if (signUp($firstName, $lastName, $email, $hashedPassword)) {
-        header("Location: /MapaAyos/signin?success=" . urlencode("User registered successfully"));
+        header("Location: /signin?success=" . urlencode("User registered successfully"));
         exit();
     } else {
-        header("Location: /MapaAyos/signup?error=" . urlencode("Error signing up. Please try again"));
+        header("Location: /signup?error=" . urlencode("Error signing up. Please try again"));
         exit();
     }
 }
@@ -65,12 +65,12 @@ function handleSignIn($email, $password)
 
     // Validation of Data
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        header("Location: /MapaAyos/signin?error=" . urlencode("Invalid email format"));
+        header("Location: /signin?error=" . urlencode("Invalid email format"));
         exit();
     }
 
     if (strlen($password) < 4) {
-        header("Location: /MapaAyos/signin?error=" . urlencode("Password must be at least 4 characters"));
+        header("Location: /signin?error=" . urlencode("Password must be at least 4 characters"));
         exit();
     }
 
@@ -83,18 +83,18 @@ function handleSignIn($email, $password)
         if ($user['is_first_login']) {
             // Update is_first_login to 0 now
             markTutorialComplete($user['id']);
-            header("Location: /MapaAyos/tutorial");
+            header("Location: /tutorial");
             exit();
         }
 
         if ($user["role"] == "user") {
-            header("Location: /MapaAyos/mapa");
+            header("Location: /mapa");
         } else {
-            header("Location: /MapaAyos/" . $user["role"] . "/dashboard");
+            header("Location: /" . $user["role"] . "/dashboard");
         }
         exit();
     } else {
-        header("Location: /MapaAyos/signin?error=" . urlencode("Invalid email or password"));
+        header("Location: /signin?error=" . urlencode("Invalid email or password"));
         exit();
     }
 }
@@ -104,7 +104,7 @@ function handleSignOut()
     session_unset(); // Unset all session variables
     session_destroy(); // Destroy the session
 
-    header("Location: /MapaAyos");
+    header("Location: ");
     exit();
 }
 
@@ -116,7 +116,7 @@ function isAuthenticated()
 function requireSignIn()
 {
     if (!isAuthenticated()) {
-        header("Location: /MapaAyos");
+        header("Location: ");
         exit();
     }
 }
@@ -125,7 +125,7 @@ function redirectIfNotAllowed($userRole, $pageRole)
 {
     if (isAuthenticated()) {
         if ($userRole == "all" && ($pageRole == "signup" || $pageRole == "signin")) {
-            header("Location: /MapaAyos/complete_tutorial");
+            header("Location: /complete_tutorial");
             exit();
         } else if ($userRole != $pageRole) {
             header("Location: /" . $userRole . "/dashboard");
@@ -137,7 +137,7 @@ function redirectIfNotAllowed($userRole, $pageRole)
 function completeTutorial()
 {
     if (!isset($_SESSION['userID'])) {
-        header("Location: /MapaAyos/signin");
+        header("Location: /signin");
         exit();
     }
 
@@ -147,9 +147,9 @@ function completeTutorial()
     // Fetch user to check role
     $user = findUserByID($userID);
     if ($user && $user['role'] == 'user') {
-        header("Location: /MapaAyos/mapa");
+        header("Location: /mapa");
     } else {
-        header("Location: /MapaAyos/" . $user['role'] . "/dashboard");
+        header("Location: /" . $user['role'] . "/dashboard");
     }
 
     exit();
