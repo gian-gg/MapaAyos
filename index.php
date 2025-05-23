@@ -148,6 +148,13 @@ $user = findUserByID($userID) ?? null;
                     </div>
                 </section>
 
+                <div class="hero-video-overlay">
+                    <video autoplay loop muted playsinline>
+                        <source src="/MapaAyos/public/img/mockup.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+
                 <!-- how it works section -->
                 <section class="hiw" id="how_it_works">
                     <div class="hiw-header">
