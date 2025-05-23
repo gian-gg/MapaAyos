@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MapaAyos - Sign Up</title>
-    <link rel="shortcut icon" href="/public/img/favicon.png" type="image/png">
+    <link rel="shortcut icon" href="/MapaAyos/public/img/favicon.png" type="image/png">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
 
@@ -25,6 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="/MapaAyos/public/css/main.css">
     <link rel="stylesheet" href="/MapaAyos/public/css/navbar.css">
     <link rel="stylesheet" href="/MapaAyos/public/css/signinup.css">
+    <link rel="stylesheet" href="/MapaAyos/public/css/captcha.css">
 
     <link rel="stylesheet" href="/MapaAyos/public/css/signinup-mobile.css">
     <link rel="stylesheet" href="/MapaAyos/public/css/navbar-mobile.css">
@@ -111,7 +112,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <h1>Sign Up</h1>
                 <p>Tuloy po kayo! Please enter your details below.</p>
 
-                <form method="POST">
+                <form method="POST" id="signup-form">
                     <div class="row">
                         <div class="col-md-6">
                             <label for="firstName">First Name:</label>
@@ -122,6 +123,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <input type="text" id="lastName" name="lastName" class="form-control" required>
                         </div>
                     </div>
+
                     <label for="email">Email:</label>
                     <input type="email" id="email" name="email" class="form-control" required>
 
@@ -140,6 +142,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <i id="toggleIcon2" class="bi bi-eye-slash-fill"></i>
                         </span>
                     </div>
+
                     <?php
                     if (isset($_GET['error'])) {
                         echo '<div class="text-center message error-message">' . htmlspecialchars($_GET['error']) . '</div>';
@@ -148,15 +151,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         echo '<div class="text-center message success-message">' . htmlspecialchars($_GET['success']) . '</div>';
                     }
                     ?>
-                    <button class="btn" type="submit">Sign Up</button>
+                    <!-- Hidden CAPTCHA status -->
+                    <input type="hidden" id="captcha-verified" name="captchaVerified" value="false" />
+                    <button class="btn" id="signUp-btn" type="submit">Sign Up</button>
                 </form>
+
                 <p>May account ka na? <a href="/MapaAyos/signin">Sign in here</a></p>
             </div>
         </section>
+        <!-- CAPTCHA Modal -->
+        <div class="captcha-modal" style="display: none;">
+            <div class="captcha-form">
+                <p>Complete CAPTCHA to proceed:</p>
+                <div class="preview" style="user-select: none;"></div>
+                <input type="text" id="captchaInput" placeholder="Enter CAPTCHA" class="form-control mt-2 mb-2" required>
+                <button type="button" id="captcha-submit-btn" class="captcha-refresh ma-btn">Submit</button>
+                <div class="captcha-error text-danger mt-2" style="display: none;">Incorrect CAPTCHA. Try again.</div>
+            </div>
+        </div>
     </main>
 
     <script src="/MapaAyos/public/js/password.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+    <script src="/MapaAyos/src/scripts/captcha.js"></script>
 </body>
 
 </html>

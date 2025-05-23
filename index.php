@@ -56,6 +56,7 @@ $user = findUserByID($userID) ?? null;
             <div class="nav-items d-none d-md-flex">
                 <a href="#how_it_works">How it Works</a>
                 <a href="#features">Features</a>
+                <a href="#faq">FAQs</a>
                 <a href="#contact">Contact</a>
             </div>
 
@@ -85,6 +86,7 @@ $user = findUserByID($userID) ?? null;
                 <nav class="nav flex-column">
                     <a class="nav-link" href="/MapaAyos/index#how_it_works" data-bs-dismiss="offcanvas">How it Works</a>
                     <a class="nav-link" href="/MapaAyos/index#features" data-bs-dismiss="offcanvas">Features</a>
+                    <a class="nav-link" href="/MapaAyos/index#faq" data-bs-dismiss="offcanvas">FAQs</a>
                     <a class="nav-link" href="/MapaAyos/index#contact" data-bs-dismiss="offcanvas">Contact</a>
                 </nav>
                 <div class="mt-3">
@@ -148,6 +150,12 @@ $user = findUserByID($userID) ?? null;
                     </div>
                 </section>
 
+                <div class="hero-video-overlay">
+                    <video autoplay loop muted playsinline>
+                        <source src="/MapaAyos/public/img/mockup.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
 
                 <!-- how it works section -->
                 <section class="hiw" id="how_it_works">
@@ -190,11 +198,42 @@ $user = findUserByID($userID) ?? null;
                                 </div>
                             </div>
                         </div>
-                        <div class="arrow"><img src="/MapaAyos/public/img/arrow.gif" alt="arrow"></div>
                     </div>
                 </section>
 
+                <!--who verifies section-->
+                <section class="who-verifies">
+                    <div class="who-verifies-header">
+                        <h1>Sino ang Nagbabalid ng mga Ulat?</h1>
+                        <p>Ang mga ulat ay sinisiyasat at binabalid ng mga lokal na opisyal.</p>
+                    </div>
 
+                    <div class="who-verifies-cards">
+                        <div class="card-row">
+                            <div class="who-verifies-card card-step">
+                                <div class="card-body">
+                                    <h2>Barangay Officials</h2>
+                                    <p>Local leaders who ensure that community issues are addressed promptly.</p>
+                                </div>
+                            </div>
+
+                            <div class="who-verifies-card card-step highlight">
+                                <div class="card-body">
+                                    <h2>City Officials</h2>
+                                    <p>Responsible for overseeing the resolution of larger community concerns.</p>
+                                </div>
+                            </div>
+
+                            <div class="who-verifies-card card-step">
+                                <div class="card-body">
+                                    <h2>Community Volunteers</h2>
+                                    <p>Dedicated individuals who assist in validating and resolving local issues.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
                 <!-- feature section -->
                 <section class="ftrs" id="features">
                     <h1>Bakit MapaAyos?</h1>
@@ -217,6 +256,51 @@ $user = findUserByID($userID) ?? null;
                             <div class="feature-card">
                                 <h3>Impact Tracking</h3>
                                 <p>Monitor the resolution progress and see the tangible changes in your community.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!--FAQs section-->
+                <section class="FAQ" id="faq">
+                    <div class="faq-header">
+                        <h1>FAQs</h1>
+                        <p>Have questions? We’ve got answers!</p>
+                    </div>
+
+                    <div class="feature-cards">
+                        <div class="feat-col left-feat">
+                            <div class="feature-card">
+                                <h3>What is MapaAyos?</h3>
+                                <p>MapaAyos helps residents report local issues, track their resolution, and connect with LGUs to improve their community.</p>
+                                <a href="https://youtu.be/dQw4w9WgXcQ" target="_blank">Read More</a>
+                            </div>
+                            <div class="feature-card">
+                                <h3>Can I use MapaAyos on mobile devices?</h3>
+                                <p>Yes, MapaAyos is accessible and fully usable on mobile devices, allowing you to stay updated and manage your reports on the go.</p>
+                                <a href="https://youtu.be/dQw4w9WgXcQ" target="_blank">Read More</a>
+                            </div>
+                            <div class="feature-card">
+                                <h3>Do I need to create an account to report an issue?</h3>
+                                <p>You don't need to navigate the site, unless you're submitting a report!</p>
+                                <a href="https://youtu.be/dQw4w9WgXcQ" target="_blank">Read More</a>
+                            </div>
+                        </div>
+                        <div class="feat-col right-feat">
+                            <div class="feature-card">
+                                <h3>How do I track the status of my report?</h3>
+                                <p>You can track the status of your report by logging into your account, where you’ll find the updates and changes related to your issue.</p>
+                                <a href="https://youtu.be/dQw4w9WgXcQ" target="_blank">Read More</a>
+                            </div>
+                            <div class="feature-card">
+                                <h3>What types of issues can I report?</h3>
+                                <p>Residents can report issues like damaged infrastructure, waste problems, safety hazards, and other local concerns.</p>
+                                <a href="https://youtu.be/dQw4w9WgXcQ" target="_blank">Read More</a>
+                            </div>
+                            <div class="feature-card">
+                                <h3>How can I provide feedback or get support?</h3>
+                                <p>You can provide feedback or reach out for support by clicking the Contact Us link below—or just scroll down to find it!</p>
+                                <a href="#contact">Contact Us!</a>
                             </div>
                         </div>
                     </div>
@@ -254,6 +338,7 @@ $user = findUserByID($userID) ?? null;
                                         <ul>
                                             <li><a href="#how_it_works">How it Works</a></li>
                                             <li><a href="#features">Features</a></li>
+                                            <a href="#faq">FAQs</a>
                                             <li><a href="#contact">Contact</a></li>
                                         </ul>
                                     </div>
