@@ -46,9 +46,14 @@ CREATE TABLE `baranggays` (
 -- Baranggay Info Table
 CREATE TABLE `baranggayInfo` (
   `baranggayID` int(11) NOT NULL,
-  `description` text DEFAULT NULL,
-  `landArea` decimal(10,2) DEFAULT NULL,
-  `population` int(11) DEFAULT NULL
+  `description` text DEFAULT 'lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+  `landArea` decimal(10,2) DEFAULT 0,
+  `population` int(11) DEFAULT 0,
+  `phone` varchar(20) DEFAULT '09123456789',
+  `email` varchar(100) DEFAULT 'support@baranggay.com',
+  `address` text DEFAULT '1234 Baranggay St, City, Country',
+  `operating_hours_weekdays` varchar(100) DEFAULT '8:00 AM - 5:00 PM',
+  `operating_hours_saturday` varchar(100) DEFAULT '6:00 AM - 12:00 PM'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Indexes
