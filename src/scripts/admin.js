@@ -32,11 +32,13 @@ function displayUser(userID) {
     });
     document.getElementById("user-" + userID).classList.add("active");
 
+    const pfpPath = user["hasProfilePic"]
+      ? `/MapaAyos/public/uploads/pfp/${userID}`
+      : "/MapaAyos/public/img/default-profile";
+
     let userElement = `
       <div class="user-info-header">
-        <img src="/MapaAyos/public/uploads/pfp/${
-          user["hasProfilePic"] ? userID : "default"
-        }.png" alt="Profile Image" />
+        <img src="${pfpPath}.png" alt="Profile Image" />
         <div class="user-info-title">
           <h3>${user["firstName"]} ${user["lastName"]}</h3>
           <p><i class="bi bi-envelope"></i> ${user["email"]}</p>
