@@ -5,8 +5,10 @@ require_once __DIR__ . '/../models/UserModel.php';
 require_once __DIR__ . '/../models/BaranggayModel.php';
 require_once __DIR__ . '/../controllers/AuthController.php';
 require_once __DIR__ . '/../controllers/ReportController.php';
+require_once __DIR__ . '/../controllers/BaranggayController.php';
 
 require_once __DIR__ . '/../utils/Baranggay.php';
+require_once __DIR__ . '/../utils/ProcessFile.php';
 require_once __DIR__ . '/../utils/Misc.php';
 
 require_once __DIR__ . '/components/sidebar.php';
@@ -32,6 +34,11 @@ if ($currentBaranggay) {
             break;
         }
     }
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $fileUpload = uploadImage($_FILES, $currentBaranggay, "public/img/baranggays");
+    handleBaranggayUpdate($currentBaranggayID, $_POST['description'], $_POST['population'], $_POST["landArea"],  $_POST['phone'], $_POST['email'], $_POST['address'], $_POST['operating_hours_weekdays'], $_POST['operating_hours_saturday']);
 }
 
 ?>
@@ -63,19 +70,97 @@ if ($currentBaranggay) {
     <link rel="stylesheet" href="/MapaAyos/public/css/sidebar.css">
     <link rel="stylesheet" href="/MapaAyos/public/css/header.css">
     <link rel="stylesheet" href="/MapaAyos/public/css/baranggay-enhanced.css">
+    <link rel="stylesheet" href="/MapaAyos/public/css/report-modal.css">
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
 
 </head>
 
 <body class="bg-light">
-    <!-- Report Modal -->
-    <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+    <!-- Edit Modal -->
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModal" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content border-0 shadow">
                 <div class="modal-header border-bottom-0">
-                    <h1 class="modal-title fs-5" id="modalLabel"></h1>
+                    <h1 class="modal-title fs-5" id="editModal">Edit Baranggay Information</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body" id="modal-body">
+                    <form id="editBaranggayForm" method="POST" enctype="multipart/form-data">
+                        <div class="mb-1">
+                            <label for="fileInput" class="form-label">
+                                <i class="bi bi-image"></i> Baranggay Photo
+                            </label>
+                            <input type="file" class="form-control" id="fileInput" name="fileInput" accept="image/*">
+                            <small class="text-muted">Upload a new photo for the baranggay</small>
+                        </div>
+
+                        <div class="mb-1">
+                            <label for="edit-description" class="form-label">
+                                <i class="bi bi-card-text"></i> Description
+                            </label>
+                            <textarea class="form-control" id="edit-description" name="description" rows="4" required></textarea>
+                        </div>
+
+                        <div class="row mb-1">
+                            <div class="col-md-6">
+                                <label for="edit-population" class="form-label">
+                                    <i class="bi bi-people"></i> Population
+                                </label>
+                                <input type="number" class="form-control" id="edit-population" name="population" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="edit-landArea" class="form-label">
+                                    <i class="bi bi-geo-alt"></i> Land Area (km²)
+                                </label>
+                                <input type="number" step="0.01" class="form-control" id="edit-landArea" name="landArea" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-1">
+                            <label class="form-label d-block">
+                                <i class="bi bi-telephone"></i> Contact Information
+                            </label>
+                            <input type="tel" class="form-control" name="phone" id="edit-phone" required placeholder="Phone number">
+                            <input type="email" class="form-control" name="email" id="edit-email" required placeholder="Email address">
+                            <input type="text" class="form-control" name="address" id="edit-address" required placeholder="Baranggay Hall Address">
+                        </div>
+
+                        <div class="mb-1">
+                            <label class="form-label d-block">
+                                <i class="bi bi-clock"></i> Operating Hours
+                            </label>
+                            <div class="mb-1">
+                                <label for="edit-weekdayHours" class="form-label small">Weekdays</label>
+                                <input type="text" class="form-control" id="edit-weekdayHours" name="operating_hours_weekdays" required placeholder="e.g. 8:00 AM - 5:00 PM">
+                            </div>
+                            <div>
+                                <label for="edit-saturdayHours" class="form-label small">Saturday</label>
+                                <input type="text" class="form-control" id="edit-saturdayHours" name="operating_hours_saturday" required placeholder="e.g. 8:00 AM - 12:00 PM">
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-end gap-2">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn primary-color text-white">
+                                Save Changes
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Report Modal -->
+    <div class="modal fade" id="reportModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content border-0 shadow">
+                <div class="modal-header border-bottom-0">
+                    <h1 class="modal-title fs-5" id="reportModalLabel"></h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="reportModal-body">
                 </div>
             </div>
         </div>
@@ -97,6 +182,7 @@ if ($currentBaranggay) {
             renderHeader(
                 $user ?? null
             );
+
             ?>
             <div class="main-content" style="width: 78vw;">
                 <?php
@@ -111,18 +197,27 @@ if ($currentBaranggay) {
                     $baranggayReportsData = getReportsData($currentBaranggay, "!pending");
                     $resolvedReports = getReportsData($currentBaranggay, "resolved");
 
+                    $infoJson = htmlspecialchars(json_encode($baranggayInfo), ENT_QUOTES, 'UTF-8');
+
                     echo "<div class='page-header'>";
-                    echo "<h1>" . htmlspecialchars(capitalizeFirstLetter($currentBaranggay)) . "</h1>";
+                    echo "<div class='d-flex align-items-center gap-1'>";
+                    echo "<h1 class='mb-0'>" . htmlspecialchars(capitalizeFirstLetter($currentBaranggay)) . "</h1>";
+                    if ($user && $user["role"] == "official" && getBaranggayData($user["assignedBaranggay"])["name"] == $currentBaranggay) {
+                        echo '<button style="color: #317A88;" class="btn btn-sm ms-2" title="Edit Baranggay" onclick="displayEditModal(' . $infoJson . ')">
+                                <i class="bi bi-pencil"></i> Edit
+                              </button>';
+                    }
+                    echo "</div>";
                     echo "</div>";
 
-                    echo "<img src='/MapaAyos/public/img/baranggays/" . htmlspecialchars($currentBaranggay, ENT_QUOTES, 'UTF-8') . ".jpg' alt='Baranggay Image' class='baranggay-image'>";
+                    echo "<img src='/MapaAyos/public/img/baranggays/" . htmlspecialchars($currentBaranggay, ENT_QUOTES, 'UTF-8') . ".png' alt='Baranggay Image' class='baranggay-image'>";
                     echo "<p class='page-description mb-4'>" . htmlspecialchars($baranggayInfo["description"]) . "</p>";
 
                     echo "<div class='baranggay-dashboard'>
                             <div class='stats-grid'>
                                 <div class='stat-card'>
                                     <div class='stat-header'>
-                                        <i class='bi bi-people-fill'></i>
+                                        <i class='bi bi-people-fill' style='color: #317A88'></i>
                                         <h3>Population</h3>
                                     </div>
                                     <p class='stat-value'>" . number_format($baranggayInfo['population'] ?? 0) . "</p>
@@ -131,7 +226,7 @@ if ($currentBaranggay) {
                                 
                                 <div class='stat-card'>
                                     <div class='stat-header'>
-                                        <i class='bi bi-geo-alt-fill'></i>
+                                        <i class='bi bi-geo-alt-fill' style='color: #317A88'></i>
                                         <h3>Land Area</h3>
                                     </div>
                                     <p class='stat-value'>" . ($baranggayInfo['landArea'] ?? 0) . " km²</p>
@@ -140,7 +235,7 @@ if ($currentBaranggay) {
 
                                 <div class='stat-card'>
                                     <div class='stat-header'>
-                                        <i class='bi bi-clipboard2-data-fill'></i>
+                                        <i class='bi bi-clipboard2-data-fill' style='color: #317A88'></i>
                                         <h3>Reports</h3>
                                     </div>
                                     <p class='stat-value'>" . (count(getReportsData($currentBaranggay, "active")) ?? 0) . "</p>
@@ -149,7 +244,7 @@ if ($currentBaranggay) {
 
                                 <div class='stat-card'>
                                     <div class='stat-header'>
-                                        <i class='bi bi-check2-circle'></i>
+                                        <i class='bi bi-check2-circle' style='color: #317A88'></i>
                                         <h3>Resolved</h3>
                                     </div>
                                     <p class='stat-value'>" . (calculateResolutionRate(count(getReportsData($currentBaranggay, "resolved")), count($baranggayReportsData)) ?? 0) . "%</p>
@@ -161,18 +256,17 @@ if ($currentBaranggay) {
                                 <div class='info-card'>
                                     <h3>Contact Information</h3>
                                     <div class='info-content'>
-                                        <p><i class='bi bi-telephone'></i> " . ($baranggay['phone'] ?? '(02) 8123-4567') . "</p>
-                                        <p><i class='bi bi-envelope'></i> " . ($baranggay['email'] ?? 'contact@baranggay.gov.ph') . "</p>
-                                        <p><i class='bi bi-geo'></i> " . ($baranggay['address'] ?? 'Main Street, City') . "</p>
+                                        <p><i class='bi bi-telephone' style='color: #317A88'></i> " . $baranggayInfo['phone'] . "</p>
+                                        <p><i class='bi bi-envelope' style='color: #317A88'></i> " . $baranggayInfo['email'] . "</p>
+                                        <p><i class='bi bi-geo' style='color: #317A88'></i> " . $baranggayInfo['address'] . "</p>
                                     </div>
                                 </div>
 
                                 <div class='info-card'>
                                     <h3>Operating Hours</h3>
                                     <div class='info-content'>
-                                        <p><i class='bi bi-clock'></i> <strong>Monday - Friday:</strong> " . ($baranggay['weekday_hours'] ?? '8:00 AM - 5:00 PM') . "</p>
-                                        <p><i class='bi bi-clock'></i> <strong>Saturday:</strong> " . ($baranggay['saturday_hours'] ?? '8:00 AM - 12:00 PM') . "</p>
-                                        <p><i class='bi bi-clock'></i> <strong>Sunday:</strong> " . ($baranggay['sunday_hours'] ?? 'Closed') . "</p>
+                                        <p><i class='bi bi-clock'  style='color: #317A88'></i> <strong>Weekdays:</strong> " . $baranggayInfo['operating_hours_weekdays'] . "</p>
+                                        <p><i class='bi bi-clock'  style='color: #317A88'></i> <strong>Saturday:</strong> " . $baranggayInfo['operating_hours_saturday'] . "</p>
                                     </div>
                                 </div>
                             </div>
@@ -194,19 +288,23 @@ if ($currentBaranggay) {
                                     <tbody>
                     ";
 
-                    $reportCount = 1;
-                    foreach ($baranggayReportsData as $report) {
-                        $reportJson = htmlspecialchars(json_encode($report), ENT_QUOTES, 'UTF-8');
-                        echo "
-                            <tr onclick=\"displayModal({$reportJson})\" style=\"cursor: pointer;\">
-                                <td>{$reportCount}</td>
-                                <td>" . htmlspecialchars($report['title'], ENT_QUOTES, 'UTF-8') . "</td>
-                                <td><span class='badge bg-" . getStatusColor($report['status']) . "'>" . htmlspecialchars($report['status'], ENT_QUOTES, 'UTF-8') . "</span></td>
-                                <td>" . htmlspecialchars(getRelativeDate($report['createdAt']), ENT_QUOTES, 'UTF-8') . "</td>
-                            </tr>
-                        ";
+                    if (count($baranggayReportsData) == 0) {
+                        echo "<tr><td colspan='4' class='text-center'>No reports available</td></tr>";
+                    } else {
+                        $reportCount = 1;
+                        foreach ($baranggayReportsData as $report) {
+                            $reportJson = htmlspecialchars(json_encode($report), ENT_QUOTES, 'UTF-8');
+                            echo "
+                                <tr onclick=\"displayReportModal({$reportJson})\" style=\"cursor: pointer;\">
+                                    <td>{$reportCount}</td>
+                                    <td>" . htmlspecialchars($report['title'], ENT_QUOTES, 'UTF-8') . "</td>
+                                    <td><span class='badge bg-" . getStatusColor($report['status']) . "'>" . htmlspecialchars($report['status'], ENT_QUOTES, 'UTF-8') . "</span></td>
+                                    <td>" . htmlspecialchars(getRelativeDate($report['createdAt']), ENT_QUOTES, 'UTF-8') . "</td>
+                                </tr>
+                            ";
 
-                        $reportCount++;
+                            $reportCount++;
+                        }
                     }
 
                     echo "</tbody></table></div></div>";
@@ -255,10 +353,7 @@ if ($currentBaranggay) {
         </main>
     </div>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
-
-    <script src="/MapaAyos/src/scripts/baranggay.js"></script>
+    <script type="module" src="/MapaAyos/src/scripts/baranggay.js"></script>
 
     <script src="/MapaAyos/public/js/sidebar.js"></script>
 

@@ -1,91 +1,86 @@
-function displayModal(report) {
-  document.getElementById(
-    "modalLabel"
-  ).innerHTML = `<h5 class="modal-title fw-bold" id="modalLabel">${report.title}</h5>`;
+import { formatDate } from "./utils/helpers.js";
 
-  document.getElementById("modal-body").innerHTML = `
+function getStatusIcon(status) {
+  const icons = {
+    pending: '<i class="bi bi-clock"></i>',
+    active: '<i class="bi bi-check2-circle"></i>',
+    resolved: '<i class="bi bi-check2-all"></i>',
+    denied: '<i class="bi bi-x-circle"></i>',
+  };
+  return icons[status.toLowerCase()] || "";
+}
+
+function displayReportModal(report) {
+  document.getElementById(
+    "reportModalLabel"
+  ).innerHTML = `<h5 class="modal-title" id="modalLabel">${report.title}</h5>`;
+
+  document.getElementById("reportModal-body").innerHTML = `
     <div class="report-modal">
-      <div class="image-container mb-4">
+      <div class="image-container">
         <img src="/MapaAyos/public/uploads/reports/${report.imagePath}" 
-             class="img-fluid rounded shadow" 
              alt="Report Image" />
       </div>
       
       <div class="report-details">
-        <div class="mb-3">
-          <h6 class="text-muted mb-2">Description</h6>
+        <div class="section">
+          <h6 class="section-title">Description</h6>
           <p class="description">${report.description}</p>
         </div>
         
-        <div class="mb-3">
-          <h6 class="text-muted mb-2">Status</h6>
-          <span class="badge ${getStatusBadgeClass(report.status)}">${
-    report.status
-  }</span>
+        <div class="section">
+          <h6 class="section-title">Status</h6>
+          <span class="badge ${report.status.toLowerCase()}">
+            ${getStatusIcon(report.status)}
+            ${report.status}
+          </span>
         </div>
         
-        <div>
-          <h6 class="text-muted mb-2">Created</h6>
-          <p class="text-secondary">
-            <i class="bi bi-calendar3"></i> 
-            ${formatDate(report.createdAt)}
-          </p>
+        <div class="section">
+          <h6 class="section-title">Report Details</h6>
+          <div class="meta-info">
+            <i class="bi bi-calendar3"></i>
+            <span>Created ${formatDate(report.createdAt)}</span>
+          </div>
         </div>
 
-        <div>
-          <h6 class="text-muted mb-2">Moderator Comment:</h6>
-          <p class="text-secondary">
-            ${report.comment}
-          </p>
-        </div>
+        ${
+          report.comment
+            ? `
+          <div class="section">
+            <h6 class="section-title">Moderator Comment</h6>
+            <p class="comment">${report.comment}</p>
+          </div>
+        `
+            : ""
+        }
       </div>
     </div>
   `;
 
-  // Add custom styles
-  const style = document.createElement("style");
-  style.textContent = `
-    .report-modal .image-container {
-      position: relative;
-      overflow: hidden;
-      border-radius: 8px;
-    }
-    
-    .report-modal .description {
-      font-size: 1rem;
-      line-height: 1.6;
-    }
-    
-    .report-modal .badge {
-      font-size: 0.9rem;
-      padding: 8px 12px;
-    }
-  `;
-  document.head.appendChild(style);
-
-  const bootstrapModal = new bootstrap.Modal(document.getElementById("modal"));
+  const bootstrapModal = new bootstrap.Modal(
+    document.getElementById("reportModal")
+  );
   bootstrapModal.show();
 }
 
-// Helper function to get appropriate badge class based on status
-function getStatusBadgeClass(status) {
-  const statusMap = {
-    Pending: "bg-warning",
-    "In Progress": "bg-info",
-    Completed: "bg-success",
-    Rejected: "bg-danger",
-  };
-  return statusMap[status] || "bg-secondary";
+function displayEditModal(data) {
+  document.getElementById("edit-description").value = data.description;
+  document.getElementById("edit-population").value = data.population;
+  document.getElementById("edit-landArea").value = data.landArea;
+  document.getElementById("edit-phone").value = data.phone;
+  document.getElementById("edit-email").value = data.email;
+  document.getElementById("edit-address").value = data.address;
+  document.getElementById("edit-weekdayHours").value =
+    data.operating_hours_weekdays;
+  document.getElementById("edit-saturdayHours").value =
+    data.operating_hours_saturday;
+
+  const bootstrapModal = new bootstrap.Modal(
+    document.getElementById("editModal")
+  );
+  bootstrapModal.show();
 }
 
-// Helper function to format date
-function formatDate(dateString) {
-  const options = {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-    hour: "2-digit",
-    minute: "2-digit",
-  };
-  return new Date(dateString).toLocaleDateString("en-US", options);
-}
+window.displayEditModal = displayEditModal;
+window.displayReportModal = displayReportModal;

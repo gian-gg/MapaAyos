@@ -43,3 +43,23 @@ function getBaranggayInfo($baranggayID)
 
     return $stmt->fetch(PDO::FETCH_ASSOC);
 }
+
+function updateBaranggay($baranggayID, $description, $population, $landArea, $phone, $email, $address, $operating_hours_weekdays, $operating_hours_saturday)
+{
+    global $pdo;
+    $sql = "UPDATE baranggayInfo SET description = :description, population = :population, landArea = :landArea, phone = :phone, email = :email, address = :address, operating_hours_weekdays = :operating_hours_weekdays, operating_hours_saturday = :operating_hours_saturday WHERE baranggayID = :baranggayID";
+
+    $stmt = $pdo->prepare($sql);
+
+    $stmt->bindParam(':description', $description);
+    $stmt->bindParam(':population', $population);
+    $stmt->bindParam(':landArea', $landArea);
+    $stmt->bindParam(':phone', $phone);
+    $stmt->bindParam(':email', $email);
+    $stmt->bindParam(':address', $address);
+    $stmt->bindParam(':operating_hours_weekdays', $operating_hours_weekdays);
+    $stmt->bindParam(':operating_hours_saturday', $operating_hours_saturday);
+    $stmt->bindParam(':baranggayID', $baranggayID);
+
+    return $stmt->execute();
+}

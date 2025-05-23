@@ -1,0 +1,144 @@
+.report-modal {
+    padding: 1rem;
+}
+
+.report-modal .image-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    margin-bottom: 1.5rem;
+}
+
+.report-modal .image-container img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.report-modal .image-container:hover img {
+    transform: scale(1.02);
+}
+
+.report-modal .report-details {
+    padding: 0.5rem;
+}
+
+.report-modal .report-details .section {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.report-modal .report-details .section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.report-modal .section-title {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #6B7280;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.75rem;
+}
+
+.report-modal .description {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #374151;
+    margin: 0;
+}
+
+.report-modal .badge {
+    font-size: 0.875rem;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.report-modal .badge i {
+    font-size: 1rem;
+}
+
+.report-modal .badge.pending {
+    background-color: #FEF3C7;
+    color: #92400E;
+}
+
+.report-modal .badge.active {
+    background-color: #DEF7EC;
+    color: #03543F;
+}
+
+.report-modal .badge.resolved {
+    background-color: #E0E7FF;
+    color: #3730A3;
+}
+
+.report-modal .badge.denied {
+    background-color: #FEE2E2;
+    color: #991B1B;
+}
+
+.report-modal .meta-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #6B7280;
+    font-size: 0.875rem;
+}
+
+.report-modal .meta-info i {
+    color: #9CA3AF;
+}
+
+.report-modal .comment {
+    background-color: #F9FAFB;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    color: #4B5563;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.report-modal .comment:empty {
+    display: none;
+}
+
+.report-modal .modal-header {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.report-modal .modal-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #111827;
+}
+
+/* Responsive adjustments */
+@media (max-width: 576px) {
+    .report-modal {
+        padding: 0.5rem;
+    }
+    
+    .report-modal .image-container {
+        margin-bottom: 1rem;
+    }
+    
+    .report-modal .section-title {
+        font-size: 0.75rem;
+    }
+    
+    .report-modal .description {
+        font-size: 0.875rem;
+    }
+} 

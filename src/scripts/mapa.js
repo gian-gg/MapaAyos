@@ -50,7 +50,7 @@ baranggaySelect.addEventListener("change", (e) => {
     infoContainer.innerHTML = `
     <img src="/MapaAyos/public/img/baranggays/${
       data.data[0].name
-    }.jpg" class="card-img-top" alt="Report Image" />
+    }.png" class="card-img-top" alt="Report Image" />
     <div class="card-body text-center">
       <h5 class="card-title text-capitalize fw-semibold">${capitalizeFirstLetter(
         data.data[0].name

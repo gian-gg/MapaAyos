@@ -160,7 +160,7 @@ function displayReport(reportID) {
     const marker = L.marker([report.lat, report.lng]).addTo(map);
     marker.setIcon(
       L.icon({
-        iconUrl: "/public/img/pins/default.png",
+        iconUrl: "/MapaAyos/public/img/pins/default.png",
         iconSize: [24, 32],
         iconAnchor: [12, 12],
       })
