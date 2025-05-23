@@ -18,6 +18,57 @@ main {
 
 }
 
+.hero-video-overlay {
+    position: relative; 
+    z-index: 10;
+    width: 100%;
+    max-width: 650px;
+    height: max-content;
+    margin: -270px auto 0 auto;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 8px 12px 15px rgba(0, 0, 0, 0.476);
+    border: 1px solid var(--outline);
+
+    background: var(--bg-primary);
+    padding: 10px;
+}
+
+.hero-video-overlay video {
+    width: 100%;
+    height: max-content;
+    display: block;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+    .hero-video-overlay {
+        width: 70%;
+        margin-top: -40px;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-video-overlay {
+        width: 85%;
+        margin-top: -30px;
+    }
+    .hiw {
+        padding-top: 60px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-video-overlay {
+        width: 90%;
+        margin-top: -20px;
+        border-width: 2px;
+    }
+    .hiw {
+        padding-top: 50px;
+    }
+}
+
 /* hero section styling */
 .hero {
   position: relative;
