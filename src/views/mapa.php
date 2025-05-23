@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (hasReachedMaxReports($userID)) {
         echo "<script>alert('You have reached the maximum number of reports for today.');</script>";
     } else {
-        $currentDate = date('Y-m-d');
+        $currentDate = date('Y-m-d_H-i-s');
         $fileUpload = uploadImage($_FILES, "{$userID}-{$currentDate}", "public/uploads/reports");
         handleRegisterReport($_POST['latInput'], $_POST['lngInput'], $_POST['baranggayInput'], $_POST['titleInput'], $_POST['descriptionInput'], $fileUpload, $userID);
     }
