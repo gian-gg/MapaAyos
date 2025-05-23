@@ -1,0 +1,101 @@
+body {
+  width: 100%;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.map-wrapper {
+  display: flex;
+  height: 100vh;
+  box-sizing: border-box;
+
+  gap: 20px;
+}
+
+/* Left panel styling */
+.left-panel {
+  position: fixed;
+  top: 90px;
+  left: 30px;
+  width: 380px;
+  max-height: calc(100vh - 120px);
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--outline);
+  border-radius: 8px;
+  padding: 20px;
+  overflow-y: auto;
+  text-align: left;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 1100;
+}
+
+.left-panel::-webkit-scrollbar {
+  display: none;
+}
+
+/* Make reports list scrollable */
+.reports-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  max-height: calc(100vh - 160px);
+}
+
+.reports-list::-webkit-scrollbar {
+  display: none;
+}
+
+.left-panel > p {
+  font-size: 1.5rem;
+  padding-bottom: 10px;
+  text-align: left;
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--outline);
+}
+
+.report-item {
+  padding: 15px 20px;
+
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--outline);
+}
+
+.report-item strong {
+  font-size: 1.2rem;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.report-item small {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  display: block;
+  margin-bottom: 6px;
+}
+
+.report-item small em {
+  font-style: italic;
+  color: var(--text-tertiary, #666);
+}
+
+.map-overlay-text {
+  position: absolute;
+  bottom: 22%;
+  right: 10%;
+  z-index: 1000;
+  padding: 8px 16px;
+  border-radius: 8px;
+
+  text-align: center;
+  width: 340px;
+  color: var(--text-primary);
+}

@@ -1,0 +1,99 @@
+body, html {
+  margin: 0;
+  padding: 0;
+
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.error-page-container {
+  position: relative;
+  width: 100%;
+  max-width: 520px; 
+
+  box-sizing: border-box;
+  bottom: 13%; 
+  border: 2px solid pink;
+}
+
+.error-background {
+  position: absolute;
+  inset: 0;
+  background: url('/MapaAyos/public/img/feat-404.png') no-repeat center center;
+  background-size: contain;
+  border-radius: 10px;
+  z-index: 0;
+  transform: scale(1.6);
+  transform-origin: center;
+  pointer-events: none;
+}
+
+.error-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  bottom: 20%;
+
+  width: 100%;          
+  margin: 0 auto;       
+}
+
+.card-body {
+  width: 100%;         
+  height: auto;         
+}
+
+.card-body h1 {
+  font-size: 6.5rem;
+  line-height: 1;
+  font-weight: 800;
+  margin-bottom: 6vh;
+  letter-spacing: -0.5px;
+
+  color: var(--text-primary);
+}
+
+.card-body p {
+  font-size: 0.7rem;
+  margin: 0.2rem 0 1.2rem;
+}
+
+.card-body .error {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+    color: #934646;
+}
+
+.ma-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+
+  width: max-content;
+  color: white;
+  border-radius: 0.25rem;
+  background: var(--secondary);
+
+  transition: background-color 0.3s ease;
+}
+
+.ma-btn i {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+.ma-btn p {
+background-color: white;
+border-radius: 0.2rem;
+padding: 0 0.5rem;
+margin: 0;
+display: inline;
+font-size: 0.9rem;
+}

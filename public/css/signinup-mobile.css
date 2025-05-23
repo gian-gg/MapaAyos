@@ -1,0 +1,69 @@
+@media (max-width: 1024px) {
+    /*
+    .signing-main .card {
+        max-width: 80%;
+        flex-direction: column;
+        padding: 15px;
+        height: auto;
+    }
+
+    .feature-card,
+    .log-card {
+        width: 100%;
+        flex-grow: 1;
+    }
+
+    .feature-card img {
+        height: auto; 
+        max-height: 300px;
+    }
+
+    .log-card {
+        align-items: center;
+        text-align: left;
+    }
+
+    .log-card h1 {
+        text-align: left;
+    }
+
+    .log-card a,
+    .log-card p {
+        text-align: left;
+    }
+    */
+}
+
+@media (max-width: 768px) {
+    /*
+    .signing-main {
+        padding-top: 3rem;
+        gap: 15px;
+    }
+
+    .signing-main .card {
+        max-width: 95%;
+        gap: 15px;
+    }
+
+    .log-card h1 {
+        font-size: 1.5rem;
+    }
+
+    .log-card .btn {
+        font-size: 0.9rem;
+        padding: 0.6rem 8px;
+    }
+
+    .password-container input {
+        font-size: 0.9rem;
+    }
+
+    .toggle-password {
+        font-size: 1rem;
+    }
+    */
+    .image-wrapper {
+        display: none:
+    }
+}

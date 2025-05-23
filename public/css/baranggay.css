@@ -1,0 +1,215 @@
+.main-content {
+  padding: 20px;
+}
+
+/* Table styles */
+.table {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.table th {
+  font-weight: 500;
+  color: #666;
+  font-size: 0.9rem;
+  padding: 12px 16px;
+}
+
+.table td {
+  padding: 12px 16px;
+  color: #333;
+}
+
+.table th i {
+  font-size: 0.8rem;
+  margin-left: 4px;
+  cursor: pointer;
+  color: #999;
+}
+
+/* Status badge styles */
+.badge {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-weight: 500;
+  font-size: 0.8rem;
+}
+
+.badge.bg-green {
+  background-color: #e6f4ea !important;
+  color: #1e7e34;
+}
+
+.badge.bg-orange {
+  background-color: #fff3e0 !important;
+  color: #f57c00;
+}
+
+.badge.bg-red {
+  background-color: #fdecea !important;
+  color: #dc3545;
+}
+
+.badge.bg-blue {
+  background-color: #e7f3ff !important;
+  color: #007bff;
+}
+
+.badge.bg-yellow {
+  background-color: #fff9e6 !important;
+  color: #ffc107;
+}
+
+/* Search and filter controls */
+.form-control {
+  border-radius: 6px;
+  border: 1px solid #dee2e6;
+  padding: 8px 12px;
+}
+
+.form-control:focus {
+  box-shadow: 0 0 0 2px rgba(13, 110, 253, 0.25);
+}
+
+.btn-outline-secondary {
+  border: 1px solid #dee2e6;
+  color: #666;
+}
+
+.btn-outline-secondary:hover {
+  background-color: #f8f9fa;
+  color: #333;
+}
+
+/* Checkbox styles */
+.form-check-input {
+  cursor: pointer;
+  width: 16px;
+  height: 16px;
+}
+
+/* Actions button */
+.btn-link {
+  color: #666;
+}
+
+.btn-link:hover {
+  color: #333;
+}
+
+/* Pagination section */
+.pagination-info {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.baranggay-dashboard {
+  padding: 1.5rem;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.stat-card {
+  background: var(--surface-card);
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.stat-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.stat-header i {
+  font-size: 1.5rem;
+  color: var(--primary-color);
+}
+
+.stat-header h3 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.stat-value {
+  font-size: 2rem;
+  font-weight: 600;
+  margin: 0;
+  color: var(--text-primary);
+}
+
+.stat-description {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin: 0.25rem 0 0 0;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.info-card {
+  background: var(--surface-card);
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.info-card h3 {
+  margin: 0 0 1rem 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.info-content {
+  color: var(--text-secondary);
+}
+
+.info-content p {
+  margin: 0.5rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.info-content i {
+  color: var(--primary-color);
+}
+
+/* Add these CSS variables if not already defined in root.css */
+:root {
+  --surface-card: #ffffff;
+  --text-primary: #1a1a1a;
+  --text-secondary: #666666;
+  --primary-color: #0066cc;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .baranggay-dashboard {
+    padding: 1rem;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+
+  .stat-value {
+    font-size: 1.5rem;
+  }
+}

@@ -1,0 +1,201 @@
+/* sign in/sign up section */
+body.signing-body { 
+  background: url("../img/dotgrid.png") repeat center/contain, var(--bg-primary);
+  color: var(--text-primary);
+  gap: 20px;
+
+  margin: 0 auto;
+  padding: 0;
+  max-width: var(--max-width);
+  overflow: hidden;
+}
+
+main.signing-main {
+    width: 100%;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: inherit;
+    gap: 20px;
+
+    height: 768px; 
+    max-height: 768px;
+}
+
+.signing-main .card {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: stretch; 
+
+    gap: 15px;
+    padding: 20px;
+    min-width: 55%;
+    width: 100%;
+    border-radius: 8px;
+
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--outline);
+    box-sizing: border-box;
+    height: auto; 
+}
+
+.feature-card,
+.log-card {
+    width: 48%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: stretch; 
+    box-sizing: border-box;
+    flex-grow: 1; 
+}
+
+.feature-card .image-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.feature-card .image-wrapper img {
+    width: 100%;
+    height: 100%; 
+    object-fit: cover; 
+    border-radius: 6px;
+    display: block;
+}
+
+.feature-card .image-wrapper svg {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    width: 40px;
+    height: 40px;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.log-card {
+    gap: 15px;
+    padding: 10px;
+    align-items: flex-start;
+    justify-content: center;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+.log-card form {
+    gap: 15px;
+    width: 100%;
+}
+
+.log-card h1 {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--primary);
+    text-align: left;
+    margin: 0;
+}
+
+.log-card p {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    text-align: left;
+    margin: 0;
+}
+
+.log-card a {
+    font-size: 0.8rem;
+    color: var(--secondary);
+    text-align: left;
+}
+
+.log-card .btn {
+    all: unset;
+    background: none; 
+    border: none; 
+    padding: 0; 
+    font: inherit; 
+    cursor: pointer; 
+    text-align: center;
+    background: url('../img/button.png') lightgray 50% / cover no-repeat;
+    padding: 0.8rem 10px;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    font-weight: 900;
+    color: var(--text-primary);
+    width: 100%;  
+    box-sizing: border-box;  
+}
+
+.log-card .btn:hover {
+    background: url('../img/button.png') lightgray 50% / cover no-repeat;
+    color: var(--text-secondary); 
+    font-weight: 800;
+}
+
+.log-card .btn:disabled {
+    background-color: var(--error);
+    cursor: not-allowed;
+}
+
+.password-container {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.password-container input {
+    width: 100%;
+    padding: 0.5rem 2.5rem 0.5rem 0.5rem; 
+    box-sizing: border-box;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 5px; 
+}
+
+.toggle-password {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%); 
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: inherit;
+
+    font-size: 1.1rem;
+    cursor: pointer;
+    color: #888;
+}
+
+.toggle-password i {
+    align-self: flex-start;
+    margin-bottom: 2vh;
+}
+
+.message {
+    padding: 8px 12px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    text-align: center;
+    width: 100%;
+    font-size: 0.8rem;
+}
+
+.error-message {
+    background-color: #fff2f2;
+    color: #dc3545;
+    border: 1px solid #ffcdd2;
+}
+
+.success-message {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    border: 1px solid #c8e6c9;
+}
