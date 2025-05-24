@@ -28,7 +28,7 @@ function updateStep() {
   text.classList.add("text-fade-out");
 
   setTimeout(() => {
-    img.src = `/public/img/step${currentStep}.png`;
+    img.src = `/public/img/step${currentStep}.PNG`;
     text.innerText = messages[currentStep] || "";
 
     img.onload = () => {
