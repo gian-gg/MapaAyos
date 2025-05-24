@@ -16,12 +16,11 @@ require_once __DIR__ . '/components/toasts.php';
 $userID = $_SESSION['userID'] ?? null;
 $user = findUserByID($userID);
 
+if (isset($_POST['logout'])) {
+    handleSignOut();
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST['logout'])) {
-        handleSignOut();
-        return;
-    }
 
     if (hasReachedMaxReports($userID)) {
         echo "<script>alert('You have reached the maximum number of reports for today.');</script>";
