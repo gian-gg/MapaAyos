@@ -16,7 +16,12 @@ require_once __DIR__ . '/components/toasts.php';
 $userID = $_SESSION['userID'] ?? null;
 $user = findUserByID($userID);
 
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['logout'])) {
+        handleSignOut();
+        return;
+    }
 
     if (hasReachedMaxReports($userID)) {
         echo "<script>alert('You have reached the maximum number of reports for today.');</script>";
@@ -25,10 +30,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $fileUpload = uploadImage($_FILES, "{$userID}-{$currentDate}", "public/uploads/reports");
         handleRegisterReport($_POST['latInput'], $_POST['lngInput'], $_POST['baranggayInput'], $_POST['titleInput'], $_POST['descriptionInput'], $fileUpload, $userID);
     }
-}
-
-if (isset($_POST['logout'])) {
-    handleSignOut();
 }
 
 ?>
