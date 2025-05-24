@@ -14,8 +14,8 @@ CREATE TABLE `users` (
   `createdAt` timestamp NOT NULL DEFAULT current_timestamp(),
   `role` enum('user','official','admin') DEFAULT 'user',
   `hasProfilePic` tinyint(1) DEFAULT 0,
-  `assignedBaranggay` int(11) DEFAULT NULL
-  `is_first_login` TINYINT(1) NOT NULL DEFAULT 1
+  `assignedBaranggay` int(11) DEFAULT NULL,
+  `is_first_login` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Reports Table
